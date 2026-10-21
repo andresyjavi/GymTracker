@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-LWxAieI9b7tspyPZ31BGlEoMiEUQ3b10+v9hXLlFMAA=' 'sha256-O9qSU7GDZVoew+Bbsak3stzTo7NEVMcXR7AVW//y6F4=' 'sha256-FIs867s4jT8mP5nGI4APoXRSomOhEScW9IFMiehzkTM=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>html,body{margin:0}body{font-size:14px}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px)}</style>
+<meta name="gt-social" content="{&quot;url&quot;: &quot;https://tvukrwgvtpfogjmbgsnj.supabase.co&quot;, &quot;key&quot;: &quot;sb_publishable_NNHHS5Iwtr7ho2OK_os2ig_c58Mkj3o&quot;}">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -479,7 +481,6 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
 </div>
 <div id="toasts" class="toasts" aria-live="polite"></div>
 <div id="modal-root"></div>
-<script>window.GT_SOCIAL = {"url": "https://tvukrwgvtpfogjmbgsnj.supabase.co", "key": "sb_publishable_NNHHS5Iwtr7ho2OK_os2ig_c58Mkj3o"};</script>
 <script>
 /* GymTracker — cálculos estadísticos centralizados.
  * Funciones puras: no tocan el DOM ni el almacenamiento.
@@ -1391,6 +1392,85 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     return c;
   }
 
+  // ---------- limpieza de datos que llegan de otras personas ----------
+  // Todo lo que viene del servidor se trata como no fiable: se reconstruye campo a campo,
+  // con tipos, rangos y longitudes fijos. Lo que no encaja se descarta.
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
+  function cleanNum(x, min, max, dec) {
+    const n = typeof x === 'number' ? x : NaN;
+    if (!Number.isFinite(n) || n < min || n > max) return null;
+    return dec === 0 ? Math.round(n) : round(n, dec === undefined ? 2 : dec);
+  }
+  function cleanStr(x, max) {
+    if (typeof x !== 'string') return '';
+    return x.replace(/[\u0000-\u001f\u007f​-‏‪-‮⁦-⁩]/g, '').trim().slice(0, max);
+  }
+  function cleanDay(x) { return typeof x === 'string' && DAY_RE.test(x) && !Number.isNaN(Date.parse(x + 'T12:00:00')) ? x : null; }
+  function cleanIso(x) { return typeof x === 'string' && x.length <= 40 && !Number.isNaN(Date.parse(x)) ? x : null; }
+  function cleanWindow(w, withKey) {
+    if (!w || typeof w !== 'object') return null;
+    const key = withKey === 'month' ? (typeof w.key === 'string' && /^\d{4}-\d{2}$/.test(w.key) ? w.key : null) : cleanDay(w.key);
+    if (!key) return null;
+    const o = { key, sessions: cleanNum(w.sessions, 0, 1000, 0) || 0, workSets: cleanNum(w.workSets, 0, 100000, 0) || 0,
+      minutes: cleanNum(w.minutes, 0, 1e6, 0) || 0, days: cleanNum(w.days, 0, 31, 0) || 0, prs: cleanNum(w.prs, 0, 10000, 0) || 0 };
+    const v = cleanNum(w.volume, 0, 1e9, 0);
+    if (v !== null) o.volume = v;
+    return o;
+  }
+  /** Devuelve una copia segura de un resumen recibido, o {} si no es válido. */
+  function sanitizeSummary(s) {
+    if (!s || typeof s !== 'object' || Array.isArray(s)) return {};
+    if (s.hidden === true) return { v: 1, hidden: true };
+    if (s.v !== SOCIAL_VERSION) return {};
+    const out = { v: SOCIAL_VERSION, weights: s.weights !== false, generatedAt: cleanIso(s.generatedAt) };
+    const t = s.totals || {};
+    out.totals = { sessions: cleanNum(t.sessions, 0, 100000, 0) || 0, workSets: cleanNum(t.workSets, 0, 1e7, 0) || 0, since: cleanDay(t.since) };
+    if (out.weights && cleanNum(t.volume, 0, 1e10, 0) !== null) out.totals.volume = cleanNum(t.volume, 0, 1e10, 0);
+    ['week', 'prevWeek'].forEach((k) => { const w = cleanWindow(s[k], 'week'); if (w) out[k] = w; });
+    ['month', 'prevMonth'].forEach((k) => { const w = cleanWindow(s[k], 'month'); if (w) out[k] = w; });
+    const st = s.streak || {};
+    out.streak = { current: cleanNum(st.current, 0, 1000, 0) || 0, best: cleanNum(st.best, 0, 1000, 0) || 0 };
+    if (s.last && cleanDay(s.last.date)) out.last = { date: cleanDay(s.last.date), type: SESSION_TYPES.includes(s.last.type) ? s.last.type : 'mixto' };
+    if (s.level) out.level = { level: cleanNum(s.level.level, 1, 1000, 0) || 1, title: cleanStr(s.level.title, 40) };
+    out.achievements = cleanNum(s.achievements, 0, 100, 0) || 0;
+    out.lifts = (Array.isArray(s.lifts) ? s.lifts : []).slice(0, 8).map((l) => {
+      if (!l || typeof l !== 'object') return null;
+      const name = cleanStr(l.name, 80);
+      if (!name) return null;
+      const b = l.best || {}, la = l.last || {};
+      const o = { name, sessions: cleanNum(l.sessions, 0, 100000, 0) || 0, best: { e1rm: b.e1rm === true, reps: cleanNum(b.reps, 0, 500, 0), date: cleanDay(b.date) }, last: { date: cleanDay(la.date) } };
+      if (out.weights) {
+        o.best.score = cleanNum(b.score, 0, 2000, 1); o.best.weight = cleanNum(b.weight, 0, 1000, 2); o.last.score = cleanNum(la.score, 0, 2000, 1);
+        if (o.best.weight === null) delete o.best.weight;
+      }
+      if (l.change30 && cleanNum(l.change30.pct, -100, 10000, 1) !== null) o.change30 = { pct: cleanNum(l.change30.pct, -100, 10000, 1) };
+      return o;
+    }).filter(Boolean);
+    out.prs = (Array.isArray(s.prs) ? s.prs : []).slice(0, 8).map((p) => {
+      if (!p || typeof p !== 'object') return null;
+      const name = cleanStr(p.name, 80), date = cleanDay(p.date);
+      if (!name || !date || (p.type !== 'weight' && p.type !== 'e1rm')) return null;
+      const o = { name, type: p.type, date, reps: cleanNum(p.reps, 1, 500, 0) };
+      if (out.weights && cleanNum(p.value, 0, 2000, 1) !== null) o.value = cleanNum(p.value, 0, 2000, 1);
+      return o;
+    }).filter(Boolean);
+    const cm = (m) => { const o = {}; if (m && typeof m === 'object') MUSCLES.forEach((k) => { const v = cleanNum(m[k], 0, 1000, 1); if (v) o[k] = v; }); return o; };
+    out.muscles = { week: cm(s.muscles && s.muscles.week), avg4: cm(s.muscles && s.muscles.avg4) };
+    return out;
+  }
+  /** Limpia una fila de la clasificación recibida del servidor. Devuelve null si no es válida. */
+  function sanitizeBoardRow(r) {
+    if (!r || typeof r !== 'object' || typeof r.user_id !== 'string' || !UUID_RE.test(r.user_id)) return null;
+    return { user_id: r.user_id.toLowerCase(), display_name: cleanStr(r.display_name, 30), summary: sanitizeSummary(r.summary),
+      updated_at: cleanIso(r.updated_at), joined_at: cleanIso(r.joined_at), is_me: r.is_me === true };
+  }
+  function sanitizeGroup(g) {
+    if (!g || typeof g !== 'object' || typeof g.id !== 'string' || !UUID_RE.test(g.id)) return null;
+    const code = typeof g.invite_code === 'string' && /^[A-Z0-9]{4,12}$/.test(g.invite_code) ? g.invite_code : '';
+    return { id: g.id.toLowerCase(), name: cleanStr(g.name, 40) || 'Grupo', invite_code: code, members: cleanNum(Number(g.members), 0, 1000, 0) || 0 };
+  }
+
   // ---------- clasificaciones ----------
   const BOARD_METRICS = {
     week_sessions: { label: 'Sesiones esta semana', unit: 'sesiones' },
@@ -1472,7 +1552,7 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
   }
 
   const api = {
-    SOCIAL_VERSION, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
+    SOCIAL_VERSION, sanitizeSummary, sanitizeBoardRow, sanitizeGroup, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
     MUSCLES, MUSCLE_ROLES, muscleSetsBetween, validMuscleMap,
     DEFAULT_PROGRESSION, progressionConfig, suggestProgression, strengthScore, detectStalls, groupSetsBetween, weeklySetsLevel, monthRecap,
     KG_PER_LB, E1RM_MAX_REPS, GROUPS, SESSION_TYPES, SET_KINDS, PERIODS, EXPORT_FORMAT, ACHIEVEMENTS,
@@ -2303,7 +2383,13 @@ function bodyMapSVG(opts) {
    Los entrenamientos siguen guardándose solo en el dispositivo. Al servidor solo va
    el resumen que calcula S.buildSocialSummary (y solo si la persona lo permite). */
 
-const SOCIAL_CFG = window.GT_SOCIAL && window.GT_SOCIAL.url && window.GT_SOCIAL.key ? window.GT_SOCIAL : null;
+const SOCIAL_CFG = (() => {
+  try {
+    const m = document.querySelector('meta[name="gt-social"]');
+    const c = m ? JSON.parse(m.getAttribute('content')) : null;
+    return c && /^https:\/\/[a-z0-9-]+\.supabase\.co$|^http:\/\/127\.0\.0\.1:\d+$/.test(c.url) && typeof c.key === 'string' ? c : null;
+  } catch (e) { return null; }
+})();
 const social = {
   loaded: false,
   session: null,        // {access_token, refresh_token, expires_at, user: {id, email}}
@@ -2325,6 +2411,14 @@ async function socialLoad() {
     const row = await DB.get('meta', 'social');
     if (row && row.value) SOCIAL_KEYS.forEach((k) => { if (row.value[k] !== undefined) social[k] = row.value[k]; });
   } catch (e) { /* sin datos previos */ }
+  // lo guardado de versiones anteriores también pasa por la limpieza
+  social.groups = (Array.isArray(social.groups) ? social.groups : []).map(S.sanitizeGroup).filter(Boolean);
+  const boards = {};
+  Object.keys(social.boards || {}).forEach((gid) => {
+    const b = social.boards[gid];
+    if (b && Array.isArray(b.rows)) boards[gid] = { at: b.at, rows: b.rows.map(S.sanitizeBoardRow).filter(Boolean) };
+  });
+  social.boards = boards;
   social.loaded = true;
 }
 async function socialSave() {
@@ -2352,7 +2446,7 @@ function authErrorText(j, status) {
   const code = j && (j.error_code || j.code);
   if (code === 'invalid_credentials' || raw.includes('invalid login')) return 'Email o contraseña incorrectos.';
   if (code === 'user_already_exists' || raw.includes('already registered')) return 'Ya existe una cuenta con ese email. Entra con tu contraseña.';
-  if (code === 'weak_password' || raw.includes('password should')) return 'La contraseña es demasiado corta: usa al menos 6 caracteres.';
+  if (code === 'weak_password' || raw.includes('password should')) return 'La contraseña no cumple los requisitos del servidor: usa una más larga (al menos 8 caracteres).';
   if (code === 'email_not_confirmed' || raw.includes('not confirmed')) return 'Falta confirmar el email. En Supabase, desactiva «Confirm email» (Authentication → Sign In / Providers → Email) y vuelve a intentarlo.';
   if (code === 'validation_failed' || raw.includes('invalid format') || raw.includes('unable to validate email')) return 'Ese email no parece válido.';
   if (code === 'over_request_rate_limit' || code === 'over_email_send_rate_limit' || status === 429) return 'Demasiados intentos seguidos. Espera un minuto.';
@@ -2470,13 +2564,15 @@ async function socialSignOut() {
   if (token) authCall('logout', {}, token).catch(() => {});
 }
 async function socialRefreshGroups() {
-  social.groups = (await rpc('gt_my_groups', {})) || [];
+  const raw = await rpc('gt_my_groups', {});
+  social.groups = (Array.isArray(raw) ? raw : []).map(S.sanitizeGroup).filter(Boolean);
   if (!social.groups.some((g) => g.id === social.activeGroup)) social.activeGroup = social.groups.length ? social.groups[0].id : null;
   await socialSave();
   return social.groups;
 }
 async function socialCreateGroup(name) {
-  const g = await rpc('gt_create_group', { p_name: name });
+  const g = S.sanitizeGroup(await rpc('gt_create_group', { p_name: name }));
+  if (!g) throw new SocialError('Respuesta inesperada del servidor.', 'server');
   await socialPublish(true);
   await socialRefreshGroups();
   social.activeGroup = g.id;
@@ -2484,7 +2580,8 @@ async function socialCreateGroup(name) {
   return g;
 }
 async function socialJoin(code) {
-  const g = await rpc('gt_join_group', { p_code: code });
+  const g = S.sanitizeGroup(await rpc('gt_join_group', { p_code: code }));
+  if (!g) throw new SocialError('Respuesta inesperada del servidor.', 'server');
   await socialPublish(true);
   await socialRefreshGroups();
   social.activeGroup = g.id;
@@ -2504,7 +2601,8 @@ async function socialDeleteMine() {
   await socialSave();
 }
 async function socialFetchBoard(gid) {
-  const rows = (await rpc('gt_board', { p_group: gid })) || [];
+  const raw = await rpc('gt_board', { p_group: gid });
+  const rows = (Array.isArray(raw) ? raw : []).map(S.sanitizeBoardRow).filter(Boolean);
   social.boards[gid] = { at: new Date().toISOString(), rows };
   await socialSave();
   return social.boards[gid];
@@ -4003,7 +4101,7 @@ function viewFriends() {
   if (!loggedIn()) return head + authCard();
   if (!social.name) return head + nameCard();
   const g = social.groups.find((x) => x.id === social.activeGroup);
-  const groupChips = social.groups.length > 1 ? `<div class="chips" role="group" aria-label="Grupo">${social.groups.map((x) => `<button class="chip" data-action="fr-group" data-g="${x.id}" aria-pressed="${x.id === social.activeGroup}">${esc(x.name)}</button>`).join('')}</div>` : '';
+  const groupChips = social.groups.length > 1 ? `<div class="chips" role="group" aria-label="Grupo">${social.groups.map((x) => `<button class="chip" data-action="fr-group" data-g="${esc(x.id)}" aria-pressed="${x.id === social.activeGroup}">${esc(x.name)}</button>`).join('')}</div>` : '';
   const offline = !social.online ? `<p class="notice">Sin conexión. Se muestran los últimos datos descargados; tu resumen se publicará cuando vuelva la conexión.</p>` : '';
   if (!g) return head + offline + noGroupCards() + profileCard();
   return head + offline + groupChips + groupView(g) + profileCard();
@@ -4017,7 +4115,7 @@ function authCard() {
     <form class="stack" id="fr-auth" novalidate>
       ${mode === 'signup' ? `<label class="field" for="fr-name">Tu nombre visible<input class="input" id="fr-name" maxlength="30" autocomplete="nickname" placeholder="Así te verán tus amigos" value="${esc(state.ui.frNameDraft || '')}"></label>` : ''}
       <label class="field" for="fr-email">Email<input class="input" id="fr-email" type="email" autocomplete="email" inputmode="email" autocapitalize="off"></label>
-      <label class="field" for="fr-pass">Contraseña<input class="input" id="fr-pass" type="password" autocomplete="${mode === 'signup' ? 'new-password' : 'current-password'}" minlength="6" placeholder="${mode === 'signup' ? 'Al menos 6 caracteres' : ''}"></label>
+      <label class="field" for="fr-pass">Contraseña<input class="input" id="fr-pass" type="password" autocomplete="${mode === 'signup' ? 'new-password' : 'current-password'}" minlength="${mode === 'signup' ? 8 : 6}" placeholder="${mode === 'signup' ? 'Al menos 8 caracteres, distinta de otras webs' : ''}"></label>
       <p class="set-err" id="fr-err" role="alert" style="padding:0" hidden></p>
       <button class="btn btn-primary btn-lg" type="submit" ${social.busy ? 'disabled' : ''}>${social.busy ? 'Un momento…' : mode === 'signup' ? 'Crear cuenta' : 'Entrar'}</button>
     </form>
@@ -4053,7 +4151,7 @@ function groupView(g) {
   const b = social.boards[g.id];
   const invite = `<section class="card invite"><div class="row spread"><div><p class="eyebrow">Grupo · ${plural(Number(g.members) || (rows ? rows.length : 1), 'miembro', 'miembros')}</p><h2>${esc(g.name)}</h2></div>
       <div class="row"><button class="btn btn-sm" data-action="fr-refresh" ${social.busy ? 'disabled' : ''}>${ICON.history}Actualizar</button>
-      <button class="btn btn-sm btn-primary" data-action="fr-invite" data-g="${g.id}">${ICON.share}Invitar</button></div></div>
+      <button class="btn btn-sm btn-primary" data-action="fr-invite" data-g="${esc(g.id)}">${ICON.share}Invitar</button></div></div>
     <p class="small muted">Código de invitación: <b class="code">${esc(g.invite_code)}</b> · ${b ? 'actualizado ' + ago(b.at) : 'sin descargar todavía'}</p></section>`;
   if (!rows) return invite + `<div class="loading" style="min-height:120px">Cargando el grupo…</div>`;
   if (rows.length < 2) {
@@ -4087,7 +4185,7 @@ function boardCard(g, rows) {
       const m = r.member;
       const hidden = m.summary && m.summary.hidden;
       const staleDays = m.updated_at ? (Date.now() - new Date(m.updated_at)) / 86400000 : Infinity;
-      return `<button class="board-row ${m.is_me ? 'me' : ''} ${staleDays > 7 ? 'stale' : ''}" data-action="fr-open" data-u="${m.user_id}" ${hidden ? 'disabled' : ''}>
+      return `<button class="board-row ${m.is_me ? 'me' : ''} ${staleDays > 7 ? 'stale' : ''}" data-action="fr-open" data-u="${esc(m.user_id)}" ${hidden ? 'disabled' : ''}>
         <span class="pos num">${r.rank || '—'}</span>${avatar(m)}
         <span class="grow"><span class="nm">${esc(memberName(m))}${m.is_me ? ' <span class="small muted">(tú)</span>' : ''}</span>
           <span class="bar"><span style="width:${r.value ? Math.max(2, (Math.abs(r.value) / max) * 100) : 0}%"></span></span>
@@ -4101,7 +4199,7 @@ function feedCard(rows) {
   const feed = S.groupFeed(rows);
   return `<section class="card"><div class="card-head"><h2>Récords recientes del grupo</h2><span class="small muted">Últimos 14 días</span></div>
     ${feed.length ? `<div class="stack">${feed.map((p) => `<div class="pr-item">${ICON.trophy}<div><b>${esc(p.who || 'Alguien')}</b> · <span class="small muted">${fmtDate(p.date + 'T12:00:00')}</span><br>
-      <span class="small">${esc(p.name)}: ${p.type === 'weight' ? 'nuevo peso máximo' : 'nuevo 1RM estimado'}${p.value !== undefined ? ` · <b>${p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + p.reps : '') : fmtW(p.value, 1)}</b>` : ''}</span></div></div>`).join('')}</div>`
+      <span class="small">${esc(p.name)}: ${p.type === 'weight' ? 'nuevo peso máximo' : 'nuevo 1RM estimado'}${p.value !== undefined ? ` · <b>${p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + esc(p.reps) : '') : fmtW(p.value, 1)}</b>` : ''}</span></div></div>`).join('')}</div>`
       : '<p class="muted">Nadie ha batido récords en las últimas dos semanas. Alguien tendrá que romper el hielo.</p>'}</section>`;
 }
 function commonCard(rows) {
@@ -4183,10 +4281,10 @@ function viewFriendDetail(uid) {
     <div class="stack" style="gap:4px">${S.MUSCLES.filter((k) => ms[k]).sort((a, b) => ms[b] - ms[a]).slice(0, 8).map((k) => `<div class="row spread small"><span><i class="sw lv${S.weeklySetsLevel(ms[k])}" style="margin-right:6px"></i>${esc(C.MUSCLE_SHORT[k])}</span><b class="num">${nf(ms[k], 1)}</b></div>`).join('') || '<p class="small muted">Sin series esta semana.</p>'}</div></div></section>
   <section class="card"><div class="card-head"><h2>Ejercicios principales</h2><span class="small muted">${sm.weights === false ? 'Oculta sus kilos' : 'Mejor marca'}</span></div>
     ${(sm.lifts || []).length ? `<div class="table-wrap"><table class="data"><thead><tr><th>Ejercicio</th><th class="r">Sesiones</th><th class="r">Mejor</th><th class="r">30 días</th></tr></thead><tbody>
-      ${sm.lifts.map((l) => `<tr><td>${esc(l.name)}</td><td class="r">${l.sessions}</td><td class="r">${l.best && l.best.weight !== undefined ? `${fmtW(l.best.weight)} × ${l.best.reps}<br><span class="small faint">${l.best.e1rm ? '1RM est. ' + wNum(l.best.score, 1) : ''}</span>` : '—'}</td><td class="r ${l.change30 ? deltaCls(l.change30.pct) : ''}">${l.change30 ? metricText('strength30', l.change30.pct) : '<span class="faint">—</span>'}</td></tr>`).join('')}
+      ${sm.lifts.map((l) => `<tr><td>${esc(l.name)}</td><td class="r">${esc(l.sessions)}</td><td class="r">${l.best && l.best.weight !== undefined ? `${fmtW(l.best.weight)} × ${esc(l.best.reps)}<br><span class="small faint">${l.best.e1rm ? '1RM est. ' + wNum(l.best.score, 1) : ''}</span>` : '—'}</td><td class="r ${l.change30 ? deltaCls(l.change30.pct) : ''}">${l.change30 ? metricText('strength30', l.change30.pct) : '<span class="faint">—</span>'}</td></tr>`).join('')}
     </tbody></table></div>` : '<p class="muted">Sin ejercicios todavía.</p>'}</section>
   <section class="card"><div class="card-head"><h2>Récords recientes</h2></div>
-    ${(sm.prs || []).length ? `<div class="stack">${sm.prs.map((p) => `<div class="pr-item">${ICON.trophy}<div><b>${esc(p.name)}</b> · <span class="small muted">${fmtDate(p.date + 'T12:00:00')}</span><br><span class="small">${p.type === 'weight' ? 'Peso máximo' : '1RM estimado'}${p.value !== undefined ? ': <b>' + (p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + p.reps : '') : fmtW(p.value, 1)) + '</b>' : ''}</span></div></div>`).join('')}</div>` : '<p class="muted">Sin récords todavía.</p>'}</section>`;
+    ${(sm.prs || []).length ? `<div class="stack">${sm.prs.map((p) => `<div class="pr-item">${ICON.trophy}<div><b>${esc(p.name)}</b> · <span class="small muted">${fmtDate(p.date + 'T12:00:00')}</span><br><span class="small">${p.type === 'weight' ? 'Peso máximo' : '1RM estimado'}${p.value !== undefined ? ': <b>' + (p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + esc(p.reps) : '') : fmtW(p.value, 1)) + '</b>' : ''}</span></div></div>`).join('')}</div>` : '<p class="muted">Sin récords todavía.</p>'}</section>`;
 }
 
 // ---------------------------------------------------------------- acciones
@@ -4281,7 +4379,7 @@ async function onSocialSubmit(form) {
     const name = v('fr-name'), email = v('fr-email'), pass = document.getElementById('fr-pass').value;
     if (mode === 'signup' && (name.length < 1 || name.length > 30)) return err('Escribe tu nombre visible (hasta 30 caracteres).');
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err('Escribe un email válido.');
-    if (pass.length < 6) return err('La contraseña debe tener al menos 6 caracteres.');
+    if (pass.length < (mode === 'signup' ? 8 : 6)) return err(mode === 'signup' ? 'Usa una contraseña de al menos 8 caracteres (y que no uses en otras webs).' : 'La contraseña tiene al menos 6 caracteres.');
     state.ui.frNameDraft = name;
     await socialRun(() => (mode === 'signup' ? socialSignUp(name, email, pass) : socialSignIn(email, pass)), mode === 'signup' ? '¡Cuenta creada! Ya puedes crear un grupo o unirte a uno.' : 'Has entrado.', form);
     socialLoadActive();
