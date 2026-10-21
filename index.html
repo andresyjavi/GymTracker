@@ -78,7 +78,7 @@ a { color: var(--accent); }
 .shell { display: flex; min-height: 100vh; }
 .nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-  display: grid; grid-template-columns: repeat(6, 1fr);
+  display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));
   background: var(--surface); background: color-mix(in srgb, var(--surface) 94%, transparent);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-top: 1px solid var(--line);
@@ -87,10 +87,12 @@ a { color: var(--accent); }
 .nav-brand { display: none; }
 .nav button {
   background: none; border: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
-  padding: 6px 2px; border-radius: var(--r-md); color: var(--muted); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em;
+  padding: 6px 0; border-radius: var(--r-md); color: var(--muted); font-size: 0.62rem; font-weight: 600; letter-spacing: 0; min-width: 0;
+  white-space: nowrap; overflow: hidden;
   position: relative;
 }
-.nav button svg { width: 24px; height: 24px; }
+.nav button svg { width: 22px; height: 22px; }
+.nav button span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
 .nav button[aria-current="page"] { color: var(--accent); }
 .nav .live-dot { position: absolute; top: 6px; right: calc(50% - 16px); width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--surface); }
 .main {
@@ -428,6 +430,34 @@ button.chip.role-chip { font-size: 0.8rem; padding: 6px 10px; }
 .fact { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .fact span:last-child { font-weight: 600; }
 .recap-banner { border-color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+/* ---------- amigos ---------- */
+.avatar { --h: 90; width: 36px; height: 36px; flex: none; border-radius: 50%; display: inline-grid; place-items: center; font-weight: 700; font-size: 0.85rem;
+  background: hsl(var(--h) 35% 26%); color: hsl(var(--h) 80% 86%); border: 1px solid hsl(var(--h) 35% 36%); }
+.avatar.lg { width: 56px; height: 56px; font-size: 1.2rem; }
+.code { font-family: ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: 0.12em; color: var(--fg); }
+.code-input { font-family: ui-monospace, "SF Mono", Menlo, monospace; text-transform: uppercase; letter-spacing: 0.2em; font-size: 1.2rem; }
+.invite h2 { font-size: 1.6rem; }
+.challenge { border-color: var(--pr); border-color: color-mix(in srgb, var(--pr) 45%, var(--line)); display: flex; flex-direction: column; gap: 10px; }
+.podium { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.podium li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: var(--r-md); background: var(--surface-2); }
+.podium li:first-child { background: var(--pr-soft); }
+.podium li.me { outline: 1px solid var(--accent); }
+.podium .pos, .board-row .pos { width: 22px; text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--muted); flex: none; }
+.podium li:first-child .pos { color: var(--pr); }
+.board { display: flex; flex-direction: column; gap: 4px; }
+.board-row { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 8px; border-radius: var(--r-md); background: none; border: 1px solid transparent; color: var(--fg); text-align: left; }
+.board-row:hover { background: var(--surface-2); }
+.board-row.me { border-color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: rgba(200, 240, 49, 0.05); }
+.board-row.stale { opacity: 0.6; }
+.board-row[disabled] { cursor: default; }
+.board-row .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.board-row .nm { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.board-row .bar { height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; display: block; }
+.board-row .bar span { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+.board-row .val { font-family: var(--font-display); font-size: 1.35rem; min-width: 56px; text-align: right; }
+table.data td.lead { color: var(--accent); font-weight: 700; }
+.friends-mini svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
+.friends-mini p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -449,6 +479,7 @@ button.chip.role-chip { font-size: 0.8rem; padding: 6px 10px; }
 </div>
 <div id="toasts" class="toasts" aria-live="polite"></div>
 <div id="modal-root"></div>
+<script>window.GT_SOCIAL = {"url": "https://tvukrwgvtpfogjmbgsnj.supabase.co", "key": "sb_publishable_NNHHS5Iwtr7ho2OK_os2ig_c58Mkj3o"};</script>
 <script>
 /* GymTracker — cálculos estadísticos centralizados.
  * Funciones puras: no tocan el DOM ni el almacenamiento.
@@ -1271,7 +1302,177 @@ button.chip.role-chip { font-size: 0.8rem; padding: 6px 10px; }
     };
   }
 
+  // ---------- resumen compartible con amigos ----------
+  const SOCIAL_VERSION = 1;
+  function windowWithPRs(sessions, from, to, prs) {
+    const w = windowSummary(sessions, from, to);
+    const days = new Set(doneSessions(sessions).filter((s) => toDate(s.startedAt) >= from && toDate(s.startedAt) < to).map((s) => dayKey(s.startedAt)));
+    w.days = days.size;
+    w.prs = new Set(prs.filter((p) => p.type !== 'volume' && toDate(p.date) >= from && toDate(p.date) < to).map((p) => p.sessionId + ':' + p.exerciseId)).size;
+    return w;
+  }
+  /**
+   * Resumen que se comparte con el grupo. No incluye sesiones ni series sueltas.
+   * helpers: {exerciseName(id), exerciseMuscles(id), exerciseGroup(id)}
+   * opts: {weights: false} quita todos los kilos (deja solo recuentos y porcentajes).
+   */
+  function buildSocialSummary(sessions, helpers, now = new Date(), opts = {}) {
+    const ds = doneSessions(sessions);
+    const prs = computePRs(sessions);
+    const wk = startOfWeek(now), mo = startOfMonth(now);
+    const ach = evaluateAchievements(sessions, helpers.exerciseGroup);
+    const st = weekStreaks(sessions, now);
+    // ejercicios principales: los más frecuentes en los últimos 90 días
+    const since90 = addDays(startOfDay(now), -90);
+    const freq = {};
+    ds.filter((s) => toDate(s.startedAt) >= since90).forEach((s) => {
+      new Set((s.exercises || []).filter((e) => workSets(e).length).map((e) => e.exerciseId)).forEach((id) => { freq[id] = (freq[id] || 0) + 1; });
+    });
+    const d30 = addDays(startOfDay(now), -30);
+    const lifts = Object.keys(freq).sort((a, b) => freq[b] - freq[a]).slice(0, 8).map((id) => {
+      const hist = exerciseHistory(sessions, id);
+      const best = hist.reduce((b, h) => (strengthScore(h) > (b ? strengthScore(b) : -1) ? h : b), null);
+      const last = hist[hist.length - 1];
+      const before = hist.filter((h) => toDate(h.date) < d30);
+      const within = hist.filter((h) => toDate(h.date) >= d30);
+      let change30 = null;
+      if (before.length && within.length) {
+        const from = Math.max(...before.map(strengthScore)), to = Math.max(...within.map(strengthScore));
+        change30 = { pct: round(pctChange(from, to), 1), from: round(from, 1), to: round(to, 1) };
+      }
+      return {
+        name: helpers.exerciseName(id),
+        sessions: hist.length,
+        best: { score: round(strengthScore(best), 1), e1rm: best.e1rm > 0, weight: best.topSet.weight, reps: best.topSet.reps, date: dayKey(best.date) },
+        last: { score: round(strengthScore(last), 1), date: dayKey(last.date) },
+        change30,
+      };
+    });
+    const nameOf = (id) => helpers.exerciseName(id);
+    const recentPRs = prs.filter((p) => p.type !== 'volume').slice(-8).reverse()
+      .map((p) => ({ name: nameOf(p.exerciseId), type: p.type, value: round(p.value, 1), reps: p.reps || null, date: dayKey(p.date) }));
+    const msets = (from, to, div) => {
+      const r = muscleSetsBetween(sessions, helpers.exerciseMuscles, from, to);
+      const o = {};
+      Object.keys(r).forEach((m) => { if (r[m].sets > 0) o[m] = round(r[m].sets / div, 1); });
+      return o;
+    };
+    const last = ds[ds.length - 1];
+    let summary = {
+      v: SOCIAL_VERSION,
+      generatedAt: toDate(now).toISOString(),
+      weights: opts.weights !== false,
+      totals: { sessions: ds.length, workSets: ds.reduce((a, s) => a + sessionWorkSetCount(s), 0), volume: round(ds.reduce((a, s) => a + sessionVolume(s), 0), 0), since: ds.length ? dayKey(ds[0].startedAt) : null },
+      week: Object.assign({ key: dayKey(wk) }, windowWithPRs(sessions, wk, addDays(wk, 7), prs)),
+      prevWeek: Object.assign({ key: dayKey(addDays(wk, -7)) }, windowWithPRs(sessions, addDays(wk, -7), wk, prs)),
+      month: Object.assign({ key: monthKey(mo) }, windowWithPRs(sessions, mo, addMonths(mo, 1), prs)),
+      prevMonth: Object.assign({ key: monthKey(addMonths(mo, -1)) }, windowWithPRs(sessions, addMonths(mo, -1), mo, prs)),
+      streak: st,
+      last: last ? { date: dayKey(last.startedAt), type: last.type } : null,
+      level: { level: ach.level.level, title: ach.level.title },
+      achievements: ach.list.filter((a) => a.unlocked).length,
+      lifts,
+      prs: recentPRs,
+      muscles: { week: msets(wk, addDays(wk, 7), 1), avg4: msets(addDays(wk, -28), wk, 4) },
+    };
+    if (opts.weights === false) summary = stripWeights(summary);
+    return summary;
+  }
+  function stripWeights(s) {
+    const c = JSON.parse(JSON.stringify(s));
+    c.weights = false;
+    delete c.totals.volume;
+    ['week', 'prevWeek', 'month', 'prevMonth'].forEach((k) => { delete c[k].volume; });
+    c.lifts.forEach((l) => {
+      delete l.best.score; delete l.best.weight; delete l.last.score;
+      if (l.change30) { delete l.change30.from; delete l.change30.to; }
+    });
+    c.prs.forEach((p) => { delete p.value; });
+    return c;
+  }
+
+  // ---------- clasificaciones ----------
+  const BOARD_METRICS = {
+    week_sessions: { label: 'Sesiones esta semana', unit: 'sesiones' },
+    streak: { label: 'Racha de semanas', unit: 'semanas' },
+    month_sessions: { label: 'Sesiones este mes', unit: 'sesiones' },
+    month_prs: { label: 'Récords este mes', unit: 'récords' },
+    strength30: { label: 'Mejora de fuerza (30 días)', unit: '%' },
+    month_sets: { label: 'Series este mes', unit: 'series' },
+    month_days: { label: 'Días entrenados este mes', unit: 'días' },
+    month_volume: { label: 'Volumen este mes', unit: 'kg', weights: true },
+  };
+  /** Valor de una métrica para un resumen, a fecha `now`. Un resumen de otra semana o mes cuenta 0 en ella. */
+  function metricValue(summary, metric, now = new Date()) {
+    if (!summary || !summary.v) return null;
+    const wkKey = dayKey(startOfWeek(now)), moKey = monthKey(now);
+    const prevWkKey = dayKey(addDays(startOfWeek(now), -7));
+    const week = summary.week && summary.week.key === wkKey ? summary.week : null;
+    const month = summary.month && summary.month.key === moKey ? summary.month
+      : summary.prevMonth && summary.prevMonth.key === moKey ? summary.prevMonth : null;
+    switch (metric) {
+      case 'week_sessions': return week ? week.sessions : 0;
+      case 'month_sessions': return month ? month.sessions : 0;
+      case 'month_prs': return month ? month.prs : 0;
+      case 'month_sets': return month ? month.workSets : 0;
+      case 'month_days': return month ? month.days : 0;
+      case 'month_volume': return month && typeof month.volume === 'number' ? month.volume : null;
+      case 'streak': {
+        // la racha solo sigue viva si el resumen es de esta semana o de la anterior
+        const fresh = summary.week && (summary.week.key === wkKey || summary.week.key === prevWkKey);
+        return fresh && summary.streak ? summary.streak.current : 0;
+      }
+      case 'strength30': {
+        const ch = (summary.lifts || []).map((l) => l.change30 && l.change30.pct).filter((x) => typeof x === 'number');
+        return ch.length ? round(ch.reduce((a, b) => a + b, 0) / ch.length, 1) : null;
+      }
+      default: return null;
+    }
+  }
+  /** Ordena miembros por una métrica. Empates comparten puesto; sin dato van al final sin puesto. */
+  function rankMembers(members, metric, now = new Date()) {
+    const rows = members.map((m) => ({ member: m, value: metricValue(m.summary, metric, now) }));
+    const withV = rows.filter((r) => r.value !== null).sort((a, b) => b.value - a.value);
+    const without = rows.filter((r) => r.value === null);
+    let rank = 0, prev = null;
+    withV.forEach((r, i) => { if (r.value !== prev) { rank = i + 1; prev = r.value; } r.rank = rank; });
+    without.forEach((r) => { r.rank = null; });
+    return withV.concat(without);
+  }
+  const CHALLENGES = [
+    { metric: 'month_sessions', title: 'El más constante', desc: 'Gana quien complete más sesiones este mes.' },
+    { metric: 'month_prs', title: 'Cazarrécords', desc: 'Gana quien bata más récords de peso o de 1RM estimado este mes.' },
+    { metric: 'month_days', title: 'Asistencia perfecta', desc: 'Gana quien entrene más días distintos este mes.' },
+    { metric: 'strength30', title: 'Mejora relativa', desc: 'Gana quien más mejore su fuerza en porcentaje (media de sus ejercicios, 30 días). Justo para todos los tamaños.' },
+    { metric: 'month_sets', title: 'Obreros del hierro', desc: 'Gana quien acumule más series de trabajo este mes.' },
+  ];
+  function monthlyChallenge(now = new Date()) {
+    const d = toDate(now);
+    const c = CHALLENGES[(d.getFullYear() * 12 + d.getMonth()) % CHALLENGES.length];
+    const end = addMonths(startOfMonth(d), 1);
+    return Object.assign({ daysLeft: Math.max(0, Math.round((end - startOfDay(d)) / DAY) - 1), month: monthKey(d) }, c);
+  }
+  /** Ejercicios que hacen al menos dos miembros, emparejados por nombre normalizado. */
+  function commonLifts(members) {
+    const map = new Map();
+    members.forEach((m) => (m.summary && m.summary.lifts || []).forEach((l) => {
+      const k = normName(l.name);
+      if (!map.has(k)) map.set(k, { name: l.name, by: {} });
+      map.get(k).by[m.user_id] = l;
+    }));
+    return Array.from(map.values()).filter((x) => Object.keys(x.by).length >= 2)
+      .sort((a, b) => Object.keys(b.by).length - Object.keys(a.by).length || a.name.localeCompare(b.name, 'es'));
+  }
+  /** Récords recientes de todo el grupo, del más nuevo al más antiguo. */
+  function groupFeed(members, now = new Date(), days = 14) {
+    const since = dayKey(addDays(startOfDay(now), -days));
+    const out = [];
+    members.forEach((m) => (m.summary && m.summary.prs || []).forEach((p) => { if (p.date >= since) out.push(Object.assign({ user_id: m.user_id, who: m.display_name }, p)); }));
+    return out.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)).slice(0, 12);
+  }
+
   const api = {
+    SOCIAL_VERSION, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
     MUSCLES, MUSCLE_ROLES, muscleSetsBetween, validMuscleMap,
     DEFAULT_PROGRESSION, progressionConfig, suggestProgression, strengthScore, detectStalls, groupSetsBetween, weeklySetsLevel, monthRecap,
     KG_PER_LB, E1RM_MAX_REPS, GROUPS, SESSION_TYPES, SET_KINDS, PERIODS, EXPORT_FORMAT, ACHIEVEMENTS,
@@ -1489,6 +1690,8 @@ button.chip.role-chip { font-size: 0.8rem; padding: 6px 10px; }
     upload: I('<path d="M12 21V9M7 14l5-5 5 5M5 3h14"/>'),
     duplicate: I('<path d="M8 8h12v12H8z"/><path d="M4 16V4h12"/>'),
     lock: I('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'),
+    users: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.6.2 4.4 1.9 5 4.9"/>'),
+    share: I('<path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>'),
     target: I('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'),
     pause: I('<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>'),
     body: I('<circle cx="12" cy="4" r="2"/><path d="M8 8h8l-1 6h-6zM9 14l-1 7M15 14l1 7M8 8l-3 5M16 8l3 5"/>'),
@@ -1667,6 +1870,7 @@ function saveSession(s) {
   s.updatedAt = new Date().toISOString();
   pendingSessions.set(s.id, s);
   bump();
+  if (typeof socialDirty === 'function' && s.status === 'done') socialDirty();
   setSaveState('saving');
   clearTimeout(saveTimer);
   saveTimer = setTimeout(flushSessions, 250);
@@ -2095,6 +2299,267 @@ function bodyMapSVG(opts) {
     ${figure('front', 0, 'Frente')}${figure('back', 220, 'Espalda')}</svg>`;
 }
 
+/* GymTracker — amigos: cuenta, grupos y clasificaciones con Supabase.
+   Los entrenamientos siguen guardándose solo en el dispositivo. Al servidor solo va
+   el resumen que calcula S.buildSocialSummary (y solo si la persona lo permite). */
+
+const SOCIAL_CFG = window.GT_SOCIAL && window.GT_SOCIAL.url && window.GT_SOCIAL.key ? window.GT_SOCIAL : null;
+const social = {
+  loaded: false,
+  session: null,        // {access_token, refresh_token, expires_at, user: {id, email}}
+  name: '',
+  share: { enabled: true, weights: true },
+  groups: [],           // [{id, name, invite_code, members}]
+  activeGroup: null,
+  boards: {},           // gid → {at, rows}
+  lastPublished: null,  // {at, hash}
+  pendingJoin: null,
+  busy: false,
+  error: null,
+  online: navigator.onLine !== false,
+};
+const SOCIAL_KEYS = ['session', 'name', 'share', 'groups', 'activeGroup', 'boards', 'lastPublished', 'pendingJoin'];
+
+async function socialLoad() {
+  try {
+    const row = await DB.get('meta', 'social');
+    if (row && row.value) SOCIAL_KEYS.forEach((k) => { if (row.value[k] !== undefined) social[k] = row.value[k]; });
+  } catch (e) { /* sin datos previos */ }
+  social.loaded = true;
+}
+async function socialSave() {
+  const v = {};
+  SOCIAL_KEYS.forEach((k) => { v[k] = social[k]; });
+  try { await DB.put('meta', { key: 'social', value: v }); } catch (e) { /* se reintentará en el próximo cambio */ }
+}
+function socialReady() { return !!SOCIAL_CFG; }
+function loggedIn() { return !!(social.session && social.session.access_token); }
+
+// ---------------------------------------------------------------- errores legibles
+const SOCIAL_ERRORS = {
+  sin_sesion: 'Tu sesión ha caducado. Vuelve a entrar.',
+  nombre_no_valido: 'El nombre debe tener entre 1 y 30 caracteres (40 para grupos).',
+  resumen_no_valido: 'No se pudo preparar tu resumen.',
+  resumen_demasiado_grande: 'Tu resumen es demasiado grande para compartirlo.',
+  codigo_no_valido: 'Ese código de invitación no existe. Revisa las letras y números.',
+  grupo_lleno: 'Ese grupo ya tiene 20 personas.',
+  demasiados_grupos: 'Puedes estar como mucho en 10 grupos.',
+  no_miembro: 'Ya no perteneces a ese grupo.',
+};
+class SocialError extends Error { constructor(msg, code) { super(msg); this.code = code; } }
+function authErrorText(j, status) {
+  const raw = String((j && (j.msg || j.error_description || j.message || j.error)) || '').toLowerCase();
+  const code = j && (j.error_code || j.code);
+  if (code === 'invalid_credentials' || raw.includes('invalid login')) return 'Email o contraseña incorrectos.';
+  if (code === 'user_already_exists' || raw.includes('already registered')) return 'Ya existe una cuenta con ese email. Entra con tu contraseña.';
+  if (code === 'weak_password' || raw.includes('password should')) return 'La contraseña es demasiado corta: usa al menos 6 caracteres.';
+  if (code === 'email_not_confirmed' || raw.includes('not confirmed')) return 'Falta confirmar el email. En Supabase, desactiva «Confirm email» (Authentication → Sign In / Providers → Email) y vuelve a intentarlo.';
+  if (code === 'validation_failed' || raw.includes('invalid format') || raw.includes('unable to validate email')) return 'Ese email no parece válido.';
+  if (code === 'over_request_rate_limit' || code === 'over_email_send_rate_limit' || status === 429) return 'Demasiados intentos seguidos. Espera un minuto.';
+  if (code === 'signup_disabled' || raw.includes('signups not allowed')) return 'El registro está desactivado en Supabase (Authentication → Sign In / Providers → Email → Allow new users to sign up).';
+  return 'No se pudo completar (' + (raw || 'error ' + status) + ').';
+}
+function networkError() { return new SocialError('Sin conexión con el servidor. Tus entrenamientos se siguen guardando en el móvil.', 'offline'); }
+
+// ---------------------------------------------------------------- llamadas HTTP
+async function authCall(path, body, token) {
+  let res;
+  try {
+    res = await fetch(SOCIAL_CFG.url + '/auth/v1/' + path, {
+      method: 'POST',
+      headers: Object.assign({ apikey: SOCIAL_CFG.key, 'Content-Type': 'application/json' }, token ? { Authorization: 'Bearer ' + token } : {}),
+      body: JSON.stringify(body || {}),
+    });
+  } catch (e) { throw networkError(); }
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) throw new SocialError(authErrorText(j, res.status), (j && (j.error_code || j.code)) || 'auth');
+  return j;
+}
+function storeSession(j) {
+  if (!j || !j.access_token) {
+    throw new SocialError('La cuenta se ha creado pero Supabase pide confirmar el email. Desactiva «Confirm email» en Authentication → Sign In / Providers → Email y entra de nuevo.', 'email_not_confirmed');
+  }
+  social.session = {
+    access_token: j.access_token,
+    refresh_token: j.refresh_token,
+    expires_at: j.expires_at || Math.floor(Date.now() / 1000) + (j.expires_in || 3600),
+    user: { id: j.user && j.user.id, email: j.user && j.user.email },
+  };
+}
+let refreshing = null;
+async function refreshSession() {
+  if (!social.session || !social.session.refresh_token) throw new SocialError(SOCIAL_ERRORS.sin_sesion, 'sin_sesion');
+  if (!refreshing) {
+    refreshing = authCall('token?grant_type=refresh_token', { refresh_token: social.session.refresh_token })
+      .then((j) => { storeSession(j); return socialSave(); })
+      .catch((e) => {
+        if (e.code !== 'offline') { social.session = null; socialSave(); }
+        throw e.code === 'offline' ? e : new SocialError(SOCIAL_ERRORS.sin_sesion, 'sin_sesion');
+      })
+      .finally(() => { refreshing = null; });
+  }
+  return refreshing;
+}
+async function rpc(name, args, retried) {
+  if (!loggedIn()) throw new SocialError(SOCIAL_ERRORS.sin_sesion, 'sin_sesion');
+  if (social.session.expires_at - 60 < Date.now() / 1000) await refreshSession();
+  let res;
+  try {
+    res = await fetch(SOCIAL_CFG.url + '/rest/v1/rpc/' + name, {
+      method: 'POST',
+      headers: { apikey: SOCIAL_CFG.key, Authorization: 'Bearer ' + social.session.access_token, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(args || {}),
+    });
+  } catch (e) { social.online = false; throw networkError(); }
+  social.online = true;
+  if (res.status === 401 && !retried) { await refreshSession(); return rpc(name, args, true); }
+  const text = await res.text();
+  let j = null;
+  try { j = text ? JSON.parse(text) : null; } catch (e) { j = null; }
+  if (!res.ok) {
+    const msg = j && j.message ? String(j.message) : '';
+    if (SOCIAL_ERRORS[msg]) {
+      if (msg === 'sin_sesion') { social.session = null; socialSave(); }
+      throw new SocialError(SOCIAL_ERRORS[msg], msg);
+    }
+    if (res.status === 404 || (j && j.code === 'PGRST202')) throw new SocialError('Falta instalar el script de GymTracker en Supabase (SQL Editor → Run).', 'missing_sql');
+    throw new SocialError('El servidor ha respondido con un error (' + res.status + (msg ? ': ' + msg : '') + ').', 'server');
+  }
+  return j;
+}
+
+// ---------------------------------------------------------------- acciones de cuenta y grupos
+async function socialSignUp(name, email, password) {
+  storeSession(await authCall('signup', { email, password }));
+  social.name = name;
+  await socialSave();
+  await socialPublish(true);
+  await socialAfterLogin();
+}
+async function socialSignIn(email, password) {
+  storeSession(await authCall('token?grant_type=password', { email, password }));
+  await socialSave();
+  await socialRefreshGroups();
+  if (!social.name) {
+    // cuenta creada en otro dispositivo: recupera el nombre desde los grupos
+    for (const g of social.groups) {
+      const b = await socialFetchBoard(g.id).catch(() => null);
+      const me = b && b.rows.find((r) => r.is_me);
+      if (me && me.display_name) { social.name = me.display_name; break; }
+    }
+  }
+  await socialSave();
+  if (social.name) await socialPublish(true);
+  await socialAfterLogin();
+}
+async function socialAfterLogin() {
+  if (social.pendingJoin) {
+    const code = social.pendingJoin;
+    social.pendingJoin = null;
+    await socialSave();
+    try { const g = await socialJoin(code); toast(`Te has unido a «${g.name}».`, 'good', 3500); }
+    catch (e) { toast(e.message, 'err', 4500); }
+  } else {
+    await socialRefreshGroups();
+  }
+}
+async function socialSignOut() {
+  const token = social.session && social.session.access_token;
+  social.session = null; social.groups = []; social.boards = {}; social.activeGroup = null; social.lastPublished = null;
+  await socialSave();
+  if (token) authCall('logout', {}, token).catch(() => {});
+}
+async function socialRefreshGroups() {
+  social.groups = (await rpc('gt_my_groups', {})) || [];
+  if (!social.groups.some((g) => g.id === social.activeGroup)) social.activeGroup = social.groups.length ? social.groups[0].id : null;
+  await socialSave();
+  return social.groups;
+}
+async function socialCreateGroup(name) {
+  const g = await rpc('gt_create_group', { p_name: name });
+  await socialPublish(true);
+  await socialRefreshGroups();
+  social.activeGroup = g.id;
+  await socialSave();
+  return g;
+}
+async function socialJoin(code) {
+  const g = await rpc('gt_join_group', { p_code: code });
+  await socialPublish(true);
+  await socialRefreshGroups();
+  social.activeGroup = g.id;
+  await socialSave();
+  await socialFetchBoard(g.id).catch(() => {});
+  return g;
+}
+async function socialLeave(gid) {
+  await rpc('gt_leave_group', { p_group: gid });
+  delete social.boards[gid];
+  await socialRefreshGroups();
+}
+async function socialDeleteMine() {
+  await rpc('gt_delete_my_data', {});
+  social.groups = []; social.boards = {}; social.activeGroup = null; social.lastPublished = null;
+  social.share.enabled = false;
+  await socialSave();
+}
+async function socialFetchBoard(gid) {
+  const rows = (await rpc('gt_board', { p_group: gid })) || [];
+  social.boards[gid] = { at: new Date().toISOString(), rows };
+  await socialSave();
+  return social.boards[gid];
+}
+
+// ---------------------------------------------------------------- publicar el resumen
+function mySummary() {
+  if (!social.share.enabled) return { v: S.SOCIAL_VERSION, hidden: true, generatedAt: new Date().toISOString() };
+  return cached('social-summary:' + social.share.weights, () => S.buildSocialSummary(state.sessions,
+    { exerciseName: exName, exerciseMuscles: exMuscles, exerciseGroup: exGroup }, new Date(), { weights: social.share.weights }));
+}
+function hashStr(str) { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return String(h >>> 0); }
+let publishTimer = null;
+/** Publica el resumen si ha cambiado (o si han pasado 6 h, para mantener frescas las métricas semanales). */
+async function socialPublish(force) {
+  if (!socialReady() || !loggedIn() || !social.name) return false;
+  const sm = mySummary();
+  const body = JSON.stringify(Object.assign({}, sm, { generatedAt: undefined }));
+  const h = hashStr(body + social.name);
+  const stale = !social.lastPublished || Date.now() - new Date(social.lastPublished.at) > 6 * 3600e3;
+  if (!force && social.lastPublished && social.lastPublished.hash === h && !stale) return false;
+  await rpc('gt_publish', { p_name: social.name, p_summary: sm });
+  social.lastPublished = { at: new Date().toISOString(), hash: h };
+  await socialSave();
+  return true;
+}
+/** Programa una publicación en segundo plano tras cambios en los entrenamientos. */
+function socialDirty(delay = 8000) {
+  if (!socialReady() || !loggedIn()) return;
+  clearTimeout(publishTimer);
+  publishTimer = setTimeout(() => { socialPublish(false).catch(() => {}); }, delay);
+}
+window.addEventListener('online', () => { social.online = true; socialDirty(1500); });
+window.addEventListener('offline', () => { social.online = false; });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) socialDirty(3000); });
+
+/** Lee ?unirse=CODIGO de la dirección (enlace de invitación) y lo guarda para después de entrar. */
+function readInviteFromURL() {
+  try {
+    const u = new URL(location.href);
+    const code = (u.searchParams.get('unirse') || '').trim().toUpperCase();
+    if (!code) return false;
+    u.searchParams.delete('unirse');
+    history.replaceState(null, '', u.pathname + (u.search || '') + '#amigos');
+    social.pendingJoin = code.replace(/[^A-Z0-9]/g, '').slice(0, 12);
+    return true;
+  } catch (e) { return false; }
+}
+function inviteLink(code) {
+  const u = new URL(location.href);
+  u.hash = ''; u.search = '';
+  u.searchParams.set('unirse', code);
+  return u.toString();
+}
+
 /* GymTracker — entrenar: inicio de sesión, editor de sesión (activa o pasada) y resumen final. */
 
 // ---------------------------------------------------------------- ayudas de sesión
@@ -2498,6 +2963,7 @@ const TrainActions = {
     s.endedAt = new Date().toISOString();
     saveSession(s);
     await flushSessions();
+    socialDirty(1500);
     const after = S.evaluateAchievements(state.sessions, exGroup).list.filter((a) => a.unlocked && !before.includes(a.id));
     state.ui.summary = { id: s.id, phrase: phrase('finish'), newAch: after.map((a) => a.id) };
     state.ui.errors = {};
@@ -2532,6 +2998,7 @@ async function removeSession(id) {
   try { await DB.del('sessions', id); } catch (e) { toast('No se pudo borrar del almacenamiento.', 'err'); return; }
   state.sessions = state.sessions.filter((s) => s.id !== id);
   bump();
+  socialDirty();
 }
 
 // ---------------------------------------------------------------- selector de ejercicios
@@ -2766,6 +3233,7 @@ function viewHome() {
     ${act ? '' : `<button class="btn btn-primary btn-lg" data-action="nav" data-view="entrenar">${ICON.dumbbell}Entrenar</button>`}</div>
   ${activeBanner}
   ${recapBanner()}
+  ${friendsMini()}
   <div class="grid grid-tiles">
     ${tile('Esta semana', `${thisW.sessions}<small>${thisW.sessions === 1 ? 'sesión' : 'sesiones'}</small>`, `Semana pasada: ${lastW.sessions}`)}
     ${tile('Este mes', `${thisM.sessions}<small>${thisM.sessions === 1 ? 'sesión' : 'sesiones'}</small>`, `${plural(thisM.workSets, 'serie', 'series')} de trabajo`)}
@@ -3484,6 +3952,373 @@ const ExtraActions = {
   },
 };
 
+/* GymTracker — pantalla Amigos: entrar, grupos, clasificaciones, retos y fichas de amigos. */
+
+const BOARD_ORDER = ['week_sessions', 'streak', 'month_prs', 'strength30', 'month_sessions', 'month_days', 'month_sets', 'month_volume'];
+const LEAD_QUIPS = [
+  '{n} manda. El resto, a tomar notas.', '{n} va en cabeza. La gravedad presenta una queja.', '{n} lidera. Ya puede ir pidiendo la corona.',
+  '{n} está en lo más alto. Por ahora.', 'Primer puesto para {n}. Que no se acomode.',
+];
+const TIE_QUIPS = ['Empate en lo alto. Esto se decide en la próxima sesión.', 'Igualados. El hierro dicta sentencia la semana que viene.'];
+const LAST_QUIPS = ['{n} está calentando motores.', '{n} se reserva para el final, como los buenos.', '{n} tiene margen de mejora. Mucho margen.'];
+
+function pickQuip(list, seed) { return list[Math.abs(hashStr(seed)) % list.length]; }
+function ago(iso) {
+  if (!iso) return 'nunca';
+  const min = Math.round((Date.now() - new Date(iso)) / 60000);
+  if (min < 1) return 'ahora mismo';
+  if (min < 60) return `hace ${min} min`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `hace ${h} h`;
+  const d = Math.round(h / 24);
+  return d === 1 ? 'ayer' : `hace ${d} días`;
+}
+function metricText(metric, v, summary) {
+  if (v === null || v === undefined) return '—';
+  if (metric === 'strength30') return (v > 0 ? '+' : v < 0 ? MINUS : '±') + nf(Math.abs(v), 1) + ' %';
+  if (metric === 'month_volume') return fmtVol(v);
+  return nf(v, 0);
+}
+function memberName(m) { return m.display_name || 'Sin nombre'; }
+function initials(name) { return (name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join(''); }
+function avatar(m) {
+  const hue = Math.abs(parseInt(hashStr(m.user_id || m.display_name || ''), 10)) % 360;
+  return `<span class="avatar" style="--h:${hue}" aria-hidden="true">${esc(initials(memberName(m)))}</span>`;
+}
+function liftScoreText(l) {
+  if (!l || !l.best) return '—';
+  if (l.best.weight === undefined) return l.change30 ? metricText('strength30', l.change30.pct) : `${plural(l.sessions, 'sesión', 'sesiones')}`;
+  return `${wNum(l.best.score, 1)} ${unit()}`;
+}
+
+// ---------------------------------------------------------------- vista principal
+function viewFriends() {
+  const head = `<div class="page-head"><div><p class="eyebrow">Con amigos</p><h1>Amigos</h1>
+    <p class="sub">Compara tu constancia, tus récords y tu progreso con tu grupo. Solo se comparte un resumen; tus entrenamientos completos se quedan en este dispositivo.</p></div></div>`;
+  if (!socialReady()) {
+    return head + `<div class="empty"><div class="plate">${ICON.users}</div><h3>Disponible en la app instalada</h3>
+      <p>Esta versión de la página no puede conectarse a vuestro servidor. Abre GymTracker desde el icono de tu pantalla de inicio (la versión de GitHub Pages) para entrar y ver a tus amigos.</p></div>`;
+  }
+  if (state.route.sub && state.route.sub.friendId) return viewFriendDetail(state.route.sub.friendId);
+  if (!loggedIn()) return head + authCard();
+  if (!social.name) return head + nameCard();
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  const groupChips = social.groups.length > 1 ? `<div class="chips" role="group" aria-label="Grupo">${social.groups.map((x) => `<button class="chip" data-action="fr-group" data-g="${x.id}" aria-pressed="${x.id === social.activeGroup}">${esc(x.name)}</button>`).join('')}</div>` : '';
+  const offline = !social.online ? `<p class="notice">Sin conexión. Se muestran los últimos datos descargados; tu resumen se publicará cuando vuelva la conexión.</p>` : '';
+  if (!g) return head + offline + noGroupCards() + profileCard();
+  return head + offline + groupChips + groupView(g) + profileCard();
+}
+
+function authCard() {
+  const mode = state.ui.frMode || 'signup';
+  const pending = social.pendingJoin ? `<p class="notice">Te han invitado a un grupo (código <b>${esc(social.pendingJoin)}</b>). Entra o crea tu cuenta y te unimos automáticamente.</p>` : '';
+  return `${pending}<section class="card stack" style="max-width:520px">
+    <div class="tabs" role="tablist"><button role="tab" aria-selected="${mode === 'signup'}" data-action="fr-mode" data-m="signup">Crear cuenta</button><button role="tab" aria-selected="${mode === 'signin'}" data-action="fr-mode" data-m="signin">Ya tengo cuenta</button></div>
+    <form class="stack" id="fr-auth" novalidate>
+      ${mode === 'signup' ? `<label class="field" for="fr-name">Tu nombre visible<input class="input" id="fr-name" maxlength="30" autocomplete="nickname" placeholder="Así te verán tus amigos" value="${esc(state.ui.frNameDraft || '')}"></label>` : ''}
+      <label class="field" for="fr-email">Email<input class="input" id="fr-email" type="email" autocomplete="email" inputmode="email" autocapitalize="off"></label>
+      <label class="field" for="fr-pass">Contraseña<input class="input" id="fr-pass" type="password" autocomplete="${mode === 'signup' ? 'new-password' : 'current-password'}" minlength="6" placeholder="${mode === 'signup' ? 'Al menos 6 caracteres' : ''}"></label>
+      <p class="set-err" id="fr-err" role="alert" style="padding:0" hidden></p>
+      <button class="btn btn-primary btn-lg" type="submit" ${social.busy ? 'disabled' : ''}>${social.busy ? 'Un momento…' : mode === 'signup' ? 'Crear cuenta' : 'Entrar'}</button>
+    </form>
+    <p class="small muted">Qué compartes: tu nombre, sesiones y series por semana y mes, racha, récords recientes, la evolución de tus ejercicios principales y las series por músculo. Puedes ocultar los kilos o dejar de compartir cuando quieras.</p>
+  </section>`;
+}
+function nameCard() {
+  return `<section class="card stack" style="max-width:520px"><h2>¿Cómo te llamamos?</h2>
+    <form class="stack" id="fr-name-form" novalidate>
+      <label class="field" for="fr-name2">Nombre visible<input class="input" id="fr-name2" maxlength="30" autocomplete="nickname"></label>
+      <p class="set-err" id="fr-err" role="alert" style="padding:0" hidden></p>
+      <button class="btn btn-primary" type="submit">Guardar</button></form></section>`;
+}
+function noGroupCards() {
+  return `<div class="grid grid-2">
+    <section class="card stack"><h2>Crear un grupo</h2><p class="small muted">Crea el grupo y comparte el enlace de invitación con tus amigos.</p>
+      <form class="stack" id="fr-create" novalidate><label class="field" for="fr-gname">Nombre del grupo<input class="input" id="fr-gname" maxlength="40" placeholder="p. ej. Los del hierro"></label>
+      <p class="set-err form-err" role="alert" style="padding:0" hidden></p>
+      <button class="btn btn-primary" type="submit" ${social.busy ? 'disabled' : ''}>${ICON.plus}Crear grupo</button></form></section>
+    <section class="card stack"><h2>Unirme con un código</h2><p class="small muted">Si te han pasado un código de 6 caracteres, escríbelo aquí.</p>
+      <form class="stack" id="fr-join" novalidate><label class="field" for="fr-code">Código<input class="input code-input" id="fr-code" maxlength="12" autocapitalize="characters" autocomplete="off" placeholder="ABC234"></label>
+      <p class="set-err form-err" role="alert" style="padding:0" hidden></p>
+      <button class="btn" type="submit" ${social.busy ? 'disabled' : ''}>Unirme</button></form></section>
+  </div>`;
+}
+function boardRows(gid) {
+  const b = social.boards[gid];
+  if (!b) return null;
+  return b.rows.map((r) => (r.is_me ? Object.assign({}, r, { display_name: social.name || r.display_name, summary: social.share.enabled ? mySummary() : r.summary, updated_at: social.lastPublished ? social.lastPublished.at : r.updated_at }) : r));
+}
+function groupView(g) {
+  const rows = boardRows(g.id);
+  const b = social.boards[g.id];
+  const invite = `<section class="card invite"><div class="row spread"><div><p class="eyebrow">Grupo · ${plural(Number(g.members) || (rows ? rows.length : 1), 'miembro', 'miembros')}</p><h2>${esc(g.name)}</h2></div>
+      <div class="row"><button class="btn btn-sm" data-action="fr-refresh" ${social.busy ? 'disabled' : ''}>${ICON.history}Actualizar</button>
+      <button class="btn btn-sm btn-primary" data-action="fr-invite" data-g="${g.id}">${ICON.share}Invitar</button></div></div>
+    <p class="small muted">Código de invitación: <b class="code">${esc(g.invite_code)}</b> · ${b ? 'actualizado ' + ago(b.at) : 'sin descargar todavía'}</p></section>`;
+  if (!rows) return invite + `<div class="loading" style="min-height:120px">Cargando el grupo…</div>`;
+  if (rows.length < 2) {
+    return invite + `<div class="empty"><div class="plate">${ICON.users}</div><h3>Solo estás tú</h3><p>Pulsa «Invitar» y manda el enlace por WhatsApp. Cuando tus amigos instalen la app y entren con el enlace, aparecerán aquí.</p></div>`
+      + boardCard(g, rows);
+  }
+  return invite + challengeCard(rows) + boardCard(g, rows) + feedCard(rows) + commonCard(rows) + musclesCompareCard(rows);
+}
+function challengeCard(rows) {
+  const ch = S.monthlyChallenge();
+  const ranked = S.rankMembers(rows, ch.metric);
+  const top = ranked.filter((r) => r.rank === 1 && r.value > 0);
+  const quip = !top.length ? 'Nadie ha puntuado todavía. Oportunidad de oro.'
+    : top.length > 1 ? pickQuip(TIE_QUIPS, ch.month) : pickQuip(LEAD_QUIPS, ch.month + top[0].member.user_id).replace('{n}', memberName(top[0].member));
+  return `<section class="card challenge"><div class="row spread"><div><p class="eyebrow">Reto de ${esc(DF.month.format(new Date()).split(' ')[0])}</p><h2>${esc(ch.title)}</h2></div>
+      <span class="tag tag-accent">${ch.daysLeft ? plural(ch.daysLeft, 'día', 'días') + ' más' : 'Último día'}</span></div>
+    <p class="small muted">${esc(ch.desc)}</p>
+    ${state.settings.fun ? `<p class="quip" style="font-size:1.1rem">${esc(quip)}</p>` : ''}
+    <ol class="podium">${ranked.slice(0, 3).map((r) => `<li class="${r.member.is_me ? 'me' : ''}"><span class="pos">${r.rank || '—'}</span>${avatar(r.member)}<span class="grow">${esc(memberName(r.member))}${r.member.is_me ? ' <span class="small muted">(tú)</span>' : ''}</span><b class="num">${metricText(ch.metric, r.value)}</b></li>`).join('')}</ol></section>`;
+}
+function boardCard(g, rows) {
+  const allWeights = rows.every((r) => r.summary && r.summary.weights !== false && !r.summary.hidden);
+  const metrics = BOARD_ORDER.filter((m) => m !== 'month_volume' || allWeights);
+  let metric = state.ui.frMetric && metrics.includes(state.ui.frMetric) ? state.ui.frMetric : 'week_sessions';
+  const ranked = S.rankMembers(rows, metric);
+  const max = Math.max(1, ...ranked.map((r) => Math.abs(r.value || 0)));
+  const last = ranked.filter((r) => r.rank).slice(-1)[0];
+  return `<section class="card"><div class="card-head"><h2>Clasificación</h2></div>
+    <div class="chips" style="margin-bottom:12px" role="group" aria-label="Métrica">${metrics.map((m) => `<button class="chip" data-action="fr-metric" data-m="${m}" aria-pressed="${metric === m}">${esc(S.BOARD_METRICS[m].label)}</button>`).join('')}</div>
+    <div class="board">${ranked.map((r) => {
+      const m = r.member;
+      const hidden = m.summary && m.summary.hidden;
+      const staleDays = m.updated_at ? (Date.now() - new Date(m.updated_at)) / 86400000 : Infinity;
+      return `<button class="board-row ${m.is_me ? 'me' : ''} ${staleDays > 7 ? 'stale' : ''}" data-action="fr-open" data-u="${m.user_id}" ${hidden ? 'disabled' : ''}>
+        <span class="pos num">${r.rank || '—'}</span>${avatar(m)}
+        <span class="grow"><span class="nm">${esc(memberName(m))}${m.is_me ? ' <span class="small muted">(tú)</span>' : ''}</span>
+          <span class="bar"><span style="width:${r.value ? Math.max(2, (Math.abs(r.value) / max) * 100) : 0}%"></span></span>
+          <span class="small faint">${hidden ? 'No comparte su resumen' : 'Actualizado ' + ago(m.updated_at)}</span></span>
+        <b class="num val">${hidden ? '—' : metricText(metric, r.value)}</b></button>`;
+    }).join('')}</div>
+    ${state.settings.fun && last && ranked.filter((r) => r.rank).length > 2 && last.rank > 1 ? `<p class="small muted" style="margin-top:8px">${esc(pickQuip(LAST_QUIPS, metric + last.member.user_id).replace('{n}', memberName(last.member)))}</p>` : ''}
+    <p class="small faint" style="margin-top:8px">${metric === 'strength30' ? 'Media del cambio de 1RM estimado (o peso máximo) de sus ejercicios principales frente a su mejor marca anterior a los últimos 30 días.' : metric === 'streak' ? 'Semanas seguidas con al menos una sesión.' : metric === 'month_volume' ? 'Más volumen no significa más progreso: depende del peso corporal y del tipo de rutina.' : 'Semanas de lunes a domingo. Toca a alguien para ver su ficha.'}</p></section>`;
+}
+function feedCard(rows) {
+  const feed = S.groupFeed(rows);
+  return `<section class="card"><div class="card-head"><h2>Récords recientes del grupo</h2><span class="small muted">Últimos 14 días</span></div>
+    ${feed.length ? `<div class="stack">${feed.map((p) => `<div class="pr-item">${ICON.trophy}<div><b>${esc(p.who || 'Alguien')}</b> · <span class="small muted">${fmtDate(p.date + 'T12:00:00')}</span><br>
+      <span class="small">${esc(p.name)}: ${p.type === 'weight' ? 'nuevo peso máximo' : 'nuevo 1RM estimado'}${p.value !== undefined ? ` · <b>${p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + p.reps : '') : fmtW(p.value, 1)}</b>` : ''}</span></div></div>`).join('')}</div>`
+      : '<p class="muted">Nadie ha batido récords en las últimas dos semanas. Alguien tendrá que romper el hielo.</p>'}</section>`;
+}
+function commonCard(rows) {
+  const common = S.commonLifts(rows).slice(0, 8);
+  if (!common.length) return '';
+  const cols = rows.filter((r) => common.some((c) => c.by[r.user_id]));
+  return `<section class="card"><div class="card-head"><h2>Ejercicios en común</h2><span class="small muted">Mejor 1RM estimado y cambio en 30 días</span></div>
+    <div class="table-wrap"><table class="data"><thead><tr><th>Ejercicio</th>${cols.map((c) => `<th class="r">${esc(memberName(c))}</th>`).join('')}</tr></thead><tbody>
+    ${common.map((c) => {
+      const vals = cols.map((m) => (c.by[m.user_id] && c.by[m.user_id].best && typeof c.by[m.user_id].best.score === 'number' ? c.by[m.user_id].best.score : -1));
+      const best = Math.max(...vals);
+      return `<tr><td>${esc(c.name)}</td>${cols.map((m, i) => {
+        const l = c.by[m.user_id];
+        if (!l) return '<td class="r muted">—</td>';
+        const ch = l.change30 ? `<br><span class="small ${deltaCls(l.change30.pct)}">${metricText('strength30', l.change30.pct)}</span>` : '';
+        return `<td class="r ${vals[i] === best && best > 0 ? 'lead' : ''}">${liftScoreText(l)}${ch}</td>`;
+      }).join('')}</tr>`;
+    }).join('')}</tbody></table></div>
+    <p class="small faint" style="margin-top:8px">Se emparejan por nombre del ejercicio. El 1RM es una estimación (Epley). Quien oculta sus kilos solo muestra su porcentaje de mejora.</p></section>`;
+}
+function musclesCompareCard(rows) {
+  const shown = rows.filter((r) => r.summary && r.summary.muscles && !r.summary.hidden);
+  if (!shown.length) return '';
+  const wkKey = S.dayKey(S.startOfWeek(new Date()));
+  const sets = (r) => (r.summary.week && r.summary.week.key === wkKey ? r.summary.muscles.week || {} : {});
+  const regions = C.MUSCLE_REGIONS.map(([name, ms]) => [name, ms]);
+  return `<section class="card"><div class="card-head"><h2>Series por zona esta semana</h2></div>
+    <div class="table-wrap"><table class="data"><thead><tr><th>Zona</th>${shown.map((c) => `<th class="r">${esc(memberName(c))}</th>`).join('')}</tr></thead><tbody>
+    ${regions.map(([name, ms]) => `<tr><td>${esc(name)}</td>${shown.map((r) => { const s = sets(r); const v = ms.reduce((a, m) => a + (s[m] || 0), 0); return `<td class="r">${v ? nf(v, 1) : '<span class="faint">0</span>'}</td>`; }).join('')}</tr>`).join('')}
+    </tbody></table></div><p class="small faint" style="margin-top:8px">Series ponderadas: principal 1, secundario 0,5. Toca a un amigo en la clasificación para ver su mapa muscular.</p></section>`;
+}
+function profileCard() {
+  const s = social.share;
+  return `<section class="card stack"><h2>Tu perfil</h2>
+    <p class="small muted">Has entrado como <b>${esc(social.session.user.email || '')}</b>. Último resumen publicado: ${social.lastPublished ? ago(social.lastPublished.at) : 'todavía no'}.</p>
+    <form class="row" id="fr-rename" novalidate style="align-items:flex-end"><label class="field" for="fr-name3" style="flex:1;min-width:180px">Nombre visible<input class="input" id="fr-name3" maxlength="30" value="${esc(social.name)}"></label><button class="btn" type="submit">Guardar</button></form>
+    <label class="row" for="fr-share" style="cursor:pointer"><input type="checkbox" id="fr-share" data-fr-setting="enabled" ${s.enabled ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--accent)"><span>Compartir mi resumen con mis grupos</span></label>
+    <label class="row" for="fr-weights" style="cursor:pointer"><input type="checkbox" id="fr-weights" data-fr-setting="weights" ${s.weights ? 'checked' : ''} ${s.enabled ? '' : 'disabled'} style="width:22px;height:22px;accent-color:var(--accent)"><span>Mostrar mis kilos (si lo quitas, solo se ven recuentos y porcentajes)</span></label>
+    <div class="row">
+      <button class="btn btn-sm" data-action="fr-publish" ${social.busy ? 'disabled' : ''}>Publicar ahora</button>
+      ${social.groups.length ? `<button class="btn btn-sm" data-action="fr-newgroup">${ICON.plus}Otro grupo</button>` : ''}
+      ${social.activeGroup ? `<button class="btn btn-sm btn-danger" data-action="fr-leave">Salir de este grupo</button>` : ''}
+      <button class="btn btn-sm btn-ghost" data-action="fr-signout">Cerrar sesión</button>
+      <button class="btn btn-sm btn-danger" data-action="fr-delete">Borrar mis datos compartidos</button>
+    </div></section>`;
+}
+
+// ---------------------------------------------------------------- ficha de un amigo
+function viewFriendDetail(uid) {
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  const rows = g ? boardRows(g.id) || [] : [];
+  const m = rows.find((r) => r.user_id === uid);
+  const back = `<div class="row"><button class="btn btn-ghost btn-sm" data-action="fr-back">${ICON.back}Amigos</button></div>`;
+  if (!m || !m.summary || m.summary.hidden) return back + `<div class="empty"><h3>Sin datos</h3><p>Esta persona no comparte su resumen.</p></div>`;
+  const sm = m.summary;
+  const now = new Date();
+  const me = rows.find((r) => r.is_me);
+  const vs = (metric) => {
+    if (!me || me.user_id === uid) return '';
+    const a = S.metricValue(sm, metric, now), b = S.metricValue(me.summary, metric, now);
+    if (a === null || b === null) return '';
+    return `Tú: ${metricText(metric, b)}`;
+  };
+  const wkKey = S.dayKey(S.startOfWeek(now));
+  const ms = sm.muscles && sm.week && sm.week.key === wkKey ? sm.muscles.week || {} : {};
+  return back + `
+  <div class="page-head"><div class="row" style="gap:14px">${avatar(m).replace('class="avatar"', 'class="avatar lg"')}<div><p class="eyebrow">${esc(sm.level ? 'Nivel ' + sm.level.level + ' · ' + sm.level.title : 'Amigo')}</p><h1>${esc(memberName(m))}</h1>
+    <p class="sub">Actualizado ${ago(m.updated_at)}${sm.last ? ` · última sesión ${fmtDate(sm.last.date + 'T12:00:00')} (${esc(C.TYPE_SHORT[sm.last.type] || sm.last.type)})` : ''}</p></div></div></div>
+  <div class="grid grid-tiles">
+    ${tile('Esta semana', `${metricText('week_sessions', S.metricValue(sm, 'week_sessions', now))}<small>sesiones</small>`, vs('week_sessions'))}
+    ${tile('Racha', `${metricText('streak', S.metricValue(sm, 'streak', now))}<small>semanas</small>`, vs('streak'))}
+    ${tile('Récords este mes', metricText('month_prs', S.metricValue(sm, 'month_prs', now)), vs('month_prs'))}
+    ${tile('Mejora 30 días', metricText('strength30', S.metricValue(sm, 'strength30', now)), vs('strength30'))}
+    ${tile('Sesiones totales', nf(sm.totals ? sm.totals.sessions : 0, 0), sm.totals && sm.totals.since ? 'desde ' + fmtDate(sm.totals.since + 'T12:00:00') : '')}
+    ${tile('Logros', nf(sm.achievements || 0, 0), 'de ' + S.ACHIEVEMENTS.length)}
+  </div>
+  <section class="card"><div class="card-head"><h2>Mapa muscular de esta semana</h2></div>
+    <div class="mc"><div class="mc-map">${bodyMapSVG({ level: (k) => S.weeklySetsLevel(ms[k] || 0), title: (k) => `${C.MUSCLE_LABELS[k]}: ${nf(ms[k] || 0, 1)} series`, ariaLabel: 'Mapa muscular de ' + memberName(m) })}</div>
+    <div class="stack" style="gap:4px">${S.MUSCLES.filter((k) => ms[k]).sort((a, b) => ms[b] - ms[a]).slice(0, 8).map((k) => `<div class="row spread small"><span><i class="sw lv${S.weeklySetsLevel(ms[k])}" style="margin-right:6px"></i>${esc(C.MUSCLE_SHORT[k])}</span><b class="num">${nf(ms[k], 1)}</b></div>`).join('') || '<p class="small muted">Sin series esta semana.</p>'}</div></div></section>
+  <section class="card"><div class="card-head"><h2>Ejercicios principales</h2><span class="small muted">${sm.weights === false ? 'Oculta sus kilos' : 'Mejor marca'}</span></div>
+    ${(sm.lifts || []).length ? `<div class="table-wrap"><table class="data"><thead><tr><th>Ejercicio</th><th class="r">Sesiones</th><th class="r">Mejor</th><th class="r">30 días</th></tr></thead><tbody>
+      ${sm.lifts.map((l) => `<tr><td>${esc(l.name)}</td><td class="r">${l.sessions}</td><td class="r">${l.best && l.best.weight !== undefined ? `${fmtW(l.best.weight)} × ${l.best.reps}<br><span class="small faint">${l.best.e1rm ? '1RM est. ' + wNum(l.best.score, 1) : ''}</span>` : '—'}</td><td class="r ${l.change30 ? deltaCls(l.change30.pct) : ''}">${l.change30 ? metricText('strength30', l.change30.pct) : '<span class="faint">—</span>'}</td></tr>`).join('')}
+    </tbody></table></div>` : '<p class="muted">Sin ejercicios todavía.</p>'}</section>
+  <section class="card"><div class="card-head"><h2>Récords recientes</h2></div>
+    ${(sm.prs || []).length ? `<div class="stack">${sm.prs.map((p) => `<div class="pr-item">${ICON.trophy}<div><b>${esc(p.name)}</b> · <span class="small muted">${fmtDate(p.date + 'T12:00:00')}</span><br><span class="small">${p.type === 'weight' ? 'Peso máximo' : '1RM estimado'}${p.value !== undefined ? ': <b>' + (p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + p.reps : '') : fmtW(p.value, 1)) + '</b>' : ''}</span></div></div>`).join('')}</div>` : '<p class="muted">Sin récords todavía.</p>'}</section>`;
+}
+
+// ---------------------------------------------------------------- acciones
+/** Ejecuta una acción de red. Con `form`, no se repinta la pantalla hasta que acaba bien,
+    para no perder lo escrito si hay un error. */
+async function socialRun(fn, okMsg, form) {
+  if (social.busy) return false;
+  social.busy = true;
+  const btn = form ? form.querySelector('[type="submit"]') : null;
+  const label = btn ? btn.innerHTML : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Un momento…'; } else render();
+  try {
+    const r = await fn();
+    social.busy = false;
+    render();
+    if (okMsg) toast(typeof okMsg === 'function' ? okMsg(r) : okMsg, 'good', 3000);
+    return true;
+  } catch (e) {
+    console.warn(e);
+    social.busy = false;
+    if (btn && btn.isConnected) {
+      btn.disabled = false; btn.innerHTML = label;
+      const el = form.querySelector('.form-err') || document.getElementById('fr-err');
+      if (el) { el.textContent = e.message; el.hidden = false; } else toast(e.message, 'err', 5000);
+    } else { render(); toast(e.message, 'err', 5000); }
+    return false;
+  }
+}
+async function socialLoadActive() {
+  if (!loggedIn() || !social.activeGroup) return;
+  try { await socialFetchBoard(social.activeGroup); } catch (e) { if (e.code === 'no_miembro') await socialRefreshGroups().catch(() => {}); else if (e.code !== 'offline') toast(e.message, 'err', 4000); }
+  if (state.route.view === 'amigos') render();
+}
+async function shareInvite(g) {
+  const url = inviteLink(g.invite_code);
+  const text = `Únete a «${g.name}» en GymTracker para picarnos con las estadísticas. Código: ${g.invite_code}`;
+  try {
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) { await navigator.share({ title: 'GymTracker', text, url }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  openModal({
+    title: 'Invitar al grupo',
+    body: `<p class="small">Manda este enlace a tus amigos. Al abrirlo, crean su cuenta y entran directamente en «${esc(g.name)}».</p>
+      <label class="field" for="inv-link">Enlace<input class="input" id="inv-link" readonly value="${esc(url)}"></label>
+      <p class="small muted">O diles que entren en Amigos → «Unirme con un código» y escriban <b class="code">${esc(g.invite_code)}</b>.</p>`,
+    actions: [{ label: ICON.copy + 'Copiar enlace', cls: 'btn-primary', onClick: async (close, root) => {
+      try { await navigator.clipboard.writeText(text + '\n' + url); toast('Enlace copiado.'); }
+      catch (e) { const i = $('#inv-link', root); i.focus(); i.select(); toast('Enlace seleccionado: cópialo.'); }
+      return false;
+    } }],
+  });
+}
+const SocialActions = {
+  'fr-mode': (el) => { state.ui.frMode = el.dataset.m; render(); },
+  'fr-group': (el) => { social.activeGroup = el.dataset.g; socialSave(); render(); socialLoadActive(); },
+  'fr-metric': (el) => { state.ui.frMetric = el.dataset.m; render(); },
+  'fr-refresh': () => socialRun(async () => { await socialPublish(false); await socialRefreshGroups(); if (social.activeGroup) await socialFetchBoard(social.activeGroup); }),
+  'fr-invite': (el) => { const g = social.groups.find((x) => x.id === el.dataset.g); if (g) shareInvite(g); },
+  'fr-open': (el) => { state.route = { view: 'amigos', sub: { friendId: el.dataset.u } }; render(); window.scrollTo(0, 0); },
+  'fr-back': () => { state.route = { view: 'amigos', sub: null }; render(); window.scrollTo(0, 0); },
+  'fr-publish': () => socialRun(async () => { await socialPublish(true); if (social.activeGroup) await socialFetchBoard(social.activeGroup); }, 'Resumen publicado.'),
+  'fr-newgroup': () => {
+    openModal({
+      title: 'Otro grupo',
+      body: `<label class="field" for="ng-name">Crear un grupo nuevo<input class="input" id="ng-name" maxlength="40" placeholder="Nombre del grupo"></label>
+        <label class="field" for="ng-code">…o unirte con un código<input class="input code-input" id="ng-code" maxlength="12" autocapitalize="characters" placeholder="ABC234"></label>`,
+      actions: [{ label: 'Cancelar', cls: 'btn-ghost' }, { label: 'Continuar', cls: 'btn-primary', onClick: (close, root) => {
+        const name = $('#ng-name', root).value.trim(), code = $('#ng-code', root).value.trim();
+        if (!name && !code) { toast('Escribe un nombre o un código.', 'err'); return false; }
+        socialRun(() => (code ? socialJoin(code) : socialCreateGroup(name)), (g) => (code ? `Te has unido a «${g.name}».` : `Grupo «${g.name}» creado.`));
+      } }],
+    });
+  },
+  'fr-leave': async () => {
+    const g = social.groups.find((x) => x.id === social.activeGroup);
+    const ok = await confirmModal({ title: 'Salir del grupo', text: `Dejarás de ver «${esc(g.name)}» y sus miembros dejarán de verte. Puedes volver con el código.`, confirmLabel: 'Salir', danger: true });
+    if (ok) socialRun(() => socialLeave(g.id), 'Has salido del grupo.');
+  },
+  'fr-signout': async () => {
+    const ok = await confirmModal({ title: 'Cerrar sesión', text: 'Tus entrenamientos se quedan en este dispositivo. Tu resumen sigue visible para tus grupos hasta que lo borres.', confirmLabel: 'Cerrar sesión' });
+    if (ok) { await socialSignOut(); render(); toast('Sesión cerrada.'); }
+  },
+  'fr-delete': async () => {
+    const ok = await confirmModal({ title: 'Borrar mis datos compartidos', text: 'Se borra tu resumen del servidor y sales de todos tus grupos. Tus entrenamientos en este dispositivo no se tocan. No se puede deshacer.', confirmLabel: 'Borrar', danger: true });
+    if (ok) socialRun(() => socialDeleteMine(), 'Datos compartidos borrados. Has salido de tus grupos.');
+  },
+};
+async function onSocialSubmit(form) {
+  const v = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const err = (msg) => { const el = form.querySelector('.form-err') || form.querySelector('#fr-err'); if (el) { el.textContent = msg; el.hidden = false; } else toast(msg, 'err'); };
+  if (form.id === 'fr-auth') {
+    const mode = state.ui.frMode || 'signup';
+    const name = v('fr-name'), email = v('fr-email'), pass = document.getElementById('fr-pass').value;
+    if (mode === 'signup' && (name.length < 1 || name.length > 30)) return err('Escribe tu nombre visible (hasta 30 caracteres).');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err('Escribe un email válido.');
+    if (pass.length < 6) return err('La contraseña debe tener al menos 6 caracteres.');
+    state.ui.frNameDraft = name;
+    await socialRun(() => (mode === 'signup' ? socialSignUp(name, email, pass) : socialSignIn(email, pass)), mode === 'signup' ? '¡Cuenta creada! Ya puedes crear un grupo o unirte a uno.' : 'Has entrado.', form);
+    socialLoadActive();
+  } else if (form.id === 'fr-name-form' || form.id === 'fr-rename') {
+    const name = v(form.id === 'fr-rename' ? 'fr-name3' : 'fr-name2');
+    if (name.length < 1 || name.length > 30) return err('El nombre debe tener entre 1 y 30 caracteres.');
+    social.name = name; await socialSave();
+    await socialRun(async () => { await socialPublish(true); await socialAfterLogin(); }, 'Nombre guardado.', form);
+    socialLoadActive();
+  } else if (form.id === 'fr-create') {
+    const name = v('fr-gname');
+    if (!name) return err('Escribe un nombre para el grupo.');
+    await socialRun(() => socialCreateGroup(name), (g) => `Grupo «${g.name}» creado. Ahora invita a tus amigos.`, form);
+    socialLoadActive();
+  } else if (form.id === 'fr-join') {
+    const code = v('fr-code');
+    if (code.length < 4) return err('Escribe el código que te han pasado.');
+    await socialRun(() => socialJoin(code), (g) => `Te has unido a «${g.name}».`, form);
+  }
+}
+
+/** Tarjeta corta en Inicio con tu puesto de la semana. */
+function friendsMini() {
+  if (!socialReady() || !loggedIn() || !social.activeGroup) return '';
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  const rows = g && boardRows(g.id);
+  if (!rows || rows.length < 2) return '';
+  const ranked = S.rankMembers(rows, 'week_sessions');
+  const me = ranked.find((r) => r.member.is_me);
+  const lead = ranked[0];
+  const n = ranked.filter((r) => r.rank).length;
+  const pos = me && me.rank ? `Vas <b>${me.rank}.º de ${n}</b> en «${esc(g.name)}» esta semana` : `«${esc(g.name)}»`;
+  const leadTxt = lead && lead.value > 0 && !lead.member.is_me ? ` · ${esc(memberName(lead.member))} lidera con ${plural(lead.value, 'sesión', 'sesiones')}` : lead && lead.member.is_me && lead.value > 0 ? ' · vas en cabeza' : '';
+  return `<section class="card friends-mini"><div class="row spread"><div class="row" style="gap:10px">${ICON.users}<p>${pos}${leadTxt}.</p></div>
+    <button class="btn btn-sm" data-action="nav" data-view="amigos">Ver grupo</button></div></section>`;
+}
+
 /* GymTracker — ajustes, copia de seguridad, navegación, eventos e inicio. */
 
 // ---------------------------------------------------------------- ajustes
@@ -3569,6 +4404,7 @@ function importModal() {
           await DB.putMany('sessions', plan.sessionsToAdd);
         } catch (e) { toast('Error al guardar la importación. No se ha completado.', 'err'); return false; }
         await loadAll();
+        socialDirty(2000);
         toast(`Importadas ${plural(plan.sessionsToAdd.length, 'sesión', 'sesiones')}${plan.duplicateSessions ? ` · ${plan.duplicateSessions} duplicadas omitidas` : ''}.`, 'good', 4000);
         render();
       } },
@@ -3633,10 +4469,14 @@ function resetModal() {
 // ---------------------------------------------------------------- navegación
 const VIEWS = [
   ['inicio', 'Inicio', 'home'], ['entrenar', 'Entrenar', 'dumbbell'], ['historial', 'Historial', 'history'],
-  ['progreso', 'Progreso', 'chart'], ['ejercicios', 'Ejercicios', 'list'], ['ajustes', 'Ajustes', 'settings'],
+  ['progreso', 'Progreso', 'chart'], ['amigos', 'Amigos', 'users'], ['ejercicios', 'Ejercicios', 'list'], ['ajustes', 'Ajustes', 'settings'],
 ];
 function go(view, sub = null) {
   state.route = { view, sub };
+  if (view === 'amigos' && !sub && loggedIn()) {
+    const b = social.activeGroup && social.boards[social.activeGroup];
+    if (!b || Date.now() - new Date(b.at) > 60000) setTimeout(() => { socialPublish(false).catch(() => {}).then(socialLoadActive); }, 50);
+  }
   state.ui.openSetMenu = null; state.ui.openEntryMenu = null;
   if (location.hash !== '#' + view) history.replaceState(null, '', '#' + view);
   render();
@@ -3661,6 +4501,7 @@ function render() {
     else if (r.view === 'progreso') html = viewProgress();
     else if (r.view === 'ejercicios') html = viewExercises();
     else if (r.view === 'ajustes') html = viewSettings();
+    else if (r.view === 'amigos') html = viewFriends();
     else html = viewHome();
   } catch (e) {
     console.error(e);
@@ -3674,7 +4515,7 @@ function render() {
 }
 
 // ---------------------------------------------------------------- acciones
-const Actions = Object.assign({}, TrainActions, ExtraActions, {
+const Actions = Object.assign({}, TrainActions, ExtraActions, SocialActions, {
   'nav': (el) => {
     const v = el.dataset.view;
     if (v === 'entrenar' && state.route.view === 'entrenar' && state.route.sub && state.route.sub.editId) { /* sigue editando */ }
@@ -3755,6 +4596,12 @@ document.addEventListener('click', (ev) => {
   ev.preventDefault();
   Promise.resolve(fn(el, ev)).catch((e) => { console.error(e); toast('Ha ocurrido un error: ' + e.message, 'err'); });
 });
+document.addEventListener('submit', (ev) => {
+  const form = ev.target;
+  if (!form.closest || !form.closest('#app')) return;
+  ev.preventDefault();
+  if (form.id && form.id.startsWith('fr-')) onSocialSubmit(form).catch((e) => toast(e.message, 'err'));
+});
 document.addEventListener('input', (ev) => {
   const el = ev.target;
   if (el.matches('.set-input')) onSetInput(el);
@@ -3778,6 +4625,10 @@ document.addEventListener('change', (ev) => {
     state.ui[el.dataset.cmp] = el.value;
     if (el.dataset.cmp === 'cmpType') { state.ui.cmpA = ''; state.ui.cmpB = ''; }
     render(); const c = document.getElementById('compare'); if (c) c.scrollIntoView({ block: 'nearest' });
+  } else if (el.matches('[data-fr-setting]')) {
+    social.share[el.dataset.frSetting] = el.checked;
+    socialSave().then(() => socialPublish(true)).then(() => { render(); toast(social.share.enabled ? 'Resumen actualizado para tu grupo.' : 'Has dejado de compartir tu resumen.'); })
+      .catch((e) => { render(); toast(e.message, 'err', 4500); });
   } else if (el.matches('[data-setting="fun"]')) { state.settings.fun = el.checked; saveSettings().then(render); }
 });
 // regiones del mapa (SVG) activables con teclado
@@ -3862,10 +4713,20 @@ async function init() {
     $('#view').innerHTML = `<div class="empty"><h3>No se han podido cargar los datos</h3><p>${esc(e.message)}. Prueba a recargar la página.</p></div>`;
     return;
   }
+  await socialLoad();
+  const invited = socialReady() && readInviteFromURL();
+  if (invited) await socialSave();
   state.ready = true;
   const h = location.hash.slice(1);
-  state.route = { view: VIEWS.some(([k]) => k === h) ? h : (activeSession() ? 'entrenar' : 'inicio'), sub: null };
+  state.route = { view: invited ? 'amigos' : VIEWS.some(([k]) => k === h) ? h : (activeSession() ? 'entrenar' : 'inicio'), sub: null };
   render();
+  if (socialReady() && loggedIn()) {
+    if (invited) socialAfterLogin().then(render).catch((e) => toast(e.message, 'err', 4500));
+    else {
+      socialRefreshGroups().then(() => socialPublish(false)).then(socialLoadActive).catch(() => {});
+    }
+    if (state.route.view === 'amigos') socialLoadActive();
+  }
   // Instalada en la pantalla de inicio: pide al navegador que no borre los datos para liberar espacio.
   try {
     const standaloneApp = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;

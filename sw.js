@@ -1,6 +1,6 @@
 /* GymTracker — service worker: guarda la app para usarla sin conexión.
    Tus datos de entrenamiento NO pasan por aquí: viven en IndexedDB del dispositivo. */
-const CACHE = 'gymtracker-7e8293f510fc';
+const CACHE = 'gymtracker-417f9b372eba';
 const FILES = ["./", "icon-180.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "index.html", "manifest.webmanifest"];
 
 self.addEventListener('install', (ev) => {
