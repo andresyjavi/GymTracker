@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-LWxAieI9b7tspyPZ31BGlEoMiEUQ3b10+v9hXLlFMAA=' 'sha256-O9qSU7GDZVoew+Bbsak3stzTo7NEVMcXR7AVW//y6F4=' 'sha256-FIs867s4jT8mP5nGI4APoXRSomOhEScW9IFMiehzkTM=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-0yfycbXXBAl2NP/mjfJ6i368eY93O+qVDBctnqn5/oI=' 'sha256-IbKIm33tAEl6+QsKJSkj6ECMlGOCOY58N9wFja10Y0E=' 'sha256-8Ygrnu2/TLfecKxayGAng6g/NdkDg6ZPgAi62xXymqU=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>html,body{margin:0}body{font-size:14px}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px)}</style>
 <meta name="gt-social" content="{&quot;url&quot;: &quot;https://tvukrwgvtpfogjmbgsnj.supabase.co&quot;, &quot;key&quot;: &quot;sb_publishable_NNHHS5Iwtr7ho2OK_os2ig_c58Mkj3o&quot;}">
@@ -432,6 +432,40 @@ button.chip.role-chip { font-size: 0.8rem; padding: 6px 10px; }
 .fact { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .fact span:last-child { font-weight: 600; }
 .recap-banner { border-color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+/* ---------- plantillas ---------- */
+.mode-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mode-switch button { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 16px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--surface); color: var(--muted); text-align: left; min-height: 72px; }
+.mode-switch button b { font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; color: var(--fg); line-height: 1; }
+.mode-switch button span { font-size: 0.8rem; }
+.mode-switch button[aria-selected="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: rgba(200, 240, 49, 0.06); }
+.mode-switch button[aria-selected="true"] b { color: var(--accent); }
+.tpl-list { display: flex; flex-direction: column; gap: 10px; }
+.tpl-card { display: flex; align-items: stretch; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+.tpl-card.next { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.tpl-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: none; border: 0; color: var(--fg); text-align: left; }
+.tpl-main:hover { background: var(--surface-2); }
+.tpl-main .t { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; text-transform: uppercase; line-height: 1; }
+.tpl-main .s { font-size: 0.82rem; color: var(--muted); }
+.tpl-main .s.ex { color: var(--fg); opacity: 0.85; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tpl-tools { display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 4px; border-left: 1px solid var(--line); }
+.tpl-tools .icon-btn { width: 36px; height: 32px; }
+.tpl-ex { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.tpl-ex li { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; grid-template-areas: "n name step" "n tools tools"; gap: 4px 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.tpl-ex li:last-child { border-bottom: 0; }
+.tpl-ex .n { grid-area: n; align-self: start; font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--muted); text-align: center; }
+.tpl-ex .grow { grid-area: name; display: flex; flex-direction: column; min-width: 0; }
+.tpl-ex .stepper { grid-area: step; display: flex; align-items: center; gap: 2px; text-align: center; }
+.tpl-ex .stepper .num { min-width: 60px; font-size: 0.85rem; line-height: 1.15; }
+.tpl-ex .stepper .icon-btn { width: 36px; height: 36px; font-size: 1.2rem; font-weight: 700; border: 1px solid var(--line); }
+.tpl-ex-tools { grid-area: tools; display: flex; gap: 2px; }
+.tpl-ex-tools .icon-btn { width: 34px; height: 32px; font-family: var(--font-display); font-weight: 700; color: var(--muted); }
+.tpl-offer { border-color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.news { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.news li { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px; border-radius: var(--r-md); background: var(--surface-2); border-left: 3px solid var(--accent); }
+.news li span { font-size: 0.9rem; color: var(--muted); }
+.news li .btn { margin-top: 4px; }
+.whats-new #modal-title { color: var(--accent); }
+details summary { cursor: pointer; padding: 4px 0; }
 /* ---------- amigos ---------- */
 .avatar { --h: 90; width: 36px; height: 36px; flex: none; border-radius: 50%; display: inline-grid; place-items: center; font-weight: 700; font-size: 0.85rem;
   background: hsl(var(--h) 35% 26%); color: hsl(var(--h) 80% 86%); border: 1px solid hsl(var(--h) 35% 36%); }
@@ -457,6 +491,32 @@ button.chip.role-chip { font-size: 0.8rem; padding: 6px 10px; }
 .board-row .bar { height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; display: block; }
 .board-row .bar span { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
 .board-row .val { font-family: var(--font-display); font-size: 1.35rem; min-width: 56px; text-align: right; }
+.cal-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+.cal-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+.cal-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.cal .gday { gap: 3px; }
+.cal .gday { background: transparent; border: 1px solid var(--line); }
+.cal .gday.out { border-color: transparent; }
+.cal .gday.trained { background: var(--surface-3); color: var(--fg); font-weight: 700; border-color: var(--surface-3); }
+.cal .gday.trained:hover { border-color: var(--fg); }
+.cal .gday.today { border-color: var(--fg); }
+.cal .gday .dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; max-width: 30px; }
+.cal .gday .dots i { width: 6px; height: 6px; border-radius: 50%; }
+.wk-rows { display: flex; flex-direction: column; gap: 10px; }
+.wk-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
+.wk-name { display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 600; }
+.wk-name span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wk-name .avatar { width: 28px; height: 28px; font-size: 0.72rem; }
+.wk-grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 9px); gap: 2px; }
+.wk-c { width: 9px; height: 9px; border-radius: 2px; background: var(--surface-2); }
+.wk-c.future { background: transparent; }
+.mini-heat { margin-bottom: 8px; }
+.fs-list { display: flex; flex-direction: column; gap: 10px; }
+.fs-ex { padding: 10px 12px; border-radius: var(--r-md); background: var(--surface-2); display: flex; flex-direction: column; gap: 6px; }
+.fs-sets { display: flex; flex-wrap: wrap; gap: 6px; }
+.fs-set { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.9rem; padding: 3px 8px; border-radius: 6px; background: var(--surface-3); }
+.fs-set.warm { color: var(--warm); }
+.fs-set.drop { color: var(--pr); }
 table.data td.lead { color: var(--accent); font-weight: 700; }
 .friends-mini svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
 .friends-mini p { margin: 0; }
@@ -1303,6 +1363,51 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     };
   }
 
+  // ---------- plantillas de entrenamiento ----------
+  // Plantilla: {id, name, type, exercises: [{exerciseId, sets, warmups}]}. El orden de la lista es la rotación.
+  function cleanTemplate(t, exists) {
+    if (!t || typeof t !== 'object' || typeof t.id !== 'string' || !t.id) return null;
+    const exercises = (Array.isArray(t.exercises) ? t.exercises : []).filter((e) => e && typeof e.exerciseId === 'string' && (!exists || exists(e.exerciseId)))
+      .slice(0, 30).map((e) => ({ exerciseId: e.exerciseId, sets: Math.min(20, Math.max(1, Math.round(Number(e.sets) || 3))), warmups: Math.min(10, Math.max(0, Math.round(Number(e.warmups) || 0))) }));
+    return { id: t.id, name: String(t.name || '').trim().slice(0, 40) || 'Plantilla', type: SESSION_TYPES.includes(t.type) ? t.type : 'mixto', exercises };
+  }
+  /** Plantilla a partir de una sesión: mismos ejercicios y en el mismo orden, con su número de series. */
+  function templateFromSession(session, id, name) {
+    const exercises = [];
+    for (const e of session.exercises || []) {
+      const sets = (e.sets || []).filter((x) => x.done || x.weight != null || x.reps != null);
+      const warmups = sets.filter((x) => x.kind === 'warmup').length;
+      const work = sets.length - warmups;
+      if (!sets.length) continue;
+      const prev = exercises.find((x) => x.exerciseId === e.exerciseId);
+      if (prev) { prev.sets += Math.max(0, work); prev.warmups += warmups; continue; }
+      exercises.push({ exerciseId: e.exerciseId, sets: Math.max(1, work), warmups });
+    }
+    return { id, name: name || '', type: session.type, exercises };
+  }
+  /** Qué cambió una sesión respecto a su plantilla (ejercicios, orden y número de series). */
+  function templateDiff(template, session) {
+    const now = templateFromSession(session, template.id, template.name).exercises;
+    const before = template.exercises;
+    const idsB = before.map((e) => e.exerciseId), idsA = now.map((e) => e.exerciseId);
+    const added = idsA.filter((id) => !idsB.includes(id));
+    const removed = idsB.filter((id) => !idsA.includes(id));
+    const common = idsA.filter((id) => idsB.includes(id));
+    const reordered = common.join('|') !== idsB.filter((id) => idsA.includes(id)).join('|');
+    const sets = now.filter((e) => { const b = before.find((x) => x.exerciseId === e.exerciseId); return b && (b.sets !== e.sets || b.warmups !== e.warmups); })
+      .map((e) => { const b = before.find((x) => x.exerciseId === e.exerciseId); return { exerciseId: e.exerciseId, from: b.sets, to: e.sets, warmupsFrom: b.warmups, warmupsTo: e.warmups }; });
+    return { changed: !!(added.length || removed.length || reordered || sets.length), added, removed, reordered, sets, proposed: now };
+  }
+  /** Siguiente plantilla de la rotación según la última sesión terminada. */
+  function nextTemplate(templates, sessions) {
+    if (!templates || !templates.length) return null;
+    const last = doneSessions(sessions).slice(-1)[0];
+    if (!last) return templates[0];
+    let i = templates.findIndex((t) => t.id === last.templateId);
+    if (i === -1) i = templates.findIndex((t) => t.type === last.type);
+    return i === -1 ? templates[0] : templates[(i + 1) % templates.length];
+  }
+
   // ---------- resumen compartible con amigos ----------
   const SOCIAL_VERSION = 1;
   function windowWithPRs(sessions, from, to, prs) {
@@ -1376,8 +1481,29 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
       prs: recentPRs,
       muscles: { week: msets(wk, addDays(wk, 7), 1), avg4: msets(addDays(wk, -28), wk, 4) },
     };
+    summary.sessions = recentSessionsForShare(sessions, helpers, now, opts.weights !== false);
     if (opts.weights === false) summary = stripWeights(summary);
+    // por si alguien entrena muchísimo: se recortan las sesiones más antiguas para no pasar de ~48 KB
+    while (summary.sessions.length && JSON.stringify(summary).length > 48000) summary.sessions.shift();
     return summary;
+  }
+  const KIND_CODE = { normal: 'n', warmup: 'w', drop: 'd' };
+  /** Sesiones terminadas de las últimas 12 semanas, con sus ejercicios y series completadas. */
+  function recentSessionsForShare(sessions, helpers, now, withWeights) {
+    const since = addDays(startOfWeek(now), -77);
+    return doneSessions(sessions).filter((s) => toDate(s.startedAt) >= since).slice(-60).map((s) => ({
+      date: dayKey(s.startedAt),
+      time: String(toDate(s.startedAt).getHours()).padStart(2, '0') + ':' + String(toDate(s.startedAt).getMinutes()).padStart(2, '0'),
+      type: s.type,
+      name: helpers.templateName ? helpers.templateName(s.templateId) || '' : '',
+      minutes: durationMinutes(s),
+      workSets: sessionWorkSetCount(s),
+      exercises: (s.exercises || []).map((e) => ({
+        name: helpers.exerciseName(e.exerciseId),
+        sets: (e.sets || []).filter((x) => x.done && typeof x.reps === 'number').slice(0, 20)
+          .map((x) => [withWeights && typeof x.weight === 'number' ? round(x.weight, 2) : null, x.reps, KIND_CODE[x.kind] || 'n']),
+      })).filter((e) => e.sets.length).slice(0, 20),
+    }));
   }
   function stripWeights(s) {
     const c = JSON.parse(JSON.stringify(s));
@@ -1389,6 +1515,7 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
       if (l.change30) { delete l.change30.from; delete l.change30.to; }
     });
     c.prs.forEach((p) => { delete p.value; });
+    (c.sessions || []).forEach((x) => x.exercises.forEach((e) => e.sets.forEach((t) => { t[0] = null; })));
     return c;
   }
 
@@ -1455,6 +1582,28 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
       if (out.weights && cleanNum(p.value, 0, 2000, 1) !== null) o.value = cleanNum(p.value, 0, 2000, 1);
       return o;
     }).filter(Boolean);
+    out.sessions = (Array.isArray(s.sessions) ? s.sessions : []).slice(-60).map((x) => {
+      if (!x || typeof x !== 'object' || !cleanDay(x.date)) return null;
+      return {
+        date: cleanDay(x.date),
+        time: typeof x.time === 'string' && /^\d{2}:\d{2}$/.test(x.time) ? x.time : '',
+        type: SESSION_TYPES.includes(x.type) ? x.type : 'mixto',
+        name: cleanStr(x.name, 40),
+        minutes: cleanNum(x.minutes, 0, 1440, 0) || 0,
+        workSets: cleanNum(x.workSets, 0, 500, 0) || 0,
+        exercises: (Array.isArray(x.exercises) ? x.exercises : []).slice(0, 20).map((e) => {
+          const name = e && cleanStr(e.name, 80);
+          if (!name) return null;
+          const sets = (Array.isArray(e.sets) ? e.sets : []).slice(0, 20).map((t) => {
+            if (!Array.isArray(t)) return null;
+            const reps = cleanNum(t[1], 0, 500, 0);
+            if (reps === null) return null;
+            return [out.weights ? cleanNum(t[0], 0, 1000, 2) : null, reps, t[2] === 'w' || t[2] === 'd' ? t[2] : 'n'];
+          }).filter(Boolean);
+          return sets.length ? { name, sets } : null;
+        }).filter(Boolean),
+      };
+    }).filter(Boolean).sort((a, b) => (a.date + a.time < b.date + b.time ? -1 : 1));
     const cm = (m) => { const o = {}; if (m && typeof m === 'object') MUSCLES.forEach((k) => { const v = cleanNum(m[k], 0, 1000, 1); if (v) o[k] = v; }); return o; };
     out.muscles = { week: cm(s.muscles && s.muscles.week), avg4: cm(s.muscles && s.muscles.avg4) };
     return out;
@@ -1543,6 +1692,22 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     return Array.from(map.values()).filter((x) => Object.keys(x.by).length >= 2)
       .sort((a, b) => Object.keys(b.by).length - Object.keys(a.by).length || a.name.localeCompare(b.name, 'es'));
   }
+  /** Días entrenados por cada miembro: {user_id: {día: {sessions: [...], workSets}}}. */
+  function groupCalendar(members) {
+    const out = {};
+    members.forEach((m) => {
+      const days = {};
+      ((m.summary && m.summary.sessions) || []).forEach((x, i) => {
+        if (!days[x.date]) days[x.date] = { sessions: [], workSets: 0 };
+        days[x.date].sessions.push(Object.assign({ index: i }, x));
+        days[x.date].workSets += x.workSets || 0;
+      });
+      out[m.user_id] = days;
+    });
+    return out;
+  }
+  /** Intensidad 0–3 de un día según las series de trabajo (escala fija, igual para todos). */
+  function dayLevel(workSets) { return !workSets ? 0 : workSets < 10 ? 1 : workSets < 20 ? 2 : 3; }
   /** Récords recientes de todo el grupo, del más nuevo al más antiguo. */
   function groupFeed(members, now = new Date(), days = 14) {
     const since = dayKey(addDays(startOfDay(now), -days));
@@ -1552,7 +1717,8 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
   }
 
   const api = {
-    SOCIAL_VERSION, sanitizeSummary, sanitizeBoardRow, sanitizeGroup, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
+    cleanTemplate, templateFromSession, templateDiff, nextTemplate,
+    SOCIAL_VERSION, groupCalendar, dayLevel, sanitizeSummary, sanitizeBoardRow, sanitizeGroup, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
     MUSCLES, MUSCLE_ROLES, muscleSetsBetween, validMuscleMap,
     DEFAULT_PROGRESSION, progressionConfig, suggestProgression, strengthScore, detectStalls, groupSetsBetween, weeklySetsLevel, monthRecap,
     KG_PER_LB, E1RM_MAX_REPS, GROUPS, SESSION_TYPES, SET_KINDS, PERIODS, EXPORT_FORMAT, ACHIEVEMENTS,
@@ -1594,6 +1760,20 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     hombros: ['Elevaciones laterales en polea', 'Pájaros en máquina'],
     piernas: ['Abductores en máquina', 'Aductores en máquina'],
     core: ['Crunch abdominal', 'Giros rusos'],
+  };
+
+  // Versión 3 del catálogo: variantes de agarre, máquinas, Smith, poleas y levantamientos olímpicos.
+  const CATALOG_V3 = {
+    pecho: ['Press inclinado en máquina', 'Press en Smith', 'Press inclinado en Smith', 'Aperturas en polea baja', 'Aperturas en polea alta',
+      'Press con mancuernas agarre neutro', 'Pullover con mancuerna'],
+    espalda: ['Remo en polea agarre ancho al pecho', 'Remo en polea agarre estrecho', 'Jalón agarre neutro', 'Jalón agarre estrecho supino',
+      'Dominadas supinas', 'Remo Pendlay', 'Remo en máquina agarre ancho', 'Jalón unilateral en polea', 'Rack pull'],
+    hombros: ['Press militar en Smith', 'Elevaciones laterales unilaterales en polea', 'Y-raise en banco inclinado', 'Pájaros en polea', 'Elevación lateral en máquina'],
+    brazos: ['Curl bayesian en polea', 'Curl araña', 'Curl inclinado con mancuernas', 'Curl concentrado', 'Curl inverso',
+      'Extensión de tríceps con cuerda', 'Patada de tríceps', 'Extensión unilateral de tríceps en polea', 'Curl de muñeca'],
+    piernas: ['Sentadilla en Smith', 'Sentadilla goblet', 'Prensa con pies altos', 'Step-up', 'Buenos días', 'Curl nórdico',
+      'Curl femoral sentado', 'Elevación de gemelos sentado', 'Peso muerto sumo', 'Zancadas caminando'],
+    otro: ['Arrancada', 'Cargada de potencia', 'Dos tiempos'],
   };
 
   const MUSCLE_LABELS = {
@@ -1684,12 +1864,78 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     'Rueda abdominal': { abdominales: P, oblicuos: X, dorsales: X },
     'Pallof press': { oblicuos: P, abdominales: X },
     'Giros rusos': { oblicuos: P, abdominales: X },
+    // versión 3
+    'Press inclinado en máquina': { pecho_sup: P, hombro_ant: X, triceps: X },
+    'Press en Smith': { pecho_med: P, pecho_sup: X, hombro_ant: X, triceps: X },
+    'Press inclinado en Smith': { pecho_sup: P, hombro_ant: X, triceps: X },
+    'Aperturas en polea baja': { pecho_sup: P, hombro_ant: X },
+    'Aperturas en polea alta': { pecho_med: P, hombro_ant: X },
+    'Press con mancuernas agarre neutro': { pecho_med: P, triceps: X, hombro_ant: X },
+    'Pullover con mancuerna': { pecho_med: P, dorsales: P, triceps: X },
+    'Remo en polea agarre ancho al pecho': { espalda_alta: P, hombro_post: P, dorsales: X, trapecio: X, biceps: X },
+    'Remo en polea agarre estrecho': { dorsales: P, espalda_alta: X, biceps: X, hombro_post: X },
+    'Jalón agarre neutro': { dorsales: P, biceps: X, espalda_alta: X },
+    'Jalón agarre estrecho supino': { dorsales: P, biceps: P },
+    'Dominadas supinas': { dorsales: P, biceps: P, espalda_alta: X },
+    'Remo Pendlay': { espalda_alta: P, dorsales: P, hombro_post: X, lumbares: X, biceps: X },
+    'Remo en máquina agarre ancho': { espalda_alta: P, hombro_post: P, dorsales: X, biceps: X },
+    'Jalón unilateral en polea': { dorsales: P, biceps: X },
+    'Rack pull': { trapecio: P, lumbares: P, gluteos: X, espalda_alta: X, antebrazos: X },
+    'Press militar en Smith': { hombro_ant: P, hombro_lat: X, triceps: X },
+    'Elevaciones laterales unilaterales en polea': { hombro_lat: P },
+    'Y-raise en banco inclinado': { hombro_lat: P, trapecio: P, hombro_post: X },
+    'Pájaros en polea': { hombro_post: P, espalda_alta: X },
+    'Elevación lateral en máquina': { hombro_lat: P },
+    'Curl bayesian en polea': { biceps: P },
+    'Curl araña': { biceps: P },
+    'Curl inclinado con mancuernas': { biceps: P },
+    'Curl concentrado': { biceps: P },
+    'Curl inverso': { antebrazos: P, biceps: X },
+    'Extensión de tríceps con cuerda': { triceps: P },
+    'Patada de tríceps': { triceps: P },
+    'Extensión unilateral de tríceps en polea': { triceps: P },
+    'Curl de muñeca': { antebrazos: P },
+    'Sentadilla en Smith': { cuadriceps: P, gluteos: X, aductores: X },
+    'Sentadilla goblet': { cuadriceps: P, gluteos: X, abdominales: X },
+    'Prensa con pies altos': { gluteos: P, isquios: X, cuadriceps: X },
+    'Step-up': { cuadriceps: P, gluteos: P },
+    'Buenos días': { isquios: P, lumbares: P, gluteos: X },
+    'Curl nórdico': { isquios: P },
+    'Curl femoral sentado': { isquios: P },
+    'Elevación de gemelos sentado': { gemelos: P },
+    'Peso muerto sumo': { gluteos: P, cuadriceps: P, aductores: P, isquios: X, lumbares: X, trapecio: X },
+    'Zancadas caminando': { cuadriceps: P, gluteos: P, aductores: X },
+    'Arrancada': { cuadriceps: P, gluteos: P, trapecio: P, hombro_lat: X, lumbares: X, isquios: X },
+    'Cargada de potencia': { gluteos: P, cuadriceps: P, trapecio: P, isquios: X, lumbares: X, antebrazos: X },
+    'Dos tiempos': { cuadriceps: P, gluteos: P, hombro_ant: P, triceps: X, trapecio: X, lumbares: X },
   };
   // Para ejercicios propios sin músculos asignados: estimación por grupo.
   const GROUP_FALLBACK_MUSCLES = {
     pecho: { pecho_med: P }, espalda: { dorsales: P, espalda_alta: X }, hombros: { hombro_ant: X, hombro_lat: X },
     brazos: { biceps: X, triceps: X }, piernas: { cuadriceps: X, gluteos: X, isquios: X }, core: { abdominales: P }, otro: {},
   };
+
+  // ---------------- novedades ----------------
+  // Saludo de la ventana de novedades: cámbialo aquí si quieres otro.
+  const WHATS_NEW_GREETING = '¡Buenos días, truhanes!';
+  const WHATS_NEW_INTRO = 'Oídas vuestras peticiones, estas son las novedades:';
+  // Versión actual de la app y lista de cambios (la más reciente primero).
+  const APP_VERSION = '1.4';
+  const CHANGELOG = [
+    { version: '1.4', date: '2026-10-22', items: [
+      { title: 'Plantillas de entreno', text: 'En Entrenar elige «Plantilla»: cada día de tu rutina con sus ejercicios en orden, series y calentamientos. Al empezar, todo sale preparado con el peso sugerido, y la app marca cuál te toca.', go: 'plantilla' },
+      { title: 'Calendario del grupo', text: 'En Amigos, cada uno con su color: qué días ha entrenado cada uno y, al tocar un día, su sesión completa. También en vista de 12 semanas.', go: 'amigos' },
+      { title: '43 ejercicios nuevos', text: 'Ya son 106: remo en polea agarre ancho al pecho, buenos días, arrancada, cargada, más variantes de jalón, Smith, poleas y curls. Todos con sus músculos.', go: 'ejercicios' },
+    ] },
+    { version: '1.3', date: '2026-10-21', items: [
+      { title: 'Amigos', text: 'Grupos con enlace de invitación, clasificaciones, reto mensual, récords del grupo y ficha de cada amigo.' },
+      { title: 'Mapa muscular detallado', text: '19 músculos, con los músculos de cada ejercicio editables tocando el mapa.' },
+    ] },
+    { version: '1.2', date: '2026-10-20', items: [
+      { title: 'Progresión y estancamiento', text: 'Sugerencia de peso y repeticiones para la próxima vez y aviso si un ejercicio lleva semanas sin mejorar.' },
+      { title: 'Resumen mensual', text: 'Tu mes en números, con imagen para guardar o compartir.' },
+    ] },
+  ];
 
   const PHRASES = {
     start: [
@@ -1780,7 +2026,7 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     compare: I('<path d="M7 4v16M17 4v16M3 8l4-4 4 4M13 16l4 4 4-4"/>'),
   };
 
-  window.GTContent = { TYPE_LABELS, TYPE_SHORT, GROUP_LABELS, KIND_LABELS, CATALOG, CATALOG_V2, MUSCLE_LABELS, MUSCLE_SHORT, MUSCLE_REGIONS, CATALOG_MUSCLES, GROUP_FALLBACK_MUSCLES, PHRASES, ICONS };
+  window.GTContent = { WHATS_NEW_GREETING, WHATS_NEW_INTRO, APP_VERSION, CHANGELOG, TYPE_LABELS, TYPE_SHORT, GROUP_LABELS, KIND_LABELS, CATALOG, CATALOG_V2, CATALOG_V3, MUSCLE_LABELS, MUSCLE_SHORT, MUSCLE_REGIONS, CATALOG_MUSCLES, GROUP_FALLBACK_MUSCLES, PHRASES, ICONS };
 })();
 
 </script>
@@ -2612,7 +2858,7 @@ async function socialFetchBoard(gid) {
 function mySummary() {
   if (!social.share.enabled) return { v: S.SOCIAL_VERSION, hidden: true, generatedAt: new Date().toISOString() };
   return cached('social-summary:' + social.share.weights, () => S.buildSocialSummary(state.sessions,
-    { exerciseName: exName, exerciseMuscles: exMuscles, exerciseGroup: exGroup }, new Date(), { weights: social.share.weights }));
+    { exerciseName: exName, exerciseMuscles: exMuscles, exerciseGroup: exGroup, templateName: (id) => (templateById(id) ? templateById(id).name : '') }, new Date(), { weights: social.share.weights }));
 }
 function hashStr(str) { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return String(h >>> 0); }
 let publishTimer = null;
@@ -2702,13 +2948,24 @@ function isPRSet(session, entry, set) {
   if (set.reps <= S.E1RM_MAX_REPS && b.e1rm > 0 && S.epley1RM(set.weight, set.reps) > b.e1rm + 1e-9) return 'e1rm';
   return null;
 }
-function startSession(type, from) {
+function startSession(type, from, template) {
   const cur = activeSession();
   if (cur) { go('entrenar'); toast('Ya tienes una sesión en marcha.'); return; }
   const s = {
     id: uid(), type, status: 'active', startedAt: new Date().toISOString(), endedAt: null, notes: '',
     exercises: [], createdAt: new Date().toISOString(),
   };
+  if (template) {
+    s.templateId = template.id;
+    s.exercises = template.exercises.filter((e) => state.exById.has(e.exerciseId)).map((e) => {
+      const entry = { id: uid(), exerciseId: e.exerciseId, sets: [] };
+      for (let i = 0; i < (e.warmups || 0); i++) entry.sets.push(newSet('warmup'));
+      for (let i = 0; i < e.sets; i++) entry.sets.push(newSet('normal'));
+      const p = progressionFor(e.exerciseId, s);
+      if (p) entry.target = { weight: p.weight, reps: p.reps };
+      return entry;
+    });
+  }
   if (from) {
     s.exercises = from.exercises.map((e) => ({
       id: uid(), exerciseId: e.exerciseId,
@@ -2724,35 +2981,6 @@ function startSession(type, from) {
   if (state.settings.fun) toast(phrase('start'), 'good');
 }
 
-// ---------------------------------------------------------------- pantalla de inicio de sesión
-function viewTrainStart() {
-  const last = done().slice(-1)[0];
-  const next = nextRoutineType();
-  const recent = done().slice(-6).reverse();
-  const types = S.SESSION_TYPES.map((t) => {
-    const lastOf = done().filter((s) => s.type === t).slice(-1)[0];
-    return `<button class="type-btn ${next === t ? 'suggested' : ''}" data-action="start" data-type="${t}">
-      <span class="t">${esc(C.TYPE_SHORT[t])}</span>
-      <span class="s">${next === t ? 'Siguiente en tu rutina' : lastOf ? 'Última: ' + fmtDate(lastOf.startedAt) : 'Sin registros aún'}</span>
-    </button>`;
-  }).join('');
-  return `
-  <div class="page-head"><div><p class="eyebrow">Nueva sesión</p><h1>¿Qué toca hoy?</h1>
-    <p class="sub">Elige el tipo de día. La hora de inicio se registra ahora y la duración se calcula al terminar.</p></div></div>
-  <div class="type-grid">${types}</div>
-  <section class="card">
-    <div class="card-head"><h2>Repetir una sesión</h2><span class="muted small">Copia ejercicios, series, pesos y repeticiones como punto de partida</span></div>
-    ${recent.length ? `<div class="list">${recent.map((s) => `
-      <button class="list-item" data-action="start-copy" data-id="${s.id}">
-        <div class="date-badge"><span class="d">${DF.day.format(new Date(s.startedAt))}</span><span class="m">${DF.monthShort.format(new Date(s.startedAt)).replace('.', '')}</span></div>
-        <div class="grow"><div class="title">${esc(C.TYPE_LABELS[s.type])}</div>
-        <div class="sub">${esc(s.exercises.map((e) => exName(e.exerciseId)).join(' · ') || 'Sin ejercicios')}</div></div>
-        <span class="btn btn-sm">${ICON.copy}Repetir</span>
-      </button>`).join('')}</div>` : `<p class="muted">Cuando termines tu primera sesión aparecerá aquí para reutilizarla.</p>`}
-  </section>
-  ${last ? '' : `<div class="empty"><div class="plate">20</div><h3>Primera sesión</h3><p>Elige un tipo de día arriba, añade un ejercicio desde el catálogo y registra peso y repeticiones de cada serie. Todo se guarda en este navegador a medida que escribes.</p></div>`}`;
-}
-
 // ---------------------------------------------------------------- editor
 function editingSession() {
   if (state.route.sub && state.route.sub.editId) return sessionById(state.route.sub.editId);
@@ -2766,7 +2994,7 @@ function viewEditor(s) {
   return `
   <div class="session-bar">
     ${active ? '' : `<button class="btn btn-ghost icon-btn" data-action="edit-done" aria-label="Volver a la sesión">${ICON.back}</button>`}
-    <div class="meta"><span class="t">${esc(C.TYPE_SHORT[s.type])}${active ? '' : ' · edición'}</span>
+    <div class="meta"><span class="t">${esc(templateById(s.templateId) ? templateById(s.templateId).name : C.TYPE_SHORT[s.type])}${active ? '' : ' · edición'}</span>
       <span class="save-state" id="save-state" aria-live="polite">${state.ui.saveState === 'saving' ? 'Guardando…' : 'Guardado'}</span></div>
     <span class="timer" id="timer" aria-label="Tiempo de sesión">${elapsed}</span>
     ${active ? `<button class="btn btn-primary" data-action="finish">${ICON.flag}Terminar</button>` : `<button class="btn btn-primary" data-action="edit-done">Listo</button>`}
@@ -3100,9 +3328,10 @@ async function removeSession(id) {
 }
 
 // ---------------------------------------------------------------- selector de ejercicios
-function openExercisePicker(onPick) {
-  const s = editingSession();
-  const defGroup = s && S.GROUPS.includes(s.type) ? s.type : '';
+function openExercisePicker(onPick, opts = {}) {
+  const s = opts.forTemplate ? null : editingSession();
+  const baseType = opts.type || (s && s.type);
+  const defGroup = baseType && S.GROUPS.includes(baseType) ? baseType : '';
   let group = defGroup;
   let q = '';
   const body = `
@@ -3119,7 +3348,7 @@ function openExercisePicker(onPick) {
         groups.innerHTML = [['', 'Todos'], ['fav', 'Favoritos']].concat(S.GROUPS.map((g) => [g, C.GROUP_LABELS[g]]))
           .map(([g, l]) => `<button class="chip" data-g="${g}" aria-pressed="${group === g}">${esc(l)}</button>`).join('');
         const nq = S.normName(q);
-        const inSession = new Set((s ? s.exercises : []).map((e) => e.exerciseId));
+        const inSession = new Set(opts.inList || (s ? s.exercises : []).map((e) => e.exerciseId));
         let items = state.exercises.filter((e) => !e.archived);
         if (group === 'fav') items = items.filter((e) => e.favorite);
         else if (group && !nq) items = items.filter((e) => e.group === group);
@@ -3130,7 +3359,7 @@ function openExercisePicker(onPick) {
           <button class="pick-item" data-pick="${e.id}">
             <span class="star" aria-hidden="true" style="width:20px">${e.favorite ? ICON.starFill : ''}</span>
             <span class="grow"><span style="font-weight:600">${esc(e.name)}</span><br><span class="muted small">${esc(C.GROUP_LABELS[e.group])}${used[e.id] ? ' · ' + plural(used[e.id], 'sesión', 'sesiones') : ''}</span></span>
-            ${inSession.has(e.id) ? '<span class="tag">En la sesión</span>' : ''}
+            ${inSession.has(e.id) ? `<span class="tag">${opts.forTemplate ? 'En la plantilla' : 'En la sesión'}</span>` : ''}
           </button>`).join('') : `<p class="muted" style="padding:8px">No hay ejercicios con ese nombre.</p>`;
         const exact = state.exercises.some((e) => S.normName(e.name) === nq);
         create.innerHTML = q.trim() && !exact ? `
@@ -3189,6 +3418,7 @@ function viewSummary(id) {
   </div>
   ${strengthPRs.length || prs.length ? `<section class="card"><div class="card-head"><h2>Récords de hoy</h2></div><div class="stack">${prs.map(prItemHTML).join('')}</div></section>` : ''}
   ${achList.length && state.settings.fun ? `<section class="card"><div class="card-head"><h2>Logros desbloqueados</h2></div><div class="ach-grid">${achList.map((a) => achHTML(Object.assign({ unlocked: true }, a))).join('')}</div></section>` : ''}
+  ${templateSummaryCard(s)}
   <section class="card">
     <div class="card-head"><h2>Comparado con la vez anterior</h2></div>
     ${s.exercises.length ? `<div class="table-wrap"><table class="data"><thead><tr><th>Ejercicio</th><th>Mejor serie</th><th class="r">Volumen</th><th class="r">Cambio de volumen</th></tr></thead><tbody>
@@ -3218,16 +3448,272 @@ function tile(label, big, foot) {
   return `<div class="tile"><span class="eyebrow">${esc(label)}</span><span class="big">${big}</span>${foot ? `<span class="foot">${foot}</span>` : ''}</div>`;
 }
 
+/* GymTracker — plantillas: pantalla Entrenar (Libre / Plantilla), editor de plantillas y
+   propuesta de guardar en la plantilla los cambios hechos durante la sesión. */
+
+function templates() { return Array.isArray(state.settings.templates) ? state.settings.templates : []; }
+function templateById(id) { return id ? templates().find((t) => t.id === id) || null : null; }
+function nextTpl() { return S.nextTemplate(templates(), state.sessions); }
+/** Convierte la rutina antigua (solo el orden de tipos de día) en plantillas vacías, una vez. */
+function migrateRoutine() {
+  const st = state.settings;
+  if (Array.isArray(st.templates)) {
+    st.templates = st.templates.map((t) => S.cleanTemplate(t, (id) => state.exById.has(id))).filter(Boolean);
+    return false;
+  }
+  st.templates = (Array.isArray(st.routine) ? st.routine : []).filter((t) => S.SESSION_TYPES.includes(t))
+    .map((t, i) => ({ id: 'tpl-' + uid(), name: C.TYPE_SHORT[t] + (st.routine.slice(0, i).includes(t) ? ' ' + (i + 1) : ''), type: t, exercises: [] }));
+  return true;
+}
+async function saveTemplates() { await saveSettings(); }
+function tplExerciseNames(t, max = 4) {
+  const names = t.exercises.map((e) => exName(e.exerciseId));
+  return names.length ? names.slice(0, max).join(' · ') + (names.length > max ? ` · +${names.length - max}` : '') : 'Sin ejercicios todavía';
+}
+function tplSetCount(t) { return t.exercises.reduce((a, e) => a + e.sets, 0); }
+
+// ---------------------------------------------------------------- pantalla Entrenar
+function viewTrainStart() {
+  const sub = state.route.sub || {};
+  if (sub.tpl) return viewTemplateEditor(sub.tpl);
+  const mode = state.ui.trainMode || (templates().length ? 'plantilla' : 'libre');
+  const seg = `<div class="mode-switch" role="tablist" aria-label="Forma de entrenar">
+    <button role="tab" aria-selected="${mode === 'libre'}" data-action="train-mode" data-m="libre"><b>Libre</b><span>Eliges ejercicios sobre la marcha</span></button>
+    <button role="tab" aria-selected="${mode === 'plantilla'}" data-action="train-mode" data-m="plantilla"><b>Plantilla</b><span>${templates().length ? plural(templates().length, 'plantilla', 'plantillas') : 'Tus días ya preparados'}</span></button></div>`;
+  return `<div class="page-head"><div><p class="eyebrow">Nueva sesión</p><h1>¿Qué toca hoy?</h1></div></div>` + seg + (mode === 'plantilla' ? viewTemplateList() : viewFreeStart());
+}
+function viewFreeStart() {
+  const last = done().slice(-1)[0];
+  const recent = done().slice(-6).reverse();
+  const types = S.SESSION_TYPES.map((t) => {
+    const lastOf = done().filter((s) => s.type === t).slice(-1)[0];
+    return `<button class="type-btn" data-action="start" data-type="${t}">
+      <span class="t">${esc(C.TYPE_SHORT[t])}</span>
+      <span class="s">${lastOf ? 'Última: ' + fmtDate(lastOf.startedAt) : 'Sin registros aún'}</span>
+    </button>`;
+  }).join('');
+  return `<p class="sub muted">Elige el tipo de día y añade los ejercicios que vayas haciendo. La duración se calcula al terminar.</p>
+  <div class="type-grid">${types}</div>
+  <section class="card">
+    <div class="card-head"><h2>Repetir una sesión</h2><span class="muted small">Copia ejercicios, series, pesos y repeticiones como punto de partida</span></div>
+    ${recent.length ? `<div class="list">${recent.map((s) => `
+      <button class="list-item" data-action="start-copy" data-id="${s.id}">
+        <div class="date-badge"><span class="d">${DF.day.format(new Date(s.startedAt))}</span><span class="m">${DF.monthShort.format(new Date(s.startedAt)).replace('.', '')}</span></div>
+        <div class="grow"><div class="title">${esc(templateById(s.templateId) ? templateById(s.templateId).name : C.TYPE_LABELS[s.type])}</div>
+        <div class="sub">${esc(s.exercises.map((e) => exName(e.exerciseId)).join(' · ') || 'Sin ejercicios')}</div></div>
+        <span class="btn btn-sm">${ICON.copy}Repetir</span>
+      </button>`).join('')}</div>` : `<p class="muted">Cuando termines tu primera sesión aparecerá aquí para reutilizarla.</p>`}
+  </section>
+  ${last ? '' : `<div class="empty"><div class="plate">20</div><h3>Primera sesión</h3><p>Elige un tipo de día arriba, añade un ejercicio desde el catálogo y registra peso y repeticiones de cada serie. Todo se guarda en este dispositivo a medida que escribes.</p></div>`}`;
+}
+function viewTemplateList() {
+  const list = templates();
+  const next = nextTpl();
+  if (!list.length) {
+    return `<div class="empty"><div class="plate">${ICON.list}</div><h3>Aún no tienes plantillas</h3>
+      <p>Una plantilla es un día de tu rutina con sus ejercicios en orden, por ejemplo Hombros: press militar, pájaros, elevaciones laterales… Al elegirla, la sesión empieza con todo preparado y los pesos sugeridos.</p>
+      <div class="row"><button class="btn btn-primary" data-action="tpl-new">${ICON.plus}Crear plantilla</button>
+      ${done().length ? `<button class="btn" data-action="tpl-from-session">${ICON.copy}Crear desde una sesión</button>` : ''}</div></div>`;
+  }
+  return `<p class="sub muted">Elige el día. El orden de la lista es tu rotación: la app marca cuál toca después.</p>
+  <div class="tpl-list">${list.map((t, i) => {
+    const lastOf = done().filter((s) => s.templateId === t.id).slice(-1)[0];
+    return `<article class="tpl-card ${next && next.id === t.id ? 'next' : ''}">
+      <button class="tpl-main" data-action="tpl-start" data-id="${esc(t.id)}" aria-label="Empezar ${esc(t.name)}">
+        <span class="row" style="gap:8px"><span class="t">${esc(t.name)}</span>${next && next.id === t.id ? '<span class="tag tag-accent">Te toca</span>' : ''}</span>
+        <span class="s">${esc(C.TYPE_SHORT[t.type])} · ${plural(t.exercises.length, 'ejercicio', 'ejercicios')} · ${plural(tplSetCount(t), 'serie', 'series')}${lastOf ? ' · última ' + fmtDate(lastOf.startedAt) : ''}</span>
+        <span class="s ex">${esc(tplExerciseNames(t))}</span>
+      </button>
+      <div class="tpl-tools">
+        <button class="btn btn-ghost icon-btn" data-action="tpl-move" data-id="${esc(t.id)}" data-dir="-1" aria-label="Subir en la rotación" ${i === 0 ? 'disabled' : ''}>${ICON.up}</button>
+        <button class="btn btn-ghost icon-btn" data-action="tpl-move" data-id="${esc(t.id)}" data-dir="1" aria-label="Bajar en la rotación" ${i === list.length - 1 ? 'disabled' : ''}>${ICON.down}</button>
+        <button class="btn btn-ghost icon-btn" data-action="tpl-edit" data-id="${esc(t.id)}" aria-label="Editar ${esc(t.name)}">${ICON.edit}</button>
+      </div></article>`;
+  }).join('')}</div>
+  <div class="row"><button class="btn" data-action="tpl-new">${ICON.plus}Nueva plantilla</button>
+    ${done().length ? `<button class="btn btn-ghost" data-action="tpl-from-session">${ICON.copy}Crear desde una sesión</button>` : ''}</div>`;
+}
+
+// ---------------------------------------------------------------- editor de plantilla
+function viewTemplateEditor(id) {
+  const t = templateById(id);
+  if (!t) return `<div class="empty"><h3>Plantilla no encontrada</h3><button class="btn" data-action="tpl-back">Volver</button></div>`;
+  const idx = templates().indexOf(t);
+  return `<div class="row"><button class="btn btn-ghost btn-sm" data-action="tpl-back">${ICON.back}Plantillas</button></div>
+  <div class="page-head"><div><p class="eyebrow">Plantilla · ${idx + 1}.º en la rotación</p><h1>${esc(t.name)}</h1></div>
+    <button class="btn btn-primary" data-action="tpl-start" data-id="${esc(t.id)}" ${t.exercises.length ? '' : 'disabled'}>${ICON.dumbbell}Empezar</button></div>
+  <section class="card stack">
+    <div class="filters">
+      <label class="field" for="tpl-name">Nombre<input class="input" id="tpl-name" data-tpl-field="name" maxlength="40" value="${esc(t.name)}"></label>
+      <label class="field" for="tpl-type">Tipo de día<select class="input" id="tpl-type" data-tpl-field="type">${S.SESSION_TYPES.map((x) => `<option value="${x}" ${x === t.type ? 'selected' : ''}>${esc(C.TYPE_LABELS[x])}</option>`).join('')}</select></label>
+    </div></section>
+  <section class="card"><div class="card-head"><h2>Ejercicios en orden</h2><span class="small muted">${plural(tplSetCount(t), 'serie de trabajo', 'series de trabajo')}</span></div>
+    ${t.exercises.length ? `<ol class="tpl-ex">${t.exercises.map((e, i) => {
+      const cfg = progressionCfg(e.exerciseId);
+      return `<li>
+      <span class="n num">${i + 1}</span>
+      <div class="grow"><b>${esc(exName(e.exerciseId))}</b><span class="small muted">${S.MUSCLES.filter((m) => exMuscles(e.exerciseId)[m] === 1).map((m) => C.MUSCLE_SHORT[m]).join(', ') || esc(C.GROUP_LABELS[exGroup(e.exerciseId)])} · ${cfg.repMin}–${cfg.repMax} reps</span></div>
+      <div class="stepper" role="group" aria-label="Series de ${esc(exName(e.exerciseId))}">
+        <button class="btn btn-ghost icon-btn" data-action="tpl-sets" data-i="${i}" data-d="-1" aria-label="Una serie menos" ${e.sets <= 1 ? 'disabled' : ''}>−</button>
+        <span class="num"><b>${e.sets}</b> ${e.sets === 1 ? 'serie' : 'series'}${e.warmups ? `<br><span class="small" style="color:var(--warm)">+${e.warmups} calent.</span>` : ''}</span>
+        <button class="btn btn-ghost icon-btn" data-action="tpl-sets" data-i="${i}" data-d="1" aria-label="Una serie más" ${e.sets >= 20 ? 'disabled' : ''}>+</button>
+      </div>
+      <div class="tpl-ex-tools">
+        <button class="btn btn-ghost icon-btn" data-action="tpl-ex-move" data-i="${i}" data-dir="-1" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>${ICON.up}</button>
+        <button class="btn btn-ghost icon-btn" data-action="tpl-ex-move" data-i="${i}" data-dir="1" aria-label="Bajar" ${i === t.exercises.length - 1 ? 'disabled' : ''}>${ICON.down}</button>
+        <button class="btn btn-ghost icon-btn" data-action="tpl-warm" data-i="${i}" aria-label="Series de calentamiento: ${e.warmups}. Cambiar" title="Calentamiento">C</button>
+        <button class="btn btn-ghost icon-btn" data-action="tpl-ex-remove" data-i="${i}" aria-label="Quitar ${esc(exName(e.exerciseId))}">${ICON.x}</button>
+      </div></li>`;
+    }).join('')}</ol>` : `<p class="muted">Añade los ejercicios en el orden en que los haces.</p>`}
+    <div class="row" style="margin-top:12px"><button class="btn btn-primary" data-action="tpl-add">${ICON.plus}Añadir ejercicio</button>
+      ${done().length ? `<button class="btn" data-action="tpl-copy-session">${ICON.copy}Copiar de una sesión</button>` : ''}</div>
+    <p class="small faint" style="margin-top:10px">«C» añade series de calentamiento (no cuentan en las estadísticas). Los pesos no se guardan en la plantilla: al empezar, cada ejercicio te sugiere el peso según tu progresión.</p></section>
+  <div class="row spread"><span></span><button class="btn btn-danger btn-sm" data-action="tpl-delete" data-id="${esc(t.id)}">${ICON.trash}Eliminar plantilla</button></div>`;
+}
+function editingTemplate() { const sub = state.route.sub || {}; return templateById(sub.tpl); }
+function pickSession(title, onPick) {
+  const recent = done().slice(-15).reverse();
+  openModal({
+    title,
+    body: `<div class="pick-list">${recent.map((s) => `<button class="pick-item" data-ps="${s.id}"><span class="grow"><b>${esc(templateById(s.templateId) ? templateById(s.templateId).name : C.TYPE_LABELS[s.type])}</b> · <span class="muted small">${fmtDate(s.startedAt)}</span><br><span class="small muted">${esc(s.exercises.map((e) => exName(e.exerciseId)).join(' · ') || 'Sin ejercicios')}</span></span></button>`).join('')}</div>`,
+    onOpen: (root, close) => {
+      $('.modal', root).addEventListener('click', (ev) => { const b = ev.target.closest('[data-ps]'); if (b) { close(); onPick(sessionById(b.dataset.ps)); } });
+    },
+  });
+}
+async function createTemplate(fromSession) {
+  const t = fromSession ? S.templateFromSession(fromSession, 'tpl-' + uid(), C.TYPE_SHORT[fromSession.type])
+    : { id: 'tpl-' + uid(), name: 'Nueva plantilla', type: 'mixto', exercises: [] };
+  let name = t.name, n = 2;
+  while (templates().some((x) => x.name === name)) name = t.name + ' ' + (n++);
+  t.name = name;
+  state.settings.templates = templates().concat([t]);
+  await saveTemplates();
+  state.ui.trainMode = 'plantilla';
+  go('entrenar', { tpl: t.id });
+  return t;
+}
+
+// ---------------------------------------------------------------- al terminar: guardar cambios
+function templateSummaryCard(s) {
+  const t = templateById(s.templateId);
+  if (state.ui.tplSaved === s.id) return `<section class="card"><p>${ICON.check.replace('<svg', '<svg width="18" height="18" style="vertical-align:-3px;color:var(--accent)"')} Plantilla actualizada.</p></section>`;
+  if (!t) {
+    if (!S.templateFromSession(s, 'x').exercises.length) return '';
+    return `<section class="card tpl-offer"><div class="row spread"><div><h2>¿La guardas como plantilla?</h2><p class="small muted">Así la próxima vez empiezas con estos ejercicios en el mismo orden.</p></div>
+      <button class="btn" data-action="tpl-save-new" data-id="${s.id}">${ICON.plus}Guardar como plantilla</button></div></section>`;
+  }
+  const d = S.templateDiff(t, s);
+  if (!d.changed || state.ui.tplDismissed === s.id) return '';
+  const items = [];
+  d.added.forEach((id) => items.push(`Añadido: ${esc(exName(id))}`));
+  d.removed.forEach((id) => items.push(`Quitado: ${esc(exName(id))}`));
+  d.sets.forEach((x) => items.push(`${esc(exName(x.exerciseId))}: ${x.from} → ${x.to} series${x.warmupsFrom !== x.warmupsTo ? ` (calentamiento ${x.warmupsFrom} → ${x.warmupsTo})` : ''}`));
+  if (d.reordered) items.push('Orden de los ejercicios cambiado');
+  return `<section class="card tpl-offer"><h2>Has cambiado «${esc(t.name)}»</h2>
+    <ul class="small" style="margin:8px 0 12px;padding-left:18px">${items.map((x) => `<li>${x}</li>`).join('')}</ul>
+    <div class="row"><button class="btn btn-primary" data-action="tpl-apply" data-id="${s.id}">Guardar en la plantilla</button>
+    <button class="btn btn-ghost" data-action="tpl-dismiss" data-id="${s.id}">Dejar la plantilla como estaba</button></div></section>`;
+}
+
+// ---------------------------------------------------------------- acciones
+async function mutateTemplate(fn) {
+  const t = editingTemplate();
+  if (!t) return;
+  fn(t);
+  await saveTemplates();
+  render();
+}
+const TemplateActions = {
+  'train-mode': (el) => { state.ui.trainMode = el.dataset.m; render(); },
+  'tpl-start': (el) => {
+    const t = templateById(el.dataset.id);
+    if (!t) return;
+    if (!t.exercises.length) { toast('Añade al menos un ejercicio a la plantilla.', 'err'); return; }
+    startSession(t.type, null, t);
+  },
+  'tpl-new': () => createTemplate(null),
+  'tpl-from-session': () => pickSession('Crear desde una sesión', (s) => { if (s) createTemplate(s).then(() => toast('Plantilla creada. Ajusta el nombre y el orden.')); }),
+  'tpl-edit': (el) => { go('entrenar', { tpl: el.dataset.id }); },
+  'tpl-back': () => { state.ui.trainMode = 'plantilla'; go('entrenar'); },
+  'tpl-move': async (el) => {
+    const list = templates(), i = list.findIndex((t) => t.id === el.dataset.id), j = i + Number(el.dataset.dir);
+    if (i < 0 || j < 0 || j >= list.length) return;
+    [list[i], list[j]] = [list[j], list[i]];
+    await saveTemplates(); render();
+  },
+  'tpl-delete': async (el) => {
+    const t = templateById(el.dataset.id);
+    const ok = await confirmModal({ title: 'Eliminar plantilla', text: `Se eliminará «${esc(t.name)}». Tus sesiones hechas con ella no se borran.`, confirmLabel: 'Eliminar', danger: true });
+    if (!ok) return;
+    state.settings.templates = templates().filter((x) => x.id !== t.id);
+    await saveTemplates();
+    state.ui.trainMode = 'plantilla'; go('entrenar');
+    toast('Plantilla eliminada.');
+  },
+  'tpl-add': () => {
+    const t = editingTemplate();
+    openExercisePicker((exId) => mutateTemplate((tt) => {
+      if (tt.exercises.length >= 30) { toast('Una plantilla admite hasta 30 ejercicios.', 'err'); return; }
+      tt.exercises.push({ exerciseId: exId, sets: 3, warmups: 0 });
+    }), { forTemplate: true, type: t.type, inList: t.exercises.map((e) => e.exerciseId) });
+  },
+  'tpl-copy-session': () => pickSession('Copiar ejercicios de una sesión', async (s) => {
+    if (!s) return;
+    const t = editingTemplate();
+    if (t.exercises.length) {
+      const ok = await confirmModal({ title: 'Sustituir ejercicios', text: `Los ejercicios de «${esc(t.name)}» se sustituirán por los de esa sesión.`, confirmLabel: 'Sustituir' });
+      if (!ok) return;
+    }
+    mutateTemplate((tt) => { tt.exercises = S.templateFromSession(s, tt.id).exercises; if (tt.type === 'mixto') tt.type = s.type; });
+  }),
+  'tpl-sets': (el) => mutateTemplate((t) => { const e = t.exercises[Number(el.dataset.i)]; e.sets = Math.min(20, Math.max(1, e.sets + Number(el.dataset.d))); }),
+  'tpl-warm': (el) => mutateTemplate((t) => { const e = t.exercises[Number(el.dataset.i)]; e.warmups = (e.warmups + 1) % 4; }),
+  'tpl-ex-move': (el) => mutateTemplate((t) => {
+    const i = Number(el.dataset.i), j = i + Number(el.dataset.dir);
+    if (j < 0 || j >= t.exercises.length) return;
+    [t.exercises[i], t.exercises[j]] = [t.exercises[j], t.exercises[i]];
+  }),
+  'tpl-ex-remove': (el) => mutateTemplate((t) => { t.exercises.splice(Number(el.dataset.i), 1); }),
+  'tpl-apply': async (el) => {
+    const s = sessionById(el.dataset.id), t = s && templateById(s.templateId);
+    if (!t) return;
+    t.exercises = S.templateDiff(t, s).proposed;
+    await saveTemplates();
+    state.ui.tplSaved = s.id; render();
+    toast(`«${t.name}» actualizada.`, 'good');
+  },
+  'tpl-dismiss': (el) => { state.ui.tplDismissed = el.dataset.id; render(); },
+  'tpl-save-new': async (el) => {
+    const s = sessionById(el.dataset.id);
+    const t = S.templateFromSession(s, 'tpl-' + uid(), C.TYPE_SHORT[s.type]);
+    let name = t.name, n = 2;
+    while (templates().some((x) => x.name === name)) name = t.name + ' ' + (n++);
+    t.name = name;
+    state.settings.templates = templates().concat([t]);
+    s.templateId = t.id; saveSession(s);
+    state.ui.trainMode = 'plantilla';
+    await saveTemplates();
+    state.ui.tplSaved = s.id; render();
+    toast(`Plantilla «${t.name}» creada. Puedes renombrarla en Entrenar → Plantilla.`, 'good', 3500);
+  },
+};
+function onTemplateField(el) {
+  const t = editingTemplate();
+  if (!t) return;
+  if (el.dataset.tplField === 'name') {
+    const v = el.value.trim().slice(0, 40);
+    if (!v) return;
+    t.name = v;
+    const h = document.querySelector('.page-head h1'); if (h) h.textContent = v;
+    clearTimeout(onTemplateField.timer); onTemplateField.timer = setTimeout(saveTemplates, 400);
+  } else if (el.dataset.tplField === 'type') {
+    t.type = el.value; saveTemplates().then(render);
+  }
+}
+
 /* GymTracker — inicio, historial, progreso y ejercicios. */
 
-function nextRoutineType() {
-  const r = state.settings.routine || [];
-  if (!r.length) return null;
-  const last = done().slice(-1)[0];
-  if (!last) return r[0];
-  const i = r.indexOf(last.type);
-  return i === -1 ? r[0] : r[(i + 1) % r.length];
-}
 function periodChips(key, current) {
   return `<div class="chips" role="group" aria-label="Período">${Object.keys(S.PERIODS).map((p) =>
     `<button class="chip" data-action="set-period" data-key="${key}" data-p="${p}" aria-pressed="${current === p}">${S.PERIODS[p].label}</button>`).join('')}</div>`;
@@ -3319,7 +3805,7 @@ function viewHome() {
   const last4 = S.windowSummary(state.sessions, d28, S.addDays(S.startOfDay(now), 1)), prev4 = S.windowSummary(state.sessions, d56, d28);
   const streak = S.weekStreaks(state.sessions, now);
   const last = ds[ds.length - 1];
-  const next = nextRoutineType();
+  const next = nextTpl();
   const g = greeting();
   const recentPRs = prEvents().filter((p) => new Date(p.date) >= S.addDays(now, -30)).slice(-6).reverse();
   const tops = topExercises('3m', 3);
@@ -3345,9 +3831,10 @@ function viewHome() {
       <div class="row" style="margin-top:12px"><button class="btn btn-sm" data-action="open-session" data-id="${last.id}">Ver detalle</button>
       ${act ? '' : `<button class="btn btn-sm" data-action="start-copy" data-id="${last.id}">${ICON.copy}Repetir</button>`}</div></section>
     <section class="card"><div class="card-head"><h2>Próximo entrenamiento</h2></div>
-      ${next ? `<h3 style="font-size:1.4rem">${esc(C.TYPE_LABELS[next])}</h3><p class="muted small" style="margin:4px 0 12px">Según tu rutina: ${esc(state.settings.routine.map((t) => C.TYPE_SHORT[t]).join(' → '))}</p>
-        ${act ? '' : `<button class="btn btn-primary btn-sm" data-action="start" data-type="${next}">Empezar ${esc(C.TYPE_SHORT[next].toLowerCase())}</button>`}`
-        : `<p class="muted small" style="margin-bottom:12px">Configura el orden de tus días (por ejemplo Pecho → Espalda → Piernas) y te diré qué toca después.</p><button class="btn btn-sm" data-action="nav" data-view="ajustes">Configurar rutina</button>`}</section>
+      ${next ? `<h3 style="font-size:1.4rem">${esc(next.name)}</h3><p class="muted small" style="margin:4px 0 6px">${esc(tplExerciseNames(next, 5))}</p>
+        <p class="small faint" style="margin-bottom:12px">Rotación: ${esc(templates().map((t) => t.name).join(' → '))}</p>
+        ${act ? '' : `<button class="btn btn-primary btn-sm" data-action="tpl-start" data-id="${esc(next.id)}" ${next.exercises.length ? '' : 'disabled'}>Empezar ${esc(next.name)}</button>`}`
+        : `<p class="muted small" style="margin-bottom:12px">Crea plantillas con los ejercicios de cada día (por ejemplo Pecho, Espalda, Piernas) y te diré cuál toca después.</p><button class="btn btn-sm" data-action="open-templates">Crear plantillas</button>`}</section>
   </div>
   <section class="card"><div class="card-head"><h2>Frente a la semana anterior</h2><span class="muted small">Lunes a domingo</span></div>
     <div class="table-wrap"><table class="data"><thead><tr><th></th><th class="r">Esta semana</th><th class="r">Anterior</th><th class="r">Diferencia</th></tr></thead><tbody>
@@ -4050,6 +4537,52 @@ const ExtraActions = {
   },
 };
 
+// ---------------------------------------------------------------- novedades
+function versionNum(v) { return String(v || '0').split('.').map((x) => parseInt(x, 10) || 0).reduce((a, n) => a * 1000 + n, 0); }
+function unseenChanges() {
+  const seen = state.ui.seenVersion;
+  if (!seen) return [];
+  return C.CHANGELOG.filter((c) => versionNum(c.version) > versionNum(seen));
+}
+const WHATS_NEW_GO = {
+  plantilla: () => { state.ui.trainMode = 'plantilla'; go('entrenar'); },
+  amigos: () => go('amigos'),
+  ejercicios: () => go('ejercicios'),
+};
+async function markSeen() {
+  state.ui.seenVersion = C.APP_VERSION;
+  try { await DB.put('meta', { key: 'seenVersion', value: C.APP_VERSION }); } catch (e) { /* se volverá a mostrar: no pasa nada */ }
+}
+function changeItemsHTML(items, withGo) {
+  return `<ul class="news">${items.map((it, i) => `<li><b>${esc(it.title)}</b><span>${esc(it.text)}</span>${withGo && it.go && WHATS_NEW_GO[it.go] ? `<button class="btn btn-sm" data-news-go="${esc(it.go)}">Probar</button>` : ''}</li>`).join('')}</ul>`;
+}
+/** Muestra la ventana de novedades si hay versiones nuevas sin ver. Nunca durante un entrenamiento. */
+function maybeShowWhatsNew() {
+  if (state.ui.whatsNewShown || activeSession() || $('#modal-root').children.length) return;
+  const list = unseenChanges();
+  if (!list.length) return;
+  state.ui.whatsNewShown = true;
+  const items = list.flatMap((c) => c.items);
+  openModal({
+    title: C.WHATS_NEW_GREETING,
+    body: `<p>${esc(C.WHATS_NEW_INTRO)}</p>${changeItemsHTML(items, true)}<p class="small faint">Versión ${esc(C.APP_VERSION)} · Puedes volver a verlas en Ajustes → Novedades.</p>`,
+    actions: [{ label: 'Entendido', cls: 'btn-primary' }],
+    onOpen: (root, close) => {
+      $('.modal', root).classList.add('whats-new');
+      $('.modal', root).addEventListener('click', (ev) => {
+        const b = ev.target.closest('[data-news-go]');
+        if (b) { close(); WHATS_NEW_GO[b.dataset.newsGo](); }
+      });
+    },
+  });
+  const prev = modalCleanup;
+  modalCleanup = () => { if (prev) prev(); markSeen(); };
+}
+function newsCard() {
+  return `<section class="card stack"><h2>Novedades</h2>
+    ${C.CHANGELOG.map((c, i) => `<details ${i === 0 ? 'open' : ''}><summary><b>Versión ${esc(c.version)}</b> <span class="small muted">· ${fmtDate(c.date + 'T12:00:00')}</span></summary>${changeItemsHTML(c.items, false)}</details>`).join('')}</section>`;
+}
+
 /* GymTracker — pantalla Amigos: entrar, grupos, clasificaciones, retos y fichas de amigos. */
 
 const BOARD_ORDER = ['week_sessions', 'streak', 'month_prs', 'strength30', 'month_sessions', 'month_days', 'month_sets', 'month_volume'];
@@ -4079,9 +4612,15 @@ function metricText(metric, v, summary) {
 }
 function memberName(m) { return m.display_name || 'Sin nombre'; }
 function initials(name) { return (name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join(''); }
+// Un color fijo por persona dentro del grupo (por orden de entrada), bien separados entre sí.
+const MEMBER_HUES = [78, 28, 265, 190, 330, 50, 215, 145, 0, 300];
+function memberHue(m) {
+  if (typeof m.hue === 'number') return m.hue;
+  return MEMBER_HUES[Math.abs(parseInt(hashStr(m.user_id || m.display_name || ''), 10)) % MEMBER_HUES.length];
+}
+function memberColor(m) { return `hsl(${memberHue(m)} 75% 60%)`; }
 function avatar(m) {
-  const hue = Math.abs(parseInt(hashStr(m.user_id || m.display_name || ''), 10)) % 360;
-  return `<span class="avatar" style="--h:${hue}" aria-hidden="true">${esc(initials(memberName(m)))}</span>`;
+  return `<span class="avatar" style="--h:${memberHue(m)}" aria-hidden="true">${esc(initials(memberName(m)))}</span>`;
 }
 function liftScoreText(l) {
   if (!l || !l.best) return '—';
@@ -4144,7 +4683,8 @@ function noGroupCards() {
 function boardRows(gid) {
   const b = social.boards[gid];
   if (!b) return null;
-  return b.rows.map((r) => (r.is_me ? Object.assign({}, r, { display_name: social.name || r.display_name, summary: social.share.enabled ? mySummary() : r.summary, updated_at: social.lastPublished ? social.lastPublished.at : r.updated_at }) : r));
+  return b.rows.map((r, i) => Object.assign({}, r, { hue: MEMBER_HUES[i % MEMBER_HUES.length] },
+    r.is_me ? { display_name: social.name || r.display_name, summary: social.share.enabled ? mySummary() : r.summary, updated_at: social.lastPublished ? social.lastPublished.at : r.updated_at } : {}));
 }
 function groupView(g) {
   const rows = boardRows(g.id);
@@ -4158,7 +4698,7 @@ function groupView(g) {
     return invite + `<div class="empty"><div class="plate">${ICON.users}</div><h3>Solo estás tú</h3><p>Pulsa «Invitar» y manda el enlace por WhatsApp. Cuando tus amigos instalen la app y entren con el enlace, aparecerán aquí.</p></div>`
       + boardCard(g, rows);
   }
-  return invite + challengeCard(rows) + boardCard(g, rows) + feedCard(rows) + commonCard(rows) + musclesCompareCard(rows);
+  return invite + challengeCard(rows) + groupCalendarCard(rows) + boardCard(g, rows) + feedCard(rows) + commonCard(rows) + musclesCompareCard(rows);
 }
 function challengeCard(rows) {
   const ch = S.monthlyChallenge();
@@ -4283,6 +4823,10 @@ function viewFriendDetail(uid) {
     ${(sm.lifts || []).length ? `<div class="table-wrap"><table class="data"><thead><tr><th>Ejercicio</th><th class="r">Sesiones</th><th class="r">Mejor</th><th class="r">30 días</th></tr></thead><tbody>
       ${sm.lifts.map((l) => `<tr><td>${esc(l.name)}</td><td class="r">${esc(l.sessions)}</td><td class="r">${l.best && l.best.weight !== undefined ? `${fmtW(l.best.weight)} × ${esc(l.best.reps)}<br><span class="small faint">${l.best.e1rm ? '1RM est. ' + wNum(l.best.score, 1) : ''}</span>` : '—'}</td><td class="r ${l.change30 ? deltaCls(l.change30.pct) : ''}">${l.change30 ? metricText('strength30', l.change30.pct) : '<span class="faint">—</span>'}</td></tr>`).join('')}
     </tbody></table></div>` : '<p class="muted">Sin ejercicios todavía.</p>'}</section>
+  <section class="card"><div class="card-head"><h2>Últimas sesiones</h2><span class="small muted">Toca una para verla entera</span></div>
+    ${(sm.sessions || []).length ? `<div class="mini-heat">${weeksBlock(m, S.groupCalendar([m])[m.user_id])}</div>
+      <div class="list">${sm.sessions.slice(-10).reverse().map((x) => sessionLine(m, x, sm.sessions.indexOf(x))).join('')}</div>`
+      : '<p class="muted">Todavía no comparte sus sesiones (necesita actualizar la app y entrenar).</p>'}</section>
   <section class="card"><div class="card-head"><h2>Récords recientes</h2></div>
     ${(sm.prs || []).length ? `<div class="stack">${sm.prs.map((p) => `<div class="pr-item">${ICON.trophy}<div><b>${esc(p.name)}</b> · <span class="small muted">${fmtDate(p.date + 'T12:00:00')}</span><br><span class="small">${p.type === 'weight' ? 'Peso máximo' : '1RM estimado'}${p.value !== undefined ? ': <b>' + (p.type === 'weight' ? fmtW(p.value) + (p.reps ? ' × ' + esc(p.reps) : '') : fmtW(p.value, 1)) + '</b>' : ''}</span></div></div>`).join('')}</div>` : '<p class="muted">Sin récords todavía.</p>'}</section>`;
 }
@@ -4417,12 +4961,127 @@ function friendsMini() {
     <button class="btn btn-sm" data-action="nav" data-view="amigos">Ver grupo</button></div></section>`;
 }
 
+// ---------------------------------------------------------------- calendario del grupo
+function sessionTitle(x) { return x.name || C.TYPE_LABELS[x.type] || 'Sesión'; }
+function sessionLine(m, x, index) {
+  return `<button class="list-item" data-action="fr-session" data-u="${esc(m.user_id)}" data-i="${index}">
+    <span class="cal-dot" style="background:${memberColor(m)}"></span>
+    <span class="grow"><span class="title">${esc(sessionTitle(x))}</span> <span class="small muted">· ${fmtDate(x.date + 'T12:00:00')}${x.time ? ' · ' + esc(x.time) : ''}</span>
+      <span class="sub" style="display:block">${esc(x.exercises.map((e) => e.name).join(' · ') || 'Sin ejercicios')}</span></span>
+    <span class="small muted num">${plural(x.workSets, 'serie', 'series')}</span></button>`;
+}
+/** Bloque estilo GitHub de 12 semanas para una persona, en su color. */
+function weeksBlock(m, days) {
+  const end = S.startOfWeek(new Date());
+  const start = S.addDays(end, -77);
+  const today = S.dayKey(new Date());
+  let cells = '';
+  for (let w = 0; w < 12; w++) {
+    for (let d = 0; d < 7; d++) {
+      const day = S.addDays(start, w * 7 + d), k = S.dayKey(day);
+      if (k > today) { cells += '<span class="wk-c future"></span>'; continue; }
+      const info = days && days[k];
+      const lv = info ? S.dayLevel(info.workSets || 1) : 0;
+      cells += `<span class="wk-c" ${lv ? `style="background:hsl(${memberHue(m)} 75% ${[0, 30, 45, 60][lv]}%)"` : ''} title="${esc(fmtDate(k + 'T12:00:00') + (info ? ': ' + info.sessions.map(sessionTitle).join(', ') : ''))}"></span>`;
+    }
+  }
+  return `<div class="wk-grid" aria-hidden="true">${cells}</div>`;
+}
+function groupCalendarCard(rows) {
+  const members = rows.filter((r) => r.summary && !r.summary.hidden);
+  const cal = S.groupCalendar(members);
+  const tab = state.ui.frCal || 'mes';
+  const legend = `<div class="cal-legend">${members.map((m) => `<span><i class="cal-dot" style="background:${memberColor(m)}"></i>${esc(memberName(m))}${m.is_me ? ' (tú)' : ''}</span>`).join('')}</div>`;
+  const tabs = `<div class="tabs" role="tablist"><button role="tab" aria-selected="${tab === 'mes'}" data-action="fr-cal" data-t="mes">Mes</button><button role="tab" aria-selected="${tab === '12'}" data-action="fr-cal" data-t="12">12 semanas</button></div>`;
+  const anySessions = members.some((m) => (m.summary.sessions || []).length);
+  let body;
+  if (!anySessions) body = '<p class="muted">Aún no hay sesiones compartidas. Aparecerán aquí cuando alguien termine una sesión con la app actualizada.</p>';
+  else if (tab === '12') {
+    body = `<div class="wk-rows">${members.map((m) => `<div class="wk-row"><span class="wk-name">${avatar(m)}<span>${esc(memberName(m))}</span></span>${weeksBlock(m, cal[m.user_id])}
+      <span class="small muted num">${plural(Object.keys(cal[m.user_id] || {}).length, 'día', 'días')}</span></div>`).join('')}</div>
+      <p class="small faint" style="margin-top:8px">Cada columna es una semana (de lunes a domingo). Más intenso = más series ese día.</p>`;
+  } else {
+    const month = state.ui.frCalMonth ? new Date(state.ui.frCalMonth) : S.startOfMonth(new Date());
+    const first = S.startOfMonth(month), gridStart = S.startOfWeek(first), todayK = S.dayKey(new Date());
+    const minMonth = S.startOfMonth(S.addDays(S.startOfWeek(new Date()), -77));
+    let cells = '';
+    for (let i = 0; i < 42; i++) {
+      const d = S.addDays(gridStart, i);
+      if (i >= 35 && d.getMonth() !== first.getMonth()) break;
+      const k = S.dayKey(d), out = d.getMonth() !== first.getMonth();
+      const who = members.filter((m) => cal[m.user_id] && cal[m.user_id][k]);
+      const label = `${DF.long.format(d)}${who.length ? ': ' + who.map((m) => memberName(m)).join(', ') : ''}`;
+      cells += who.length
+        ? `<button class="day trained gday ${out ? 'out' : ''} ${k === todayK ? 'today' : ''}" data-action="fr-day" data-day="${k}" aria-label="${esc(label)}"><span>${d.getDate()}</span><span class="dots">${who.slice(0, 6).map((m) => `<i style="background:${memberColor(m)}"></i>`).join('')}</span></button>`
+        : `<div class="day gday ${out ? 'out' : ''} ${k === todayK ? 'today' : ''}" aria-label="${esc(label)}">${d.getDate()}</div>`;
+    }
+    body = `<div class="row spread" style="margin-bottom:8px">
+        <button class="btn btn-ghost icon-btn" data-action="fr-cal-nav" data-dir="-1" aria-label="Mes anterior" ${first <= minMonth ? 'disabled' : ''}>${ICON.back}</button>
+        <b>${esc(cap(DF.month.format(first)))}</b>
+        <button class="btn btn-ghost icon-btn" data-action="fr-cal-nav" data-dir="1" aria-label="Mes siguiente" style="transform:scaleX(-1)" ${S.monthKey(first) >= S.monthKey(new Date()) ? 'disabled' : ''}>${ICON.back}</button></div>
+      <div class="cal">${['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((x) => `<span class="dow">${x}</span>`).join('')}${cells}</div>
+      <p class="small faint" style="margin-top:8px">Toca un día para ver quién entrenó y su sesión completa. Se comparten las últimas 12 semanas.</p>`;
+  }
+  return `<section class="card" id="group-cal"><div class="card-head"><h2>Calendario del grupo</h2>${tabs}</div>${legend}${body}</section>`;
+}
+function openGroupDay(day) {
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  const rows = (g && boardRows(g.id)) || [];
+  const items = [];
+  rows.forEach((m) => ((m.summary && m.summary.sessions) || []).forEach((x, i) => { if (x.date === day) items.push({ m, x, i }); }));
+  openModal({
+    title: cap(DF.long.format(new Date(day + 'T12:00:00'))),
+    body: items.length ? `<div class="list">${items.map(({ m, x, i }) => `<button class="list-item" data-fs-u="${esc(m.user_id)}" data-fs-i="${i}">
+        ${avatar(m)}<span class="grow"><span class="title">${esc(memberName(m))}${m.is_me ? ' (tú)' : ''}</span>
+        <span class="sub" style="display:block">${esc(sessionTitle(x))} · ${esc(C.TYPE_SHORT[x.type])}${x.time ? ' · ' + esc(x.time) : ''} · ${x.minutes ? fmtDur(x.minutes) + ' · ' : ''}${plural(x.workSets, 'serie', 'series')}</span></span>
+        <span class="small muted">Ver</span></button>`).join('')}</div>` : '<p class="muted">Nadie entrenó este día.</p>',
+    onOpen: (root, close) => {
+      $('.modal', root).addEventListener('click', (ev) => {
+        const b = ev.target.closest('[data-fs-u]');
+        if (b) { close(); openFriendSession(b.dataset.fsU, Number(b.dataset.fsI)); }
+      });
+    },
+  });
+}
+function openFriendSession(uid, index) {
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  const m = ((g && boardRows(g.id)) || []).find((r) => r.user_id === uid);
+  const x = m && m.summary && m.summary.sessions && m.summary.sessions[index];
+  if (!x) { toast('Esa sesión ya no está disponible.', 'err'); return; }
+  const setTxt = (t) => (t[2] === 'w' ? 'C ' : t[2] === 'd' ? 'D ' : '') + (t[0] === null ? '' : wNum(t[0])) + '×' + t[1];
+  openModal({
+    title: `${memberName(m)} · ${sessionTitle(x)}`,
+    body: `<p class="small muted">${esc(cap(DF.long.format(new Date(x.date + 'T12:00:00'))))}${x.time ? ' · ' + esc(x.time) : ''} · ${esc(C.TYPE_LABELS[x.type])}${x.minutes ? ' · ' + fmtDur(x.minutes) : ''} · ${plural(x.workSets, 'serie de trabajo', 'series de trabajo')}</p>
+      ${m.summary.weights === false ? '<p class="small faint">Oculta sus kilos: solo se ven las repeticiones.</p>' : ''}
+      <div class="fs-list">${x.exercises.map((e) => {
+        const mine = state.exercises.find((ex) => S.normName(ex.name) === S.normName(e.name));
+        return `<div class="fs-ex"><div class="row spread"><b>${esc(e.name)}</b>${mine && !m.is_me ? `<button class="btn btn-ghost btn-sm" data-fs-ex="${esc(mine.id)}">Mi historial</button>` : ''}</div>
+          <div class="fs-sets">${e.sets.map((t) => `<span class="fs-set ${t[2] === 'w' ? 'warm' : t[2] === 'd' ? 'drop' : ''}">${esc(setTxt(t))}</span>`).join('')}</div></div>`;
+      }).join('')}</div>
+      <p class="small faint">C = calentamiento · D = descarga. Pesos en ${unit()}.</p>`,
+    onOpen: (root, close) => {
+      $('.modal', root).addEventListener('click', (ev) => {
+        const b = ev.target.closest('[data-fs-ex]');
+        if (b) { close(); go('ejercicios', { exerciseId: b.dataset.fsEx, back: 'amigos' }); }
+      });
+    },
+  });
+}
+Object.assign(SocialActions, {
+  'fr-cal': (el) => { state.ui.frCal = el.dataset.t; render(); },
+  'fr-cal-nav': (el) => {
+    const cur = state.ui.frCalMonth ? new Date(state.ui.frCalMonth) : S.startOfMonth(new Date());
+    state.ui.frCalMonth = S.addMonths(cur, Number(el.dataset.dir)).toISOString(); render();
+  },
+  'fr-day': (el) => openGroupDay(el.dataset.day),
+  'fr-session': (el) => openFriendSession(el.dataset.u, Number(el.dataset.i)),
+});
+
 /* GymTracker — ajustes, copia de seguridad, navegación, eventos e inicio. */
 
 // ---------------------------------------------------------------- ajustes
 function viewSettings() {
   const st = state.settings;
-  const routine = st.routine || [];
   return `
   <div class="page-head"><div><h1>Ajustes</h1></div></div>
   <section class="card stack"><h2>Unidades</h2>
@@ -4430,19 +5089,14 @@ function viewSettings() {
       <button class="chip" data-action="unit" data-u="kg" aria-pressed="${st.unit === 'kg'}">Kilogramos (kg)</button>
       <button class="chip" data-action="unit" data-u="lb" aria-pressed="${st.unit === 'lb'}">Libras (lb)</button></div>
     <p class="small muted">Los datos se guardan siempre en kg; cambiar la unidad solo cambia cómo se muestran y escriben. 1 lb = 0,4536 kg.</p></section>
+  ${newsCard()}
   <section class="card stack"><h2>Personalidad</h2>
     <label class="row" for="set-fun" style="cursor:pointer"><input type="checkbox" id="set-fun" data-setting="fun" ${st.fun ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--accent)">
       <span>Mensajes con humor, logros y niveles</span></label>
     <p class="small muted">Si lo desactivas, la app solo muestra datos y los avisos de récord en tono neutro.</p></section>
-  <section class="card stack"><h2>Rutina</h2>
-    <p class="small muted">El orden de tus días. Sirve para sugerir el próximo entrenamiento en el inicio.</p>
-    ${routine.length ? `<div class="list">${routine.map((t, i) => `<div class="list-item"><span class="tag">${i + 1}</span><span class="grow">${esc(C.TYPE_LABELS[t])}</span>
-      <button class="btn btn-ghost icon-btn" data-action="routine-move" data-i="${i}" data-dir="-1" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>${ICON.up}</button>
-      <button class="btn btn-ghost icon-btn" data-action="routine-move" data-i="${i}" data-dir="1" aria-label="Bajar" ${i === routine.length - 1 ? 'disabled' : ''}>${ICON.down}</button>
-      <button class="btn btn-ghost icon-btn" data-action="routine-remove" data-i="${i}" aria-label="Quitar">${ICON.x}</button></div>`).join('')}</div>` : '<p class="muted">Sin rutina configurada.</p>'}
-    <div class="row"><label class="sr-only" for="routine-add">Añadir día</label>
-      <select class="input" id="routine-add" style="width:auto">${S.SESSION_TYPES.map((t) => `<option value="${t}">${esc(C.TYPE_LABELS[t])}</option>`).join('')}</select>
-      <button class="btn" data-action="routine-add">${ICON.plus}Añadir día</button></div></section>
+  <section class="card stack"><h2>Rutina y plantillas</h2>
+    <p class="small muted">${templates().length ? `Tienes ${plural(templates().length, 'plantilla', 'plantillas')}: ${esc(templates().map((t) => t.name).join(' → '))}. El orden es tu rotación.` : 'Aún no tienes plantillas. Cada plantilla es un día de tu rutina con sus ejercicios en orden.'}</p>
+    <div><button class="btn" data-action="open-templates">${ICON.list}Gestionar plantillas</button></div></section>
   <section class="card stack"><h2>Copia de seguridad</h2>
     <p class="small muted">Exporta todo (sesiones, ejercicios y ajustes) en JSON para restaurarlo, o tus series en CSV para abrirlas en una hoja de cálculo. La importación solo acepta el JSON de GymTracker.</p>
     <div class="row"><button class="btn" data-action="export-json">${ICON.download}Exportar JSON</button>
@@ -4495,11 +5149,19 @@ function importModal() {
       { label: 'Importar', cls: 'btn-primary', onClick: async (close, root) => {
         if (!plan) plan = reviewImport(root);
         if (!plan) return false;
-        if (!plan.sessionsToAdd.length && !plan.exercisesToAdd.length) { toast('No hay nada nuevo que importar.'); return false; }
+        const incomingTpl = plan.source && plan.source.settings && Array.isArray(plan.source.settings.templates) ? plan.source.settings.templates : [];
+        const importTpl = !templates().length && incomingTpl.length;
+        if (!plan.sessionsToAdd.length && !plan.exercisesToAdd.length && !importTpl) { toast('No hay nada nuevo que importar.'); return false; }
         try {
           await flushSessions();
           await DB.putMany('exercises', plan.exercisesToAdd);
           await DB.putMany('sessions', plan.sessionsToAdd);
+          if (importTpl) {
+            const known = new Set(state.exercises.map((e) => e.id).concat(plan.exercisesToAdd.map((e) => e.id)));
+            const tpls = incomingTpl.map((t) => S.cleanTemplate(Object.assign({}, t, { exercises: (t.exercises || []).map((e) => Object.assign({}, e, { exerciseId: plan.idMap[e.exerciseId] || e.exerciseId })) }), (id) => known.has(id))).filter(Boolean);
+            state.settings.templates = tpls;
+            await DB.put('meta', { key: 'settings', value: state.settings });
+          }
         } catch (e) { toast('Error al guardar la importación. No se ha completado.', 'err'); return false; }
         await loadAll();
         socialDirty(2000);
@@ -4533,11 +5195,13 @@ function reviewImport(root) {
   const incoming = Object.assign({}, obj, { sessions: obj.sessions.filter((s) => (s.status || 'done') === 'done' || !hasActive).map((s) => Object.assign({ notes: '', endedAt: null }, s, { status: s.status || 'done' })) });
   const skippedActive = obj.sessions.length - incoming.sessions.length;
   const plan = S.planImport({ exercises: state.exercises, sessions: state.sessions }, incoming);
+  plan.source = obj;
   out.innerHTML = `<div class="card" style="background:var(--surface-2)"><p><b>Copia válida.</b> Exportada ${obj.exportedAt ? fmtDate(obj.exportedAt) : 'sin fecha'}.</p>
     <ul class="small" style="margin:6px 0 0;padding-left:18px">
       <li>${plural(plan.sessionsToAdd.length, 'sesión nueva', 'sesiones nuevas')} se añadirán.</li>
       <li>${plural(plan.duplicateSessions, 'sesión ya existe', 'sesiones ya existen')} y se omitirán.</li>
       <li>${plural(plan.exercisesToAdd.length, 'ejercicio nuevo', 'ejercicios nuevos')}; los demás se asocian a los que ya tienes por nombre.</li>
+      ${!templates().length && obj.settings && Array.isArray(obj.settings.templates) && obj.settings.templates.length ? `<li>${plural(obj.settings.templates.length, 'plantilla', 'plantillas')} se añadirán (aquí no tienes ninguna).</li>` : ''}
       ${skippedActive ? `<li>${plural(skippedActive, 'sesión en curso se omite', 'sesiones en curso se omiten')} porque ya tienes una abierta.</li>` : ''}
     </ul><p class="small muted" style="margin-top:6px">Tus datos actuales no se borran ni se sobrescriben. Tus ajustes se mantienen.</p></div>`;
   return plan;
@@ -4587,6 +5251,7 @@ function renderNav() {
 }
 function render() {
   if (!state.ready) return;
+  if (!state.ui.whatsNewShown && !activeSession() && state.ui.seenVersion && state.ui.seenVersion !== C.APP_VERSION) setTimeout(maybeShowWhatsNew, 800);
   chartSpecs.clear();
   renderNav();
   const r = state.route;
@@ -4613,7 +5278,8 @@ function render() {
 }
 
 // ---------------------------------------------------------------- acciones
-const Actions = Object.assign({}, TrainActions, ExtraActions, SocialActions, {
+const Actions = Object.assign({}, TrainActions, ExtraActions, SocialActions, TemplateActions, {
+  'open-templates': () => { state.ui.trainMode = 'plantilla'; go('entrenar'); },
   'nav': (el) => {
     const v = el.dataset.view;
     if (v === 'entrenar' && state.route.view === 'entrenar' && state.route.sub && state.route.sub.editId) { /* sigue editando */ }
@@ -4665,13 +5331,6 @@ const Actions = Object.assign({}, TrainActions, ExtraActions, SocialActions, {
   'edit-exercise': (el) => openExerciseForm(state.exById.get(el.dataset.ex)),
   'edit-muscles': (el) => openExerciseForm(state.exById.get(el.dataset.ex), { focusMuscles: true }),
   'unit': async (el) => { state.settings.unit = el.dataset.u; await saveSettings(); render(); },
-  'routine-add': async () => { state.settings.routine.push($('#routine-add').value); await saveSettings(); render(); },
-  'routine-remove': async (el) => { state.settings.routine.splice(Number(el.dataset.i), 1); await saveSettings(); render(); },
-  'routine-move': async (el) => {
-    const r = state.settings.routine, i = Number(el.dataset.i), j = i + Number(el.dataset.dir);
-    if (j < 0 || j >= r.length) return;
-    [r[i], r[j]] = [r[j], r[i]]; await saveSettings(); render();
-  },
   'export-json': () => exportModal('json'),
   'export-csv': () => exportModal('csv'),
   'import': () => importModal(),
@@ -4702,7 +5361,8 @@ document.addEventListener('submit', (ev) => {
 });
 document.addEventListener('input', (ev) => {
   const el = ev.target;
-  if (el.matches('.set-input')) onSetInput(el);
+  if (el.matches('[data-tpl-field="name"]')) onTemplateField(el);
+  else if (el.matches('.set-input')) onSetInput(el);
   else if (el.matches('[data-sess="notes"]')) onSessField(el);
   else if (el.matches('[data-hist="q"]')) {
     state.ui.hist.q = el.value;
@@ -4717,7 +5377,8 @@ document.addEventListener('input', (ev) => {
 });
 document.addEventListener('change', (ev) => {
   const el = ev.target;
-  if (el.matches('[data-sess]') && el.dataset.sess !== 'notes') onSessField(el);
+  if (el.matches('[data-tpl-field="type"]')) onTemplateField(el);
+  else if (el.matches('[data-sess]') && el.dataset.sess !== 'notes') onSessField(el);
   else if (el.matches('[data-hist]') && el.dataset.hist !== 'q') { state.ui.hist[el.dataset.hist] = el.value; render(); }
   else if (el.matches('[data-cmp]')) {
     state.ui[el.dataset.cmp] = el.value;
@@ -4769,23 +5430,34 @@ async function updateWakeLock() {
 document.addEventListener('visibilitychange', () => { if (!document.hidden) updateWakeLock(); });
 
 // ---------------------------------------------------------------- carga inicial
-const CATALOG_VERSION = 2;
+const CATALOG_VERSION = 3;
+const CATALOG_ADDITIONS = { 2: C.CATALOG_V2, 3: C.CATALOG_V3 };
 function catalogItems(cat) {
   const list = [];
   for (const g of Object.keys(cat)) for (const name of cat[g]) list.push({ id: 'cat-' + slug(name), name, group: g, custom: false, favorite: false });
   return list;
 }
 async function seedCatalog() {
-  await DB.putMany('exercises', catalogItems(C.CATALOG).concat(catalogItems(C.CATALOG_V2)));
+  await DB.putMany('exercises', [C.CATALOG, C.CATALOG_V2, C.CATALOG_V3].flatMap(catalogItems));
   await DB.put('meta', { key: 'seeded', value: true });
   await DB.put('meta', { key: 'catalogVersion', value: CATALOG_VERSION });
 }
-/** Añade a instalaciones existentes los ejercicios nuevos del catálogo, sin tocar los que ya hay. */
+/** Añade a instalaciones existentes los ejercicios nuevos del catálogo. No toca los que ya hay
+    y no duplica uno que la persona ya creó con el mismo nombre (se queda el suyo). */
 async function migrateCatalog() {
   const v = await DB.get('meta', 'catalogVersion');
-  if (v && v.value >= CATALOG_VERSION) return;
-  const existing = new Set((await DB.all('exercises')).map((e) => e.id));
-  const add = catalogItems(C.CATALOG_V2).filter((e) => !existing.has(e.id));
+  const from = v && v.value ? v.value : 1;
+  if (from >= CATALOG_VERSION) return;
+  const existing = await DB.all('exercises');
+  const ids = new Set(existing.map((e) => e.id));
+  const names = new Set(existing.map((e) => S.normName(e.name)));
+  const add = [];
+  for (let ver = from + 1; ver <= CATALOG_VERSION; ver++) {
+    for (const e of catalogItems(CATALOG_ADDITIONS[ver] || {})) {
+      if (ids.has(e.id) || names.has(S.normName(e.name))) continue;
+      add.push(e); ids.add(e.id); names.add(S.normName(e.name));
+    }
+  }
   if (add.length) await DB.putMany('exercises', add);
   await DB.put('meta', { key: 'catalogVersion', value: CATALOG_VERSION });
 }
@@ -4798,6 +5470,7 @@ async function loadAll() {
   const actives = state.sessions.filter((s) => s.status === 'active').sort((a, b) => new Date(b.startedAt) - new Date(a.startedAt));
   for (const s of actives.slice(1)) { s.status = 'done'; s.endedAt = s.endedAt || s.updatedAt || s.startedAt; await DB.put('sessions', s); }
   indexExercises();
+  if (migrateRoutine()) { try { await DB.put('meta', { key: 'settings', value: state.settings }); } catch (e) { /* se guardará en el próximo cambio */ } }
   bump();
 }
 async function init() {
@@ -4805,6 +5478,11 @@ async function init() {
   try {
     const seeded = await DB.get('meta', 'seeded');
     if (!seeded) await seedCatalog(); else await migrateCatalog();
+    // novedades: en una instalación nueva no hay nada que contar; quien ya la usaba antes parte de la 1.3
+    const seen = await DB.get('meta', 'seenVersion');
+    if (seen && seen.value) state.ui.seenVersion = seen.value;
+    else if (!seeded) { state.ui.seenVersion = C.APP_VERSION; await DB.put('meta', { key: 'seenVersion', value: C.APP_VERSION }); }
+    else state.ui.seenVersion = '1.3';
     await loadAll();
   } catch (e) {
     console.error(e);
@@ -4830,6 +5508,7 @@ async function init() {
     const standaloneApp = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
     if (standaloneApp && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
   } catch (e) { /* sin API */ }
+  setTimeout(maybeShowWhatsNew, 600);
   if (DB.isMemory) toast('Este navegador no permite guardar datos: exporta una copia antes de cerrar.', 'err', 6000);
   try {
     if (navigator.storage && navigator.storage.persisted && await navigator.storage.persisted()) state.ui.storageInfo = 'Almacenamiento persistente activado.';
