@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-i6Ew/JK1jjbds6c0FutV5S0a1e9EcDgEwvtfJUiQe3Y=' 'sha256-HFQATxHWWjaxA0nw10YIR0QESB1LtSyDbIxZ1DjVSCA=' 'sha256-N29lQX8Md1BUTsW3UUt3bgGYDqiwuPESAcjXvKHgz4A=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-i6Ew/JK1jjbds6c0FutV5S0a1e9EcDgEwvtfJUiQe3Y=' 'sha256-fkACbyQv4/MQBWmIiasfK/cwEhh6lGFqqyxOCfkqoR4=' 'sha256-N29lQX8Md1BUTsW3UUt3bgGYDqiwuPESAcjXvKHgz4A=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>html,body{margin:0}body{font-size:14px}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px)}</style>
 <meta name="gt-social" content="{&quot;url&quot;: &quot;https://tvukrwgvtpfogjmbgsnj.supabase.co&quot;, &quot;key&quot;: &quot;sb_publishable_NNHHS5Iwtr7ho2OK_os2ig_c58Mkj3o&quot;}">
@@ -80,7 +80,7 @@ a { color: var(--accent); }
 .shell { display: flex; min-height: 100vh; }
 .nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-  display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   background: var(--surface); background: color-mix(in srgb, var(--surface) 94%, transparent);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-top: 1px solid var(--line);
@@ -1923,16 +1923,12 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
   // ---------------- hilos de sesión ----------------
   const REACTIONS = ['💪', '🔥', '😂', '🐢', '👑', '🫡'];
   const REACTION_LABELS = { '💪': 'Fuerte', '🔥': 'A tope', '😂': 'Me parto', '🐢': 'Tortuga', '👑': 'Rey', '🫡': 'Respeto' };
-  // Pullas rápidas para comentar sesiones (sin pasarse). Las propias de cada uno se guardan en su móvil.
+  // Pullas rápidas para comentar sesiones: solo vacile e ironía (máximo 10). Las propias de cada uno se guardan en su móvil.
   const JABS = [
-    'Te veo flojo de pierna', 'Mañana no vas a poder ni sentarte', '¿Eso era el calentamiento?', 'Tu banco te echa de menos',
-    '¿Seguro que no se te olvidó apuntar una serie?', 'Las mancuernas tienen tu foto en un cartel de «Se busca»', '¿Entrenas o haces turismo?',
-    'Mañana pierna. Sin excusas.', 'Ese peso lo levanta mi abuela, y sin calentar', 'Eso en mi gimnasio se llama calentar',
-    'Te estoy pillando. Prepárate.', 'Bonito volumen. De voz.', 'El espejo del gimnasio pregunta si estás bien',
-    'Tranquilo, que la barra no muerde', 'Esa racha no se mantiene sola', 'Te reto a superar mi semana',
-    'Cuidado, que te adelanto por la derecha', 'Vas a necesitar más café', 'Ya me contarás qué tal las agujetas',
-    'Hoy no valen excusas: ni lluvia ni Netflix', '¿Pierna? Esa leyenda urbana…', 'Menos stories y más series',
-    'Menuda sesión, máquina', 'Esa constancia da miedo', 'Respeto. Mucho respeto.', 'Así sí. Sigue así.',
+    '¿Eso era el calentamiento?', 'Bonito volumen. De voz.', 'Ese peso lo levanta mi abuela, y sin calentar',
+    '¿Pierna? Esa leyenda urbana…', 'Las mancuernas tienen tu foto en un cartel de «Se busca»', 'Menos stories y más series',
+    'Tranquilo, que la barra no muerde', '¿Entrenas o haces turismo?', 'El espejo del gimnasio pregunta si estás bien',
+    'Impresionante. Para ser tú.',
   ];
 
   // ---------------- novedades ----------------
