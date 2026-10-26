@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-0yfycbXXBAl2NP/mjfJ6i368eY93O+qVDBctnqn5/oI=' 'sha256-IbKIm33tAEl6+QsKJSkj6ECMlGOCOY58N9wFja10Y0E=' 'sha256-8Ygrnu2/TLfecKxayGAng6g/NdkDg6ZPgAi62xXymqU=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-i6Ew/JK1jjbds6c0FutV5S0a1e9EcDgEwvtfJUiQe3Y=' 'sha256-HFQATxHWWjaxA0nw10YIR0QESB1LtSyDbIxZ1DjVSCA=' 'sha256-N29lQX8Md1BUTsW3UUt3bgGYDqiwuPESAcjXvKHgz4A=' 'sha256-PfobfuNOQR6VNjjqXvaSZIEDytA/iSKGp3rIRKPNg7c='; connect-src 'self' https://tvukrwgvtpfogjmbgsnj.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>html,body{margin:0}body{font-size:14px}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px)}</style>
 <meta name="gt-social" content="{&quot;url&quot;: &quot;https://tvukrwgvtpfogjmbgsnj.supabase.co&quot;, &quot;key&quot;: &quot;sb_publishable_NNHHS5Iwtr7ho2OK_os2ig_c58Mkj3o&quot;}">
@@ -330,24 +330,11 @@ table.data td.r, table.data th.r { text-align: right; }
 .hbar .fill { height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; }
 
 /* ---------- logros ---------- */
-.level { display: flex; align-items: center; gap: 14px; }
-.level .badge { width: 56px; height: 56px; flex: none; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; background: var(--surface-2); border: 3px solid var(--accent); }
-.bar { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
-.bar > div { height: 100%; background: var(--accent); border-radius: 4px; }
-.ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
-.ach { display: flex; gap: 10px; align-items: flex-start; padding: 10px; border-radius: var(--r-md); background: var(--surface-2); border: 1px solid transparent; }
-.ach.locked { opacity: 0.5; background: transparent; border-color: var(--line); border-style: dashed; }
-.ach .ico { width: 32px; height: 32px; flex: none; border-radius: 8px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
-.ach.locked .ico { background: var(--surface-2); color: var(--faint); }
-.ach .ico svg { width: 18px; height: 18px; }
-.ach .n { font-weight: 700; font-size: 0.92rem; }
-.ach .d { font-size: 0.8rem; color: var(--muted); }
 .quip { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; line-height: 1.2; }
 .quip::before { content: "» "; color: var(--accent); }
 
 /* ---------- resumen ---------- */
 .summary-hero { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 18px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; }
-.summary-hero.has-pr { border-color: var(--pr); border-color: color-mix(in srgb, var(--pr) 50%, var(--line)); }
 .pr-item { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: var(--r-md); background: var(--pr-soft); }
 .pr-item svg { width: 20px; height: 20px; color: var(--pr); flex: none; }
 
@@ -364,13 +351,14 @@ table.data td.r, table.data th.r { text-align: right; }
 .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
 .modal-body { padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
 .modal-foot { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 16px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 70; }
+.summary-hero.has-pr { border-color: var(--pr); border-color: color-mix(in srgb, var(--pr) 50%, var(--line)); }
 .toasts { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + 16px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: flex; flex-direction: column; gap: 8px; width: min(92vw, 420px); pointer-events: none; }
 @media (min-width: 900px) { .toasts { bottom: 24px; left: calc(50% + 104px); } }
 .toast { background: var(--surface-3); border: 1px solid var(--line); border-radius: var(--r-md); padding: 10px 14px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.4); animation: up .2s ease-out; pointer-events: auto; }
 .toast.pr { border-color: var(--pr); background: var(--surface-3); background: color-mix(in srgb, var(--pr) 22%, var(--surface-2)); }
 .toast.err { border-color: var(--danger); }
 .toast.good { border-color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
-#confetti { position: fixed; inset: 0; pointer-events: none; z-index: 70; }
 .loading { display: grid; place-items: center; min-height: 50vh; color: var(--muted); }
 .notice { padding: 12px 14px; border-radius: var(--r-md); background: var(--warm-soft); color: var(--fg); border: 1px solid var(--warm); border: 1px solid color-mix(in srgb, var(--warm) 40%, var(--line)); font-size: 0.9rem; }
 .pick-list { display: flex; flex-direction: column; max-height: 50vh; overflow-y: auto; margin: 0 -4px; }
@@ -517,9 +505,47 @@ details summary { cursor: pointer; padding: 4px 0; }
 .fs-set { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 0.9rem; padding: 3px 8px; border-radius: 6px; background: var(--surface-3); }
 .fs-set.warm { color: var(--warm); }
 .fs-set.drop { color: var(--pr); }
+.nav .poke-dot { background: var(--pr); }
+.react-box { border-top: 1px solid var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.react-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.react-btn { width: 48px; height: 48px; font-size: 1.5rem; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-2); padding: 0; transition: transform .1s; }
+.react-btn:active { transform: scale(0.92); }
+.react-btn[aria-pressed="true"] { border-color: var(--accent); background: rgba(200, 240, 49, 0.15); box-shadow: 0 0 0 2px var(--accent); }
+.react-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); margin: 2px 4px 2px 0; font-weight: 600; }
+.jab-chips { max-height: 38vh; overflow-y: auto; }
+.jab-chip { text-align: left; white-space: normal; }
+.jab-chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.jab-chip-wrap { display: inline-flex; align-items: center; gap: 2px; }
+.jab-del { border: 0; background: none; color: var(--faint); font-size: 1.1rem; padding: 0 4px; }
 table.data td.lead { color: var(--accent); font-weight: 700; }
-.friends-mini svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
-.friends-mini p { margin: 0; }
+/* hilos de sesión */
+.fr-tabs { margin: 0 0 4px; }
+.tab-badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; margin-left: 4px; border-radius: 999px; background: var(--pr); color: var(--bg); font-size: 0.75rem; font-weight: 800; }
+.thread { border-top: 1px solid var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.card > .thread { border-top: 0; padding-top: 0; }
+.thread.busy { opacity: 0.6; pointer-events: none; }
+.th-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.th-list li { display: flex; align-items: flex-start; gap: 10px; }
+.th-list .avatar { width: 30px; height: 30px; font-size: 0.72rem; }
+.th-c { flex: 1; min-width: 0; background: var(--surface-2); border-radius: 4px var(--r-md) var(--r-md) var(--r-md); padding: 8px 12px; }
+.th-meta { margin: 0; font-size: 0.85rem; }
+.th-meta .tag { font-size: 0.62rem; padding: 1px 6px; }
+.th-body { margin: 2px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.th-del { border: 0; background: none; color: var(--faint); font-size: 0.8rem; padding: 6px 2px; align-self: center; }
+.th-del.sure { color: var(--danger, #ff6b6b); font-weight: 700; }
+.th-compose { display: flex; flex-direction: column; gap: 8px; }
+.th-text { resize: vertical; min-height: 64px; }
+.th-quick summary { cursor: pointer; color: var(--muted); font-weight: 600; padding: 2px 0; }
+.th-quick[open] { display: flex; flex-direction: column; gap: 6px; }
+.th-badge { display: inline-flex; align-items: center; gap: 2px; font-size: 0.78rem; font-weight: 700; color: var(--muted); padding: 1px 7px; border-radius: 999px; background: var(--surface-3); white-space: nowrap; text-transform: none; letter-spacing: 0; }
+.th-badge.new { background: var(--pr); color: var(--bg); }
+.list-item .th-badge { margin-right: 6px; }
+.act-item { align-items: flex-start; }
+.act-item.new { background: rgba(200, 240, 49, 0.07); box-shadow: inset 3px 0 0 var(--accent); }
+.act-last { display: block; margin-top: 4px; font-size: 0.92rem; overflow-wrap: anywhere; }
+.cal .gday { position: relative; }
+.day-bubble { position: absolute; top: -5px; right: -5px; font-size: 0.7rem; line-height: 1; padding: 2px; border-radius: 999px; background: var(--surface); }
+.day-bubble.new { background: var(--pr); box-shadow: 0 0 0 2px var(--bg); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -995,79 +1021,6 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     };
   }
 
-  // ---------- logros y niveles ----------
-  const ACHIEVEMENTS = [
-    { id: 'first', name: 'Primera piedra', desc: 'Registra tu primera sesión.', test: (c) => c.sessions >= 1 },
-    { id: 's10', name: 'Diez de diez', desc: 'Completa 10 sesiones.', test: (c) => c.sessions >= 10 },
-    { id: 's50', name: 'Medio centenar', desc: 'Completa 50 sesiones.', test: (c) => c.sessions >= 50 },
-    { id: 's100', name: 'Club de los cien', desc: 'Completa 100 sesiones.', test: (c) => c.sessions >= 100 },
-    { id: 'pr1', name: 'Primer récord', desc: 'Supera por primera vez una marca de peso o de 1RM estimado.', test: (c) => c.strengthPRs >= 1 },
-    { id: 'pr10', name: 'Coleccionista de PR', desc: 'Consigue 10 récords de peso o de 1RM estimado.', test: (c) => c.strengthPRs >= 10 },
-    { id: 'w4', name: 'Cuatro semanas seguidas', desc: 'Entrena al menos una vez por semana durante 4 semanas consecutivas.', test: (c) => c.bestStreak >= 4 },
-    { id: 'w12', name: 'Trimestre de hierro', desc: '12 semanas consecutivas con al menos una sesión.', test: (c) => c.bestStreak >= 12 },
-    { id: 'sets100', name: 'Cien series', desc: 'Registra 100 series de trabajo.', test: (c) => c.workSets >= 100 },
-    { id: 'sets1000', name: 'Mil series', desc: 'Registra 1000 series de trabajo.', test: (c) => c.workSets >= 1000 },
-    { id: 'vol', name: 'Récord de volumen', desc: 'Supera tu volumen previo en un ejercicio.', test: (c) => c.volumePRs >= 1 },
-    { id: 'all5', name: 'Cuerpo completo', desc: 'Trabaja hombros, pecho, espalda, brazos y piernas.', test: (c) => c.groupsTrained >= 5 },
-    { id: 'ex10', name: 'Repertorio', desc: 'Registra 10 ejercicios distintos.', test: (c) => c.distinctExercises >= 10 },
-  ];
-
-  const LEVEL_TITLES = ['Recién llegado', 'Aprendiz del hierro', 'Habitual del rack', 'Veterano de la barra', 'Leyenda del gimnasio', 'Mito del disco'];
-
-  function achievementContext(sessions, exerciseGroup) {
-    const done = doneSessions(sessions);
-    const prs = computePRs(sessions);
-    const groups = new Set(), exs = new Set();
-    let ws = 0;
-    for (const s of done) {
-      for (const e of s.exercises || []) {
-        const n = workSets(e).length;
-        if (!n) continue;
-        ws += n;
-        exs.add(e.exerciseId);
-        if (exerciseGroup) groups.add(exerciseGroup(e.exerciseId));
-      }
-    }
-    const strength = new Set(prs.filter((p) => p.type !== 'volume').map((p) => p.sessionId + ':' + p.exerciseId));
-    return {
-      sessions: done.length,
-      workSets: ws,
-      strengthPRs: strength.size,
-      volumePRs: prs.filter((p) => p.type === 'volume').length,
-      bestStreak: weekStreaks(sessions).best,
-      groupsTrained: ['hombros', 'pecho', 'espalda', 'brazos', 'piernas'].filter((g) => groups.has(g)).length,
-      distinctExercises: exs.size,
-    };
-  }
-
-  /**
-   * Nivel: premia la constancia (sesiones y semanas activas) y los récords, no la carga total.
-   * XP = 10 por sesión + 5 por semana activa + 15 por récord de fuerza.
-   */
-  function levelInfo(ctx, activeWeeks) {
-    const xp = ctx.sessions * 10 + activeWeeks * 5 + ctx.strengthPRs * 15;
-    let level = 1;
-    while (xp >= xpForLevel(level + 1)) level++;
-    const cur = xpForLevel(level), next = xpForLevel(level + 1);
-    return {
-      xp, level,
-      title: LEVEL_TITLES[Math.min(LEVEL_TITLES.length - 1, Math.floor((level - 1) / 3))],
-      progress: (xp - cur) / (next - cur),
-      toNext: next - xp,
-    };
-  }
-  function xpForLevel(l) { return l <= 1 ? 0 : Math.round(50 * Math.pow(l - 1, 1.6)); }
-
-  function evaluateAchievements(sessions, exerciseGroup) {
-    const ctx = achievementContext(sessions, exerciseGroup);
-    const activeWeeks = new Set(doneSessions(sessions).map((s) => weekKey(s.startedAt))).size;
-    return {
-      ctx,
-      level: levelInfo(ctx, activeWeeks),
-      list: ACHIEVEMENTS.map((a) => ({ id: a.id, name: a.name, desc: a.desc, unlocked: a.test(ctx) })),
-    };
-  }
-
   // ---------- importación / exportación ----------
   const EXPORT_FORMAT = 'gymtracker-backup';
 
@@ -1426,7 +1379,6 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     const ds = doneSessions(sessions);
     const prs = computePRs(sessions);
     const wk = startOfWeek(now), mo = startOfMonth(now);
-    const ach = evaluateAchievements(sessions, helpers.exerciseGroup);
     const st = weekStreaks(sessions, now);
     // ejercicios principales: los más frecuentes en los últimos 90 días
     const since90 = addDays(startOfDay(now), -90);
@@ -1475,8 +1427,6 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
       prevMonth: Object.assign({ key: monthKey(addMonths(mo, -1)) }, windowWithPRs(sessions, addMonths(mo, -1), mo, prs)),
       streak: st,
       last: last ? { date: dayKey(last.startedAt), type: last.type } : null,
-      level: { level: ach.level.level, title: ach.level.title },
-      achievements: ach.list.filter((a) => a.unlocked).length,
       lifts,
       prs: recentPRs,
       muscles: { week: msets(wk, addDays(wk, 7), 1), avg4: msets(addDays(wk, -28), wk, 4) },
@@ -1614,6 +1564,62 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     return { user_id: r.user_id.toLowerCase(), display_name: cleanStr(r.display_name, 30), summary: sanitizeSummary(r.summary),
       updated_at: cleanIso(r.updated_at), joined_at: cleanIso(r.joined_at), is_me: r.is_me === true };
   }
+  const POKE_EMOJIS = ['💪', '🔥', '😂', '🐢', '👑', '🫡'];
+  const SESSION_KEY_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+  const COMMENT_MAX = 280;
+  /** Texto de un comentario: sin caracteres de control (salvo saltos de línea, como mucho dos seguidos). */
+  function cleanComment(x) {
+    if (typeof x !== 'string') return '';
+    return x.replace(/\r\n?/g, '\n').replace(/[\u0000-\u0009\u000b-\u001f\u007f\u200b-\u200f\u202a-\u202e\u2066-\u2069]/g, '')
+      .replace(/\n{3,}/g, '\n\n').trim().slice(0, COMMENT_MAX);
+  }
+  /** Limpia un elemento de un hilo recibido del servidor (reacción o comentario). Devuelve null si no es válido. */
+  function sanitizePoke(k) {
+    if (!k || typeof k !== 'object') return null;
+    if (![k.id, k.from_user, k.to_user].every((x) => typeof x === 'string' && UUID_RE.test(x))) return null;
+    if (k.kind !== 'reaction' && k.kind !== 'comment') return null;
+    if (typeof k.session_key !== 'string' || !SESSION_KEY_RE.test(k.session_key)) return null;
+    // siempre en el mismo formato (UTC con milisegundos) para poder compararlas como texto
+    const created = cleanIso(k.created_at) ? new Date(k.created_at).toISOString() : null;
+    if (!created) return null;
+    const o = { id: k.id.toLowerCase(), from_user: k.from_user.toLowerCase(), from_name: cleanStr(k.from_name, 30), to_user: k.to_user.toLowerCase(),
+      kind: k.kind, session_key: k.session_key, created_at: created };
+    if (k.kind === 'reaction') {
+      if (!POKE_EMOJIS.includes(k.emoji)) return null;
+      o.emoji = k.emoji;
+    } else {
+      o.body = cleanComment(k.body);
+      if (!o.body) return null;
+    }
+    return o;
+  }
+  function threadKey(owner, sessionKey) { return owner + '|' + sessionKey; }
+  /** Agrupa reacciones y comentarios en hilos (uno por sesión), del más reciente al más antiguo. */
+  function buildThreads(rows) {
+    const map = new Map();
+    (rows || []).forEach((k) => {
+      const key = threadKey(k.to_user, k.session_key);
+      let t = map.get(key);
+      if (!t) { t = { key, owner: k.to_user, sessionKey: k.session_key, comments: [], reactions: [], last: '' }; map.set(key, t); }
+      (k.kind === 'comment' ? t.comments : t.reactions).push(k);
+      if (k.created_at > t.last) t.last = k.created_at;
+    });
+    const byTime = (a, b) => (a.created_at < b.created_at ? -1 : a.created_at > b.created_at ? 1 : 0);
+    const out = Array.from(map.values());
+    out.forEach((t) => { t.comments.sort(byTime); t.reactions.sort(byTime); });
+    return out.sort((a, b) => (a.last < b.last ? 1 : a.last > b.last ? -1 : 0));
+  }
+  /** ¿Hay algo de otra persona en el hilo posterior a la última vez que lo viste? */
+  function threadUnread(t, me, seenIso) {
+    if (!t) return false;
+    const since = seenIso || '';
+    return t.comments.concat(t.reactions).some((k) => k.from_user !== me && k.created_at > since);
+  }
+  /** Clave con la que se identifica una sesión entre dispositivos: día y hora de inicio. */
+  function sessionKey(startedAt) {
+    const d = toDate(startedAt);
+    return dayKey(d) + 'T' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
   function sanitizeGroup(g) {
     if (!g || typeof g !== 'object' || typeof g.id !== 'string' || !UUID_RE.test(g.id)) return null;
     const code = typeof g.invite_code === 'string' && /^[A-Z0-9]{4,12}$/.test(g.invite_code) ? g.invite_code : '';
@@ -1670,7 +1676,6 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
   }
   const CHALLENGES = [
     { metric: 'month_sessions', title: 'El más constante', desc: 'Gana quien complete más sesiones este mes.' },
-    { metric: 'month_prs', title: 'Cazarrécords', desc: 'Gana quien bata más récords de peso o de 1RM estimado este mes.' },
     { metric: 'month_days', title: 'Asistencia perfecta', desc: 'Gana quien entrene más días distintos este mes.' },
     { metric: 'strength30', title: 'Mejora relativa', desc: 'Gana quien más mejore su fuerza en porcentaje (media de sus ejercicios, 30 días). Justo para todos los tamaños.' },
     { metric: 'month_sets', title: 'Obreros del hierro', desc: 'Gana quien acumule más series de trabajo este mes.' },
@@ -1718,16 +1723,16 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
 
   const api = {
     cleanTemplate, templateFromSession, templateDiff, nextTemplate,
-    SOCIAL_VERSION, groupCalendar, dayLevel, sanitizeSummary, sanitizeBoardRow, sanitizeGroup, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
+    POKE_EMOJIS, COMMENT_MAX, cleanComment, sanitizePoke, threadKey, buildThreads, threadUnread, sessionKey, SOCIAL_VERSION, groupCalendar, dayLevel, sanitizeSummary, sanitizeBoardRow, sanitizeGroup, buildSocialSummary, stripWeights, BOARD_METRICS, metricValue, rankMembers, CHALLENGES, monthlyChallenge, commonLifts, groupFeed,
     MUSCLES, MUSCLE_ROLES, muscleSetsBetween, validMuscleMap,
     DEFAULT_PROGRESSION, progressionConfig, suggestProgression, strengthScore, detectStalls, groupSetsBetween, weeklySetsLevel, monthRecap,
-    KG_PER_LB, E1RM_MAX_REPS, GROUPS, SESSION_TYPES, SET_KINDS, PERIODS, EXPORT_FORMAT, ACHIEVEMENTS,
+    KG_PER_LB, E1RM_MAX_REPS, GROUPS, SESSION_TYPES, SET_KINDS, PERIODS, EXPORT_FORMAT,
     round, kgToLb, lbToKg, pctChange, epley1RM, parseNum, validateWeight, validateReps,
     isWorkSet, setVolume, workSets, entryVolume, sessionVolume, sessionWorkSetCount, topSet, bestE1RMOfSets,
     dayKey, monthKey, weekKey, startOfDay, startOfWeek, startOfMonth, addDays, addMonths, periodStart, inPeriod, durationMinutes,
     doneSessions, exerciseHistory, exerciseStats, compareSet, compareSetLists, compareWithPrevious, compareSessions,
     computePRs, bestsBefore, aggregate, weeklySeries, volumeByGroup, dailyActivity, intensityLevel, weekStreaks,
-    daysSinceLast, windowSummary, achievementContext, levelInfo, xpForLevel, evaluateAchievements,
+    daysSinceLast, windowSummary,
     validateBackup, planImport, normName, sessionFingerprint, toCSV,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
@@ -1915,20 +1920,44 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     brazos: { biceps: X, triceps: X }, piernas: { cuadriceps: X, gluteos: X, isquios: X }, core: { abdominales: P }, otro: {},
   };
 
+  // ---------------- hilos de sesión ----------------
+  const REACTIONS = ['💪', '🔥', '😂', '🐢', '👑', '🫡'];
+  const REACTION_LABELS = { '💪': 'Fuerte', '🔥': 'A tope', '😂': 'Me parto', '🐢': 'Tortuga', '👑': 'Rey', '🫡': 'Respeto' };
+  // Pullas rápidas para comentar sesiones (sin pasarse). Las propias de cada uno se guardan en su móvil.
+  const JABS = [
+    'Te veo flojo de pierna', 'Mañana no vas a poder ni sentarte', '¿Eso era el calentamiento?', 'Tu banco te echa de menos',
+    '¿Seguro que no se te olvidó apuntar una serie?', 'Las mancuernas tienen tu foto en un cartel de «Se busca»', '¿Entrenas o haces turismo?',
+    'Mañana pierna. Sin excusas.', 'Ese peso lo levanta mi abuela, y sin calentar', 'Eso en mi gimnasio se llama calentar',
+    'Te estoy pillando. Prepárate.', 'Bonito volumen. De voz.', 'El espejo del gimnasio pregunta si estás bien',
+    'Tranquilo, que la barra no muerde', 'Esa racha no se mantiene sola', 'Te reto a superar mi semana',
+    'Cuidado, que te adelanto por la derecha', 'Vas a necesitar más café', 'Ya me contarás qué tal las agujetas',
+    'Hoy no valen excusas: ni lluvia ni Netflix', '¿Pierna? Esa leyenda urbana…', 'Menos stories y más series',
+    'Menuda sesión, máquina', 'Esa constancia da miedo', 'Respeto. Mucho respeto.', 'Así sí. Sigue así.',
+  ];
+
   // ---------------- novedades ----------------
   // Saludo de la ventana de novedades: cámbialo aquí si quieres otro.
   const WHATS_NEW_GREETING = '¡Buenos días, truhanes!';
   const WHATS_NEW_INTRO = 'Oídas vuestras peticiones, estas son las novedades:';
   // Versión actual de la app y lista de cambios (la más reciente primero).
-  const APP_VERSION = '1.4';
+  const APP_VERSION = '1.6';
   const CHANGELOG = [
+    { version: '1.6', date: '2026-10-26', items: [
+      { title: 'Comentarios en las sesiones', text: 'Cada sesión tiene su hilo, como en Instagram: reacciona y comenta, y todo el grupo lo ve. Las pullas pasan a ser comentarios rápidos, y puedes guardar las tuyas. Las sesiones con comentarios llevan 💬 en el calendario y en tu historial.', go: 'amigos' },
+      { title: 'Pestaña Actividad', text: 'En Amigos → Actividad están todas las sesiones comentadas del grupo, con lo último arriba. Lo que no has leído sale marcado, y Amigos te avisa con un punto.', go: 'actividad' },
+      { title: 'Adiós a Inicio', text: 'La app abre directamente en Entrenar. Las estadísticas siguen en Progreso, y el resumen del mes en Historial.' },
+    ] },
+    { version: '1.5', date: '2026-10-26', items: [
+      { title: 'Toques: reacciones y pullas', text: 'Reacciona a las sesiones de tus amigos (💪 🔥 😂 🐢 👑 🫡) desde el calendario del grupo y pícales con una pulla: hay 26 preparadas o puedes escribir la tuya y guardarla. Te avisamos con un punto en Amigos.', go: 'amigos' },
+      { title: 'Más sencilla', text: 'Fuera los logros y niveles, el reto «Cazarrécords» y los ejercicios principales de Inicio. Los récords siguen como siempre, también los del grupo.' },
+    ] },
     { version: '1.4', date: '2026-10-22', items: [
       { title: 'Plantillas de entreno', text: 'En Entrenar elige «Plantilla»: cada día de tu rutina con sus ejercicios en orden, series y calentamientos. Al empezar, todo sale preparado con el peso sugerido, y la app marca cuál te toca.', go: 'plantilla' },
       { title: 'Calendario del grupo', text: 'En Amigos, cada uno con su color: qué días ha entrenado cada uno y, al tocar un día, su sesión completa. También en vista de 12 semanas.', go: 'amigos' },
       { title: '43 ejercicios nuevos', text: 'Ya son 106: remo en polea agarre ancho al pecho, buenos días, arrancada, cargada, más variantes de jalón, Smith, poleas y curls. Todos con sus músculos.', go: 'ejercicios' },
     ] },
     { version: '1.3', date: '2026-10-21', items: [
-      { title: 'Amigos', text: 'Grupos con enlace de invitación, clasificaciones, reto mensual, récords del grupo y ficha de cada amigo.' },
+      { title: 'Amigos', text: 'Grupos con enlace de invitación, clasificaciones, reto mensual y ficha de cada amigo.' },
       { title: 'Mapa muscular detallado', text: '19 músculos, con los músculos de cada ejercicio editables tocando el mapa.' },
     ] },
     { version: '1.2', date: '2026-10-20', items: [
@@ -2026,7 +2055,7 @@ table.data td.lead { color: var(--accent); font-weight: 700; }
     compare: I('<path d="M7 4v16M17 4v16M3 8l4-4 4 4M13 16l4 4 4-4"/>'),
   };
 
-  window.GTContent = { WHATS_NEW_GREETING, WHATS_NEW_INTRO, APP_VERSION, CHANGELOG, TYPE_LABELS, TYPE_SHORT, GROUP_LABELS, KIND_LABELS, CATALOG, CATALOG_V2, CATALOG_V3, MUSCLE_LABELS, MUSCLE_SHORT, MUSCLE_REGIONS, CATALOG_MUSCLES, GROUP_FALLBACK_MUSCLES, PHRASES, ICONS };
+  window.GTContent = { REACTIONS, REACTION_LABELS, JABS, WHATS_NEW_GREETING, WHATS_NEW_INTRO, APP_VERSION, CHANGELOG, TYPE_LABELS, TYPE_SHORT, GROUP_LABELS, KIND_LABELS, CATALOG, CATALOG_V2, CATALOG_V3, MUSCLE_LABELS, MUSCLE_SHORT, MUSCLE_REGIONS, CATALOG_MUSCLES, GROUP_FALLBACK_MUSCLES, PHRASES, ICONS };
 })();
 
 </script>
@@ -2113,7 +2142,7 @@ const state = {
   exercises: [],
   exById: new Map(),
   settings: clone(DEFAULT_SETTINGS),
-  route: { view: 'inicio', sub: null },
+  route: { view: 'entrenar', sub: null },
   version: 0,
   ui: {
     openSetMenu: null, openEntryMenu: null, errors: {}, flash: null,
@@ -2139,6 +2168,7 @@ function exGroup(id) { const e = state.exById.get(id); return e ? e.group : 'otr
 function activeSession() { return state.sessions.find((s) => s.status === 'active') || null; }
 function sessionById(id) { return state.sessions.find((s) => s.id === id) || null; }
 function done() { return cached('done', () => S.doneSessions(state.sessions)); }
+function prEvents() { return cached('prs', () => S.computePRs(state.sessions)); }
 // ---------------------------------------------------------------- músculos por ejercicio
 const CATALOG_MUSCLES_BY_ID = {};
 Object.keys(C.CATALOG_MUSCLES).forEach((name) => { CATALOG_MUSCLES_BY_ID['cat-' + slug(name)] = C.CATALOG_MUSCLES[name]; });
@@ -2182,7 +2212,6 @@ function progressionText(p) {
   if (p.action === 'hold') return { title: `Mantén ${w} y busca ${p.reps} reps`, reason: `Alguna serie quedó por debajo de ${c.repMin} repeticiones: completa el rango antes de subir.` };
   return { title: `Mantén ${w} y busca ${p.reps} reps`, reason: `Suma una repetición a tu serie más floja (${Math.min(...p.basedOn.reps)}). Al llegar a ${c.repMax} en todas, toca subir peso.` };
 }
-function prEvents() { return cached('prs', () => S.computePRs(state.sessions)); }
 
 // ---------------------------------------------------------------- guardado
 const pendingSessions = new Map();
@@ -2326,7 +2355,7 @@ function closeModal() {
   if (modalCleanup) { modalCleanup(); modalCleanup = null; }
 }
 /** Abre un modal. actions: [{label, cls, onClick(close) → false para no cerrar}] */
-function openModal({ title, body, actions = [], onOpen, labelClose = 'Cerrar' }) {
+function openModal({ title, body, actions = [], onOpen, onClose, labelClose = 'Cerrar' }) {
   closeModal();
   const root = $('#modal-root');
   const prevFocus = document.activeElement;
@@ -2351,9 +2380,9 @@ function openModal({ title, body, actions = [], onOpen, labelClose = 'Cerrar' })
   });
   const onKey = (ev) => { if (ev.key === 'Escape') close(); };
   document.addEventListener('keydown', onKey);
-  modalCleanup = () => document.removeEventListener('keydown', onKey);
+  modalCleanup = () => { document.removeEventListener('keydown', onKey); if (onClose) onClose(); };
   if (onOpen) onOpen(root, close);
-  const first = $('input, select, textarea', root) || $('[data-modal-act]', root) || $('[data-modal-close]', root);
+  const first = $('input:not([data-nofocus]), select, textarea:not([data-nofocus])', root) || $('[data-modal-act]', root) || $('[data-modal-close]', root);
   if (first) setTimeout(() => first.focus(), 30);
   return close;
 }
@@ -2373,7 +2402,7 @@ function confirmModal({ title, text, confirmLabel = 'Confirmar', danger = false,
   });
 }
 
-// ---------------------------------------------------------------- confeti discreto
+// ---------------------------------------------------------------- confeti discreto (al batir un récord)
 function confetti() {
   if (reducedMotion()) return;
   const cv = document.createElement('canvas');
@@ -2646,11 +2675,14 @@ const social = {
   boards: {},           // gid → {at, rows}
   lastPublished: null,  // {at, hash}
   pendingJoin: null,
+  threads: {},          // gid → {at, rows, missing?}: reacciones y comentarios del grupo
+  threadSeen: {},       // gid → {base, k: {hilo → iso}}: hasta cuándo has leído cada hilo (solo en este dispositivo)
+  customJabs: [],       // pullas propias guardadas para comentar rápido
   busy: false,
   error: null,
   online: navigator.onLine !== false,
 };
-const SOCIAL_KEYS = ['session', 'name', 'share', 'groups', 'activeGroup', 'boards', 'lastPublished', 'pendingJoin'];
+const SOCIAL_KEYS = ['session', 'name', 'share', 'groups', 'activeGroup', 'boards', 'lastPublished', 'pendingJoin', 'threads', 'threadSeen', 'customJabs'];
 
 async function socialLoad() {
   try {
@@ -2665,6 +2697,22 @@ async function socialLoad() {
     if (b && Array.isArray(b.rows)) boards[gid] = { at: b.at, rows: b.rows.map(S.sanitizeBoardRow).filter(Boolean) };
   });
   social.boards = boards;
+  const threads = {};
+  Object.keys(social.threads || {}).forEach((gid) => {
+    const p = social.threads[gid];
+    if (p && Array.isArray(p.rows)) threads[gid] = { at: p.at, rows: p.rows.map(S.sanitizePoke).filter(Boolean) };
+  });
+  social.threads = threads;
+  const seen = {};
+  Object.keys(social.threadSeen || {}).forEach((gid) => {
+    const x = social.threadSeen[gid];
+    if (!x || typeof x !== 'object') return;
+    const k = {};
+    Object.keys(x.k || {}).forEach((t) => { if (typeof x.k[t] === 'string') k[t] = x.k[t]; });
+    seen[gid] = { base: typeof x.base === 'string' ? x.base : '', k };
+  });
+  social.threadSeen = seen;
+  social.customJabs = (Array.isArray(social.customJabs) ? social.customJabs : []).map((x) => S.cleanComment(String(x || ''))).filter(Boolean).slice(0, 30);
   social.loaded = true;
 }
 async function socialSave() {
@@ -2685,6 +2733,13 @@ const SOCIAL_ERRORS = {
   grupo_lleno: 'Ese grupo ya tiene 20 personas.',
   demasiados_grupos: 'Puedes estar como mucho en 10 grupos.',
   no_miembro: 'Ya no perteneces a ese grupo.',
+  destinatario_no_valido: 'Esa persona ya no está en el grupo.',
+  demasiados_toques: 'Has comentado mucho en poco rato. Espera un poco y sigue.',
+  sesion_no_valida: 'No se ha podido identificar esa sesión.',
+  emoji_no_valido: 'Esa reacción no está disponible.',
+  texto_no_valido: 'El comentario debe tener entre 1 y 280 caracteres.',
+  tipo_no_valido: 'Tipo de mensaje no válido.',
+  hilo_lleno: 'Este hilo ya tiene demasiados comentarios.',
 };
 class SocialError extends Error { constructor(msg, code) { super(msg); this.code = code; } }
 function authErrorText(j, status) {
@@ -2762,7 +2817,7 @@ async function rpc(name, args, retried) {
       if (msg === 'sin_sesion') { social.session = null; socialSave(); }
       throw new SocialError(SOCIAL_ERRORS[msg], msg);
     }
-    if (res.status === 404 || (j && j.code === 'PGRST202')) throw new SocialError('Falta instalar el script de GymTracker en Supabase (SQL Editor → Run).', 'missing_sql');
+    if (res.status === 404 || (j && j.code === 'PGRST202')) throw new SocialError(/thread/.test(name) ? 'Falta instalar el script de hilos (gymtracker-hilos.sql) en Supabase: SQL Editor → Run.' : 'Falta instalar el script de GymTracker en Supabase (SQL Editor → Run).', 'missing_sql');
     throw new SocialError('El servidor ha respondido con un error (' + res.status + (msg ? ': ' + msg : '') + ').', 'server');
   }
   return j;
@@ -2805,7 +2860,7 @@ async function socialAfterLogin() {
 }
 async function socialSignOut() {
   const token = social.session && social.session.access_token;
-  social.session = null; social.groups = []; social.boards = {}; social.activeGroup = null; social.lastPublished = null;
+  social.session = null; social.groups = []; social.boards = {}; social.threads = {}; social.threadSeen = {}; social.activeGroup = null; social.lastPublished = null;
   await socialSave();
   if (token) authCall('logout', {}, token).catch(() => {});
 }
@@ -2842,7 +2897,7 @@ async function socialLeave(gid) {
 }
 async function socialDeleteMine() {
   await rpc('gt_delete_my_data', {});
-  social.groups = []; social.boards = {}; social.activeGroup = null; social.lastPublished = null;
+  social.groups = []; social.boards = {}; social.threads = {}; social.threadSeen = {}; social.activeGroup = null; social.lastPublished = null;
   social.share.enabled = false;
   await socialSave();
 }
@@ -2904,6 +2959,62 @@ function inviteLink(code) {
   return u.toString();
 }
 
+// ---------------------------------------------------------------- hilos de sesión: reacciones y comentarios
+async function socialFetchThreads(gid) {
+  let raw;
+  try { raw = await rpc('gt_group_threads', { p_group: gid }); }
+  catch (e) { if (e.code === 'missing_sql') { social.threads[gid] = { at: new Date().toISOString(), rows: [], missing: true }; return social.threads[gid]; } throw e; }
+  const rows = (Array.isArray(raw) ? raw : []).map(S.sanitizePoke).filter(Boolean);
+  social.threads[gid] = { at: new Date().toISOString(), rows };
+  // la primera vez que se descargan los hilos de un grupo, lo anterior cuenta como leído
+  if (!social.threadSeen[gid]) social.threadSeen[gid] = { base: rows.reduce((m, k) => (k.created_at > m ? k.created_at : m), new Date().toISOString()), k: {} };
+  else {
+    // se olvidan los hilos que ya no existen
+    const keys = new Set(rows.map((k) => S.threadKey(k.to_user, k.session_key)));
+    Object.keys(social.threadSeen[gid].k).forEach((t) => { if (!keys.has(t)) delete social.threadSeen[gid].k[t]; });
+  }
+  await socialSave();
+  return social.threads[gid];
+}
+async function socialThreadPost(gid, owner, key, kind, opts = {}) {
+  await rpc('gt_thread_post', { p_group: gid, p_owner: owner, p_session: key, p_kind: kind, p_emoji: opts.emoji || null, p_body: opts.body || null });
+  await socialFetchThreads(gid).catch(() => {});
+  markThreadSeen(gid, S.threadKey(owner, key));
+}
+async function socialThreadDelete(gid, id) {
+  await rpc('gt_thread_delete', { p_id: id });
+  await socialFetchThreads(gid).catch(() => {});
+}
+function myId() { return social.session && social.session.user ? social.session.user.id : null; }
+function threadRows(gid) { const p = social.threads[gid || social.activeGroup]; return p ? p.rows : []; }
+const threadCache = new Map();
+function threadsOf(gid) {
+  gid = gid || social.activeGroup;
+  const p = social.threads[gid];
+  const hit = threadCache.get(gid);
+  if (hit && hit.p === p) return hit.v;
+  const v = S.buildThreads(p ? p.rows : []);
+  threadCache.set(gid, { p, v });
+  return v;
+}
+function threadFor(gid, owner, key) { return threadsOf(gid).find((t) => t.owner === owner && t.sessionKey === key) || null; }
+function threadSeenAt(gid, tkey) { const x = social.threadSeen[gid]; return x ? x.k[tkey] || x.base : ''; }
+function threadIsUnread(gid, t) { return S.threadUnread(t, myId(), threadSeenAt(gid, t.key)); }
+function markThreadSeen(gid, tkey) {
+  const x = social.threadSeen[gid] || (social.threadSeen[gid] = { base: '', k: {} });
+  const t = threadsOf(gid).find((y) => y.key === tkey);
+  const now = new Date().toISOString();
+  const at = t && t.last > now ? t.last : now;
+  if (x.k[tkey] && x.k[tkey] >= at) return;
+  x.k[tkey] = at;
+  socialSave();
+}
+/** Hilos con novedades en todos tus grupos (para el aviso de la barra y de Inicio). */
+function unreadThreadCount(gid) {
+  if (!myId()) return 0;
+  return (gid ? [gid] : Object.keys(social.threads)).reduce((n, g) => n + threadsOf(g).filter((t) => threadIsUnread(g, t)).length, 0);
+}
+
 /* GymTracker — entrenar: inicio de sesión, editor de sesión (activa o pasada) y resumen final. */
 
 // ---------------------------------------------------------------- ayudas de sesión
@@ -2924,10 +3035,6 @@ function previousExecution(session, exerciseId) {
     return { session: ps, sets, hist: last };
   });
 }
-function bestsFor(session, exerciseId) {
-  return cached('best:' + session.id + ':' + exerciseId + ':' + session.startedAt,
-    () => S.bestsBefore(state.sessions.filter((x) => x.status === 'done'), exerciseId, session.startedAt, session.id));
-}
 /** Valores sugeridos (kg/reps) para una serie: la misma serie de la última vez o la serie anterior de hoy. */
 function suggestion(session, entry, idx) {
   const cur = entry.sets[idx];
@@ -2939,6 +3046,10 @@ function suggestion(session, entry, idx) {
     if (s.weight != null || s.reps != null) return { weight: s.weight, reps: s.reps, from: 'same' };
   }
   return null;
+}
+function bestsFor(session, exerciseId) {
+  return cached('best:' + session.id + ':' + exerciseId + ':' + session.startedAt,
+    () => S.bestsBefore(state.sessions.filter((x) => x.status === 'done'), exerciseId, session.startedAt, session.id));
 }
 function isPRSet(session, entry, set) {
   if (!S.isWorkSet(set)) return null;
@@ -3282,7 +3393,6 @@ const TrainActions = {
       const ok = await confirmModal({ title: 'Terminar sesión', text: `Hay ${plural(pending, 'serie con datos sin marcar', 'series con datos sin marcar')} como completada. Se guardarán como pendientes y no contarán en las estadísticas.`, confirmLabel: 'Terminar', cancelLabel: 'Revisar' });
       if (!ok) return;
     }
-    const before = S.evaluateAchievements(state.sessions, exGroup).list.filter((a) => a.unlocked).map((a) => a.id);
     // se eliminan las series completamente vacías
     s.exercises.forEach((e) => { e.sets = e.sets.filter((x) => x.done || x.weight != null || x.reps != null); });
     s.status = 'done';
@@ -3290,8 +3400,7 @@ const TrainActions = {
     saveSession(s);
     await flushSessions();
     socialDirty(1500);
-    const after = S.evaluateAchievements(state.sessions, exGroup).list.filter((a) => a.unlocked && !before.includes(a.id));
-    state.ui.summary = { id: s.id, phrase: phrase('finish'), newAch: after.map((a) => a.id) };
+    state.ui.summary = { id: s.id, phrase: phrase('finish') };
     state.ui.errors = {};
     state.route = { view: 'entrenar', sub: { summaryId: s.id } };
     render();
@@ -3398,12 +3507,11 @@ function openExercisePicker(onPick, opts = {}) {
 function viewSummary(id) {
   const s = sessionById(id);
   if (!s) return viewTrainStart();
-  const sm = state.ui.summary && state.ui.summary.id === id ? state.ui.summary : { phrase: '', newAch: [] };
+  const sm = state.ui.summary && state.ui.summary.id === id ? state.ui.summary : { phrase: '' };
   const prs = prEvents().filter((p) => p.sessionId === id);
   const strengthPRs = prs.filter((p) => p.type !== 'volume');
   const prevSame = done().filter((x) => x.type === s.type && new Date(x.startedAt) < new Date(s.startedAt)).slice(-1)[0];
   const cmp = prevSame ? S.compareSessions(prevSame, s) : null;
-  const achList = S.ACHIEVEMENTS.filter((a) => sm.newAch.includes(a.id));
   return `
   <section class="summary-hero ${strengthPRs.length ? 'has-pr' : ''}">
     <p class="eyebrow">Sesión terminada · ${esc(fmtDateLong(s.startedAt))}</p>
@@ -3416,8 +3524,7 @@ function viewSummary(id) {
     ${tile('Series de trabajo', S.sessionWorkSetCount(s), 'sin calentamiento')}
     ${tile('Volumen', nf(toUnit(S.sessionVolume(s)), 0), unit() + ' · peso × reps', )}
   </div>
-  ${strengthPRs.length || prs.length ? `<section class="card"><div class="card-head"><h2>Récords de hoy</h2></div><div class="stack">${prs.map(prItemHTML).join('')}</div></section>` : ''}
-  ${achList.length && state.settings.fun ? `<section class="card"><div class="card-head"><h2>Logros desbloqueados</h2></div><div class="ach-grid">${achList.map((a) => achHTML(Object.assign({ unlocked: true }, a))).join('')}</div></section>` : ''}
+  ${prs.length ? `<section class="card"><div class="card-head"><h2>Récords de hoy</h2></div><div class="stack">${prs.map(prItemHTML).join('')}</div></section>` : ''}
   ${templateSummaryCard(s)}
   <section class="card">
     <div class="card-head"><h2>Comparado con la vez anterior</h2></div>
@@ -3434,16 +3541,16 @@ function viewSummary(id) {
   </section>
   <div class="row">
     <button class="btn btn-primary" data-action="open-session" data-id="${s.id}">Ver sesión completa</button>
-    <button class="btn" data-action="nav" data-view="inicio">Ir al inicio</button>
+    <button class="btn" data-action="nav" data-view="progreso">Ver progreso</button>
   </div>`;
 }
-function uniqueExercises(s) { const ids = []; s.exercises.forEach((e) => { if (!ids.includes(e.exerciseId)) ids.push(e.exerciseId); }); return ids; }
 function prItemHTML(p) {
   const what = p.type === 'weight' ? `Peso máximo: <b>${fmtW(p.value)}</b> × ${p.reps} <span class="muted small">(antes ${fmtW(p.previous)})</span>`
     : p.type === 'e1rm' ? `1RM estimado: <b>${fmtW(p.value, 1)}</b> <span class="muted small">(antes ${fmtW(p.previous, 1)}; estimación Epley)</span>`
       : `Récord de volumen: <b>${fmtVol(p.value)}</b> <span class="muted small">(antes ${fmtVol(p.previous)})</span>`;
   return `<div class="pr-item">${ICON.trophy}<div><b>${esc(exName(p.exerciseId))}</b> · <span class="small muted">${fmtDate(p.date)}</span><br><span class="small">${what}</span></div></div>`;
 }
+function uniqueExercises(s) { const ids = []; s.exercises.forEach((e) => { if (!ids.includes(e.exerciseId)) ids.push(e.exerciseId); }); return ids; }
 function tile(label, big, foot) {
   return `<div class="tile"><span class="eyebrow">${esc(label)}</span><span class="big">${big}</span>${foot ? `<span class="foot">${foot}</span>` : ''}</div>`;
 }
@@ -3480,7 +3587,8 @@ function viewTrainStart() {
   const seg = `<div class="mode-switch" role="tablist" aria-label="Forma de entrenar">
     <button role="tab" aria-selected="${mode === 'libre'}" data-action="train-mode" data-m="libre"><b>Libre</b><span>Eliges ejercicios sobre la marcha</span></button>
     <button role="tab" aria-selected="${mode === 'plantilla'}" data-action="train-mode" data-m="plantilla"><b>Plantilla</b><span>${templates().length ? plural(templates().length, 'plantilla', 'plantillas') : 'Tus días ya preparados'}</span></button></div>`;
-  return `<div class="page-head"><div><p class="eyebrow">Nueva sesión</p><h1>¿Qué toca hoy?</h1></div></div>` + seg + (mode === 'plantilla' ? viewTemplateList() : viewFreeStart());
+  const g = state.settings.fun ? greeting() : '';
+  return `<div class="page-head"><div><p class="eyebrow">${esc(cap(DF.longNoY.format(new Date())))}</p><h1>¿Qué toca hoy?</h1>${g ? `<p class="quip" style="margin-top:8px;font-size:1.05rem">${esc(g)}</p>` : ''}</div></div>` + seg + (mode === 'plantilla' ? viewTemplateList() : viewFreeStart());
 }
 function viewFreeStart() {
   const last = done().slice(-1)[0];
@@ -3712,7 +3820,7 @@ function onTemplateField(el) {
   }
 }
 
-/* GymTracker — inicio, historial, progreso y ejercicios. */
+/* GymTracker — historial, progreso y ejercicios. */
 
 function periodChips(key, current) {
   return `<div class="chips" role="group" aria-label="Período">${Object.keys(S.PERIODS).map((p) =>
@@ -3726,7 +3834,7 @@ function sessionListItem(s) {
   const hasPR = prEvents().some((p) => p.sessionId === s.id && p.type !== 'volume');
   return `<button class="list-item" data-action="open-session" data-id="${s.id}">
     <div class="date-badge"><span class="d">${DF.day.format(d)}</span><span class="m">${DF.monthShort.format(d).replace('.', '')}</span></div>
-    <div class="grow"><div class="title">${esc(C.TYPE_LABELS[s.type])} ${hasPR ? '<span class="tag tag-pr">PR</span>' : ''}</div>
+    <div class="grow"><div class="title">${esc(C.TYPE_LABELS[s.type])} ${hasPR ? '<span class="tag tag-pr">PR</span>' : ''} ${loggedIn() ? threadBadge(myId(), S.sessionKey(s.startedAt)) : ''}</div>
       <div class="sub">${sessionSummaryLine(s)}</div>
       <div class="sub">${esc(s.exercises.map((e) => exName(e.exerciseId)).join(' · '))}</div></div>
   </button>`;
@@ -3768,11 +3876,7 @@ function metricPoints(exId, metric, period) {
 const METRICS = { weight: 'Peso máximo', e1rm: '1RM estimado', reps: 'Reps totales', volume: 'Volumen' };
 function metricUnit(m) { return m === 'reps' ? 'reps' : unit(); }
 
-// ---------------------------------------------------------------- inicio
-function achHTML(a) {
-  return `<div class="ach ${a.unlocked ? '' : 'locked'}"><span class="ico">${a.unlocked ? ICON.trophy : ICON.lock}</span>
-    <div><div class="n">${esc(a.name)}</div><div class="d">${esc(a.desc)}</div></div></div>`;
-}
+// ---------------------------------------------------------------- saludo (cabecera de Entrenar)
 function greeting() {
   if (!state.ui.greeting) {
     const days = S.daysSinceLast(state.sessions);
@@ -3781,94 +3885,6 @@ function greeting() {
   }
   return state.ui.greeting;
 }
-function viewHome() {
-  const ds = done();
-  const act = activeSession();
-  const today = cap(DF.longNoY.format(new Date()));
-  const activeBanner = act ? `<section class="card" style="border-color:var(--accent)"><div class="row spread"><div><p class="eyebrow">En curso</p><h2>${esc(C.TYPE_LABELS[act.type])}</h2>
-    <p class="muted small">Empezó a las ${fmtTime(act.startedAt)} · ${plural(S.sessionWorkSetCount(act), 'serie completada', 'series completadas')}</p></div>
-    <button class="btn btn-primary" data-action="nav" data-view="entrenar">Continuar</button></div></section>` : '';
-  if (!ds.length) {
-    return `<div class="page-head"><div><p class="eyebrow">${esc(today)}</p><h1>Tu diario de fuerza</h1>
-      <p class="sub">Aquí verás tu último entrenamiento, tus récords y cómo evolucionan tus ejercicios. Todo sale de lo que registres; no hay datos de ejemplo.</p></div></div>
-      ${activeBanner}
-      <div class="empty"><div class="plate">0 kg</div><h3>Aún no hay sesiones</h3>
-        <p>Para empezar a ver estadísticas: inicia una sesión, añade al menos un ejercicio, registra peso y repeticiones de cada serie, márcalas como hechas y pulsa «Terminar». Con dos sesiones del mismo ejercicio verás comparaciones y porcentajes.</p>
-        ${act ? '' : `<button class="btn btn-primary btn-lg" data-action="nav" data-view="entrenar">${ICON.dumbbell}Empezar a entrenar</button>`}</div>`;
-  }
-  const now = new Date();
-  const wk = S.startOfWeek(now), prevWk = S.addDays(wk, -7), nextWk = S.addDays(wk, 7);
-  const thisW = S.windowSummary(state.sessions, wk, nextWk), lastW = S.windowSummary(state.sessions, prevWk, wk);
-  const mo = S.startOfMonth(now);
-  const thisM = S.windowSummary(state.sessions, mo, S.addMonths(mo, 1));
-  const d28 = S.addDays(S.startOfDay(now), -27), d56 = S.addDays(d28, -28);
-  const last4 = S.windowSummary(state.sessions, d28, S.addDays(S.startOfDay(now), 1)), prev4 = S.windowSummary(state.sessions, d56, d28);
-  const streak = S.weekStreaks(state.sessions, now);
-  const last = ds[ds.length - 1];
-  const next = nextTpl();
-  const g = greeting();
-  const recentPRs = prEvents().filter((p) => new Date(p.date) >= S.addDays(now, -30)).slice(-6).reverse();
-  const tops = topExercises('3m', 3);
-  const ach = S.evaluateAchievements(state.sessions, exGroup);
-  const cmpRow = (label, a, b, kind) => `<tr><td>${label}</td><td class="r">${kind === 'vol' ? fmtVol(a) : kind === 'min' ? fmtDur(a) : nf(a, 0)}</td><td class="r">${kind === 'vol' ? fmtVol(b) : kind === 'min' ? fmtDur(b) : nf(b, 0)}</td><td class="r">${deltaHTML(a - b, kind === 'vol' ? 'vol' : kind === 'min' ? 'min' : 'num', S.pctChange(b, a))}</td></tr>`;
-  return `
-  <div class="page-head"><div><p class="eyebrow">${esc(today)}</p><h1>Inicio</h1>
-    ${g && state.settings.fun ? `<p class="quip" style="margin-top:8px">${esc(g)}</p>` : ''}</div>
-    ${act ? '' : `<button class="btn btn-primary btn-lg" data-action="nav" data-view="entrenar">${ICON.dumbbell}Entrenar</button>`}</div>
-  ${activeBanner}
-  ${recapBanner()}
-  ${friendsMini()}
-  <div class="grid grid-tiles">
-    ${tile('Esta semana', `${thisW.sessions}<small>${thisW.sessions === 1 ? 'sesión' : 'sesiones'}</small>`, `Semana pasada: ${lastW.sessions}`)}
-    ${tile('Este mes', `${thisM.sessions}<small>${thisM.sessions === 1 ? 'sesión' : 'sesiones'}</small>`, `${plural(thisM.workSets, 'serie', 'series')} de trabajo`)}
-    ${tile('Volumen 4 semanas', `${nf(toUnit(last4.volume), 0)}<small>${unit()}</small>`, `4 semanas anteriores: ${fmtVol(prev4.volume)}`)}
-    ${tile('Constancia', `${streak.current}<small>${streak.current === 1 ? 'semana' : 'semanas'}</small>`, `Semanas seguidas entrenando · mejor: ${streak.best}`)}
-  </div>
-  <div class="grid grid-2">
-    <section class="card"><div class="card-head"><h2>Último entrenamiento</h2><span class="muted small">${fmtDate(last.startedAt)}</span></div>
-      <h3 style="font-size:1.4rem">${esc(C.TYPE_LABELS[last.type])}</h3><p class="muted small" style="margin:4px 0 10px">${sessionSummaryLine(last)}</p>
-      <p class="small">${esc(last.exercises.map((e) => exName(e.exerciseId)).join(' · '))}</p>
-      <div class="row" style="margin-top:12px"><button class="btn btn-sm" data-action="open-session" data-id="${last.id}">Ver detalle</button>
-      ${act ? '' : `<button class="btn btn-sm" data-action="start-copy" data-id="${last.id}">${ICON.copy}Repetir</button>`}</div></section>
-    <section class="card"><div class="card-head"><h2>Próximo entrenamiento</h2></div>
-      ${next ? `<h3 style="font-size:1.4rem">${esc(next.name)}</h3><p class="muted small" style="margin:4px 0 6px">${esc(tplExerciseNames(next, 5))}</p>
-        <p class="small faint" style="margin-bottom:12px">Rotación: ${esc(templates().map((t) => t.name).join(' → '))}</p>
-        ${act ? '' : `<button class="btn btn-primary btn-sm" data-action="tpl-start" data-id="${esc(next.id)}" ${next.exercises.length ? '' : 'disabled'}>Empezar ${esc(next.name)}</button>`}`
-        : `<p class="muted small" style="margin-bottom:12px">Crea plantillas con los ejercicios de cada día (por ejemplo Pecho, Espalda, Piernas) y te diré cuál toca después.</p><button class="btn btn-sm" data-action="open-templates">Crear plantillas</button>`}</section>
-  </div>
-  <section class="card"><div class="card-head"><h2>Frente a la semana anterior</h2><span class="muted small">Lunes a domingo</span></div>
-    <div class="table-wrap"><table class="data"><thead><tr><th></th><th class="r">Esta semana</th><th class="r">Anterior</th><th class="r">Diferencia</th></tr></thead><tbody>
-    ${cmpRow('Sesiones', thisW.sessions, lastW.sessions)}${cmpRow('Series de trabajo', thisW.workSets, lastW.workSets)}${cmpRow('Volumen', thisW.volume, lastW.volume, 'vol')}${cmpRow('Tiempo', thisW.minutes, lastW.minutes, 'min')}
-    </tbody></table></div><p class="small muted" style="margin-top:8px">La semana actual aún no ha terminado.</p></section>
-  ${muscleMapCard(true)}
-  ${stallsCard()}
-  <section class="card"><div class="card-head"><h2>Volumen semanal</h2>${periodChips('dashPeriod', state.ui.dashPeriod)}</div>
-    ${chartSlot({ type: 'bar', points: weeklyVolumePoints(state.ui.dashPeriod), unit: unit(), label: 'Volumen semanal en ' + unit() })}
-    <p class="small muted" style="margin-top:6px">Suma de peso × repeticiones de las series de trabajo (sin calentamiento), por semana.</p></section>
-  ${tops.length ? `<section class="card"><div class="card-head"><h2>Tus ejercicios principales</h2><span class="muted small">1RM estimado · últimos 3 meses</span></div>
-    <div class="grid grid-2">${tops.map((t) => miniExercise(t.id)).join('')}</div></section>` : ''}
-  <section class="card"><div class="card-head"><h2>Récords recientes</h2><span class="muted small">Últimos 30 días</span></div>
-    ${recentPRs.length ? `<div class="stack">${recentPRs.map(prItemHTML).join('')}</div>` : `<p class="muted">Sin récords en los últimos 30 días. Un récord aparece cuando superas tu mejor peso o tu 1RM estimado previo en un ejercicio.</p>`}</section>
-  ${state.settings.fun ? `<section class="card"><div class="card-head"><h2>Logros</h2><span class="muted small">${ach.list.filter((a) => a.unlocked).length} de ${ach.list.length}</span></div>
-    <div class="level" style="margin-bottom:14px"><span class="badge">${ach.level.level}</span><div style="flex:1;min-width:0">
-      <div class="row spread"><b>${esc(ach.level.title)}</b><span class="small muted">${ach.level.xp} XP · faltan ${ach.level.toNext}</span></div>
-      <div class="bar" style="margin-top:6px"><div style="width:${Math.round(ach.level.progress * 100)}%"></div></div>
-      <p class="small muted" style="margin-top:6px">La experiencia premia sesiones, semanas activas y récords; no el peso total levantado.</p></div></div>
-    <div class="ach-grid">${ach.list.map(achHTML).join('')}</div></section>` : ''}`;
-}
-function miniExercise(id) {
-  let pts = metricPoints(id, 'e1rm', '3m');
-  const metric = pts.length ? 'e1rm' : 'weight';
-  if (!pts.length) pts = metricPoints(id, 'weight', '3m');
-  const st = S.exerciseStats(state.sessions, id);
-  const c = st.comparison;
-  return `<button class="list-item" style="flex-direction:column;align-items:stretch;border:1px solid var(--line);border-radius:var(--r-md);padding:12px" data-action="open-exercise" data-ex="${id}">
-    <div class="row spread"><b>${esc(exName(id))}</b><span class="small muted">${METRICS[metric]}: ${pts.length ? nf(pts[pts.length - 1].y, 1) + ' ' + unit() : '—'}</span></div>
-    ${chartSlot({ type: 'line', compact: true, height: 64, points: pts, label: METRICS[metric] + ' de ' + exName(id) })}
-    <span class="small muted">${c ? `Vs. sesión anterior: volumen ${deltaHTML(c.totals.volume.diff, 'vol', c.totals.volume.pct)}` : 'Una sola sesión registrada'}</span>
-  </button>`;
-}
-
 // ---------------------------------------------------------------- historial
 function filteredSessions() {
   const f = state.ui.hist;
@@ -3977,8 +3993,8 @@ function viewSessionDetail(id) {
   const s = sessionById(id);
   if (!s) return `<div class="empty"><h3>Sesión no encontrada</h3><p>Puede que se haya eliminado.</p><button class="btn" data-action="back-history">Volver al historial</button></div>`;
   if (s.status === 'active') return `<div class="empty"><h3>Sesión en curso</h3><button class="btn btn-primary" data-action="nav" data-view="entrenar">Abrir</button></div>`;
-  const prs = prEvents().filter((p) => p.sessionId === id);
   const prevSame = done().filter((x) => x.type === s.type && new Date(x.startedAt) < new Date(s.startedAt)).slice(-1)[0];
+  const prs = prEvents().filter((p) => p.sessionId === id);
   return `
   <div class="row"><button class="btn btn-ghost btn-sm" data-action="back-history">${ICON.back}Historial</button></div>
   <div class="page-head"><div><p class="eyebrow">${esc(cap(fmtDateLong(s.startedAt)))} · ${fmtTime(s.startedAt)}</p><h1>${esc(C.TYPE_LABELS[s.type])}</h1></div>
@@ -3993,9 +4009,10 @@ function viewSessionDetail(id) {
     ${tile('Volumen', `${nf(toUnit(S.sessionVolume(s)), 0)}<small>${unit()}</small>`, 'peso × repeticiones')}
     ${tile('Récords', prs.filter((p) => p.type !== 'volume').length, 'de peso o 1RM estimado')}
   </div>
-  ${s.notes ? `<section class="card"><p class="eyebrow">Notas</p><p style="white-space:pre-wrap;margin-top:4px">${esc(s.notes)}</p></section>` : ''}
   ${prs.length ? `<section class="card"><div class="card-head"><h2>Récords</h2></div><div class="stack">${prs.map(prItemHTML).join('')}</div></section>` : ''}
-  ${s.exercises.map((e) => detailEntry(s, e)).join('') || '<p class="muted">Sesión sin ejercicios.</p>'}`;
+  ${s.notes ? `<section class="card"><p class="eyebrow">Notas</p><p style="white-space:pre-wrap;margin-top:4px">${esc(s.notes)}</p></section>` : ''}
+  ${s.exercises.map((e) => detailEntry(s, e)).join('') || '<p class="muted">Sesión sin ejercicios.</p>'}
+  ${myThreadCard(s)}`;
 }
 function detailEntry(s, e) {
   const cmp = S.compareWithPrevious(state.sessions, s, e.exerciseId);
@@ -4269,17 +4286,6 @@ function nextTimeCard(id) {
     <p class="small faint" style="margin-top:8px">Es una sugerencia de progresión doble: primero repeticiones, luego peso. Ajústala a cómo te encuentres.</p></section>`;
 }
 
-function recapBanner() {
-  const now = new Date();
-  const prevM = S.addMonths(S.startOfMonth(now), -1);
-  if (now.getDate() > 7) return '';
-  const r = S.windowSummary(state.sessions, prevM, S.startOfMonth(now));
-  if (!r.sessions) return '';
-  return `<section class="card recap-banner"><div class="row spread"><div><p class="eyebrow">Nuevo</p><h2>Tu resumen de ${esc(DF.month.format(prevM).split(' ')[0])}</h2>
-    <p class="small muted">${plural(r.sessions, 'sesión', 'sesiones')} · ${plural(r.workSets, 'serie', 'series')} · ${fmtVol(r.volume)}</p></div>
-    <button class="btn btn-primary" data-action="open-recap" data-month="${S.monthKey(prevM)}">${ICON.calendar}Ver resumen</button></div></section>`;
-}
-
 function musclesCard(id) {
   const info = muscleInfo(id);
   const ms = info.muscles || {};
@@ -4294,6 +4300,7 @@ function musclesCard(id) {
       </div>
     </div></section>`;
 }
+
 
 /* GymTracker — mapa muscular, avisos de estancamiento, resumen mensual e imagen compartible. */
 
@@ -4374,7 +4381,7 @@ function stallsCard() {
       <span class="stall-ico">${ICON.pause}</span>
       <div class="grow"><div class="title">${esc(exName(st.exerciseId))}</div>
         <div class="sub">${plural(st.sessionsSince, 'sesión', 'sesiones')} · ${st.daysSince} días desde tu mejor ${st.usesE1RM ? '1RM estimado' : 'peso'} (${wNum(st.bestScore, 1)} ${unit()}, ${fmtDate(st.bestDate)})</div></div></button>`).join('')}</div>
-    <p class="small muted" style="margin-top:8px">Una racha sin récords es normal de vez en cuando. Si se alarga, suele ayudar cambiar el rango de repeticiones, probar una variante o hacer una semana más suave. Dormir y comer suficiente también cuenta.</p></section>`;
+    <p class="small muted" style="margin-top:8px">Una temporada sin mejorar es normal de vez en cuando. Si se alarga, suele ayudar cambiar el rango de repeticiones, probar una variante o hacer una semana más suave. Dormir y comer suficiente también cuenta.</p></section>`;
 }
 
 // ---------------------------------------------------------------- resumen mensual
@@ -4547,6 +4554,7 @@ function unseenChanges() {
 const WHATS_NEW_GO = {
   plantilla: () => { state.ui.trainMode = 'plantilla'; go('entrenar'); },
   amigos: () => go('amigos'),
+  actividad: () => { state.ui.frTab = 'actividad'; go('amigos'); },
   ejercicios: () => go('ejercicios'),
 };
 async function markSeen() {
@@ -4631,7 +4639,7 @@ function liftScoreText(l) {
 // ---------------------------------------------------------------- vista principal
 function viewFriends() {
   const head = `<div class="page-head"><div><p class="eyebrow">Con amigos</p><h1>Amigos</h1>
-    <p class="sub">Compara tu constancia, tus récords y tu progreso con tu grupo. Solo se comparte un resumen; tus entrenamientos completos se quedan en este dispositivo.</p></div></div>`;
+    <p class="sub">Compara tu constancia y tu progreso con tu grupo, y comentad vuestras sesiones. Se comparte tu resumen y tus sesiones de las últimas 12 semanas; tus notas, nunca.</p></div></div>`;
   if (!socialReady()) {
     return head + `<div class="empty"><div class="plate">${ICON.users}</div><h3>Disponible en la app instalada</h3>
       <p>Esta versión de la página no puede conectarse a vuestro servidor. Abre GymTracker desde el icono de tu pantalla de inicio (la versión de GitHub Pages) para entrar y ver a tus amigos.</p></div>`;
@@ -4658,7 +4666,7 @@ function authCard() {
       <p class="set-err" id="fr-err" role="alert" style="padding:0" hidden></p>
       <button class="btn btn-primary btn-lg" type="submit" ${social.busy ? 'disabled' : ''}>${social.busy ? 'Un momento…' : mode === 'signup' ? 'Crear cuenta' : 'Entrar'}</button>
     </form>
-    <p class="small muted">Qué compartes: tu nombre, sesiones y series por semana y mes, racha, récords recientes, la evolución de tus ejercicios principales y las series por músculo. Puedes ocultar los kilos o dejar de compartir cuando quieras.</p>
+    <p class="small muted">Qué compartes: tu nombre, sesiones y series por semana y mes, racha, récords recientes, tus sesiones de las últimas 12 semanas, la evolución de tus ejercicios principales y las series por músculo. Puedes ocultar los kilos o dejar de compartir cuando quieras.</p>
   </section>`;
 }
 function nameCard() {
@@ -4698,7 +4706,12 @@ function groupView(g) {
     return invite + `<div class="empty"><div class="plate">${ICON.users}</div><h3>Solo estás tú</h3><p>Pulsa «Invitar» y manda el enlace por WhatsApp. Cuando tus amigos instalen la app y entren con el enlace, aparecerán aquí.</p></div>`
       + boardCard(g, rows);
   }
-  return invite + challengeCard(rows) + groupCalendarCard(rows) + boardCard(g, rows) + feedCard(rows) + commonCard(rows) + musclesCompareCard(rows);
+  const tab = state.ui.frTab === 'actividad' ? 'actividad' : 'grupo';
+  const unread = unreadThreadCount(g.id);
+  const tabs = `<div class="tabs fr-tabs" role="tablist"><button role="tab" aria-selected="${tab === 'grupo'}" data-action="fr-tab" data-t="grupo">Grupo</button>
+    <button role="tab" aria-selected="${tab === 'actividad'}" data-action="fr-tab" data-t="actividad">Actividad${unread ? ` <span class="tab-badge">${unread}</span>` : ''}</button></div>`;
+  if (tab === 'actividad') return invite + tabs + activityCard(g);
+  return invite + tabs + challengeCard(rows) + groupCalendarCard(rows) + boardCard(g, rows) + feedCard(rows) + commonCard(rows) + musclesCompareCard(rows);
 }
 function challengeCard(rows) {
   const ch = S.monthlyChallenge();
@@ -4806,15 +4819,16 @@ function viewFriendDetail(uid) {
   const wkKey = S.dayKey(S.startOfWeek(now));
   const ms = sm.muscles && sm.week && sm.week.key === wkKey ? sm.muscles.week || {} : {};
   return back + `
-  <div class="page-head"><div class="row" style="gap:14px">${avatar(m).replace('class="avatar"', 'class="avatar lg"')}<div><p class="eyebrow">${esc(sm.level ? 'Nivel ' + sm.level.level + ' · ' + sm.level.title : 'Amigo')}</p><h1>${esc(memberName(m))}</h1>
-    <p class="sub">Actualizado ${ago(m.updated_at)}${sm.last ? ` · última sesión ${fmtDate(sm.last.date + 'T12:00:00')} (${esc(C.TYPE_SHORT[sm.last.type] || sm.last.type)})` : ''}</p></div></div></div>
+  <div class="page-head"><div class="row" style="gap:14px">${avatar(m).replace('class="avatar"', 'class="avatar lg"')}<div><p class="eyebrow">${m.is_me ? 'Tú' : 'Amigo'}</p><h1>${esc(memberName(m))}</h1>
+    <p class="sub">Actualizado ${ago(m.updated_at)}${sm.last ? ` · última sesión ${fmtDate(sm.last.date + 'T12:00:00')} (${esc(C.TYPE_SHORT[sm.last.type] || sm.last.type)})` : ''}</p></div></div>
+</div>
   <div class="grid grid-tiles">
     ${tile('Esta semana', `${metricText('week_sessions', S.metricValue(sm, 'week_sessions', now))}<small>sesiones</small>`, vs('week_sessions'))}
     ${tile('Racha', `${metricText('streak', S.metricValue(sm, 'streak', now))}<small>semanas</small>`, vs('streak'))}
     ${tile('Récords este mes', metricText('month_prs', S.metricValue(sm, 'month_prs', now)), vs('month_prs'))}
     ${tile('Mejora 30 días', metricText('strength30', S.metricValue(sm, 'strength30', now)), vs('strength30'))}
     ${tile('Sesiones totales', nf(sm.totals ? sm.totals.sessions : 0, 0), sm.totals && sm.totals.since ? 'desde ' + fmtDate(sm.totals.since + 'T12:00:00') : '')}
-    ${tile('Logros', nf(sm.achievements || 0, 0), 'de ' + S.ACHIEVEMENTS.length)}
+    ${tile('Series este mes', metricText('month_sets', S.metricValue(sm, 'month_sets', now)), vs('month_sets'))}
   </div>
   <section class="card"><div class="card-head"><h2>Mapa muscular de esta semana</h2></div>
     <div class="mc"><div class="mc-map">${bodyMapSVG({ level: (k) => S.weeklySetsLevel(ms[k] || 0), title: (k) => `${C.MUSCLE_LABELS[k]}: ${nf(ms[k] || 0, 1)} series`, ariaLabel: 'Mapa muscular de ' + memberName(m) })}</div>
@@ -4860,7 +4874,11 @@ async function socialRun(fn, okMsg, form) {
 async function socialLoadActive() {
   if (!loggedIn() || !social.activeGroup) return;
   try { await socialFetchBoard(social.activeGroup); } catch (e) { if (e.code === 'no_miembro') await socialRefreshGroups().catch(() => {}); else if (e.code !== 'offline') toast(e.message, 'err', 4000); }
-  if (state.route.view === 'amigos') render();
+  try { await socialFetchThreads(social.activeGroup); } catch (e) { /* sin conexión o sin script de hilos */ }
+  renderNav();
+  // se repinta si está a la vista (nunca encima de una ventana abierta); el historial muestra los 💬 de tus sesiones
+  if ((state.route.view === 'amigos' || (state.route.view === 'historial' && !state.route.sub)) && !$('#modal-root').children.length) render();
+  refreshThreadBoxes();
 }
 async function shareInvite(g) {
   const url = inviteLink(g.invite_code);
@@ -4884,7 +4902,7 @@ const SocialActions = {
   'fr-mode': (el) => { state.ui.frMode = el.dataset.m; render(); },
   'fr-group': (el) => { social.activeGroup = el.dataset.g; socialSave(); render(); socialLoadActive(); },
   'fr-metric': (el) => { state.ui.frMetric = el.dataset.m; render(); },
-  'fr-refresh': () => socialRun(async () => { await socialPublish(false); await socialRefreshGroups(); if (social.activeGroup) await socialFetchBoard(social.activeGroup); }),
+  'fr-refresh': () => socialRun(async () => { await socialPublish(false); await socialRefreshGroups(); if (social.activeGroup) { await socialFetchBoard(social.activeGroup); await socialFetchThreads(social.activeGroup).catch(() => {}); } }),
   'fr-invite': (el) => { const g = social.groups.find((x) => x.id === el.dataset.g); if (g) shareInvite(g); },
   'fr-open': (el) => { state.route = { view: 'amigos', sub: { friendId: el.dataset.u } }; render(); window.scrollTo(0, 0); },
   'fr-back': () => { state.route = { view: 'amigos', sub: null }; render(); window.scrollTo(0, 0); },
@@ -4945,22 +4963,6 @@ async function onSocialSubmit(form) {
   }
 }
 
-/** Tarjeta corta en Inicio con tu puesto de la semana. */
-function friendsMini() {
-  if (!socialReady() || !loggedIn() || !social.activeGroup) return '';
-  const g = social.groups.find((x) => x.id === social.activeGroup);
-  const rows = g && boardRows(g.id);
-  if (!rows || rows.length < 2) return '';
-  const ranked = S.rankMembers(rows, 'week_sessions');
-  const me = ranked.find((r) => r.member.is_me);
-  const lead = ranked[0];
-  const n = ranked.filter((r) => r.rank).length;
-  const pos = me && me.rank ? `Vas <b>${me.rank}.º de ${n}</b> en «${esc(g.name)}» esta semana` : `«${esc(g.name)}»`;
-  const leadTxt = lead && lead.value > 0 && !lead.member.is_me ? ` · ${esc(memberName(lead.member))} lidera con ${plural(lead.value, 'sesión', 'sesiones')}` : lead && lead.member.is_me && lead.value > 0 ? ' · vas en cabeza' : '';
-  return `<section class="card friends-mini"><div class="row spread"><div class="row" style="gap:10px">${ICON.users}<p>${pos}${leadTxt}.</p></div>
-    <button class="btn btn-sm" data-action="nav" data-view="amigos">Ver grupo</button></div></section>`;
-}
-
 // ---------------------------------------------------------------- calendario del grupo
 function sessionTitle(x) { return x.name || C.TYPE_LABELS[x.type] || 'Sesión'; }
 function sessionLine(m, x, index) {
@@ -4968,7 +4970,7 @@ function sessionLine(m, x, index) {
     <span class="cal-dot" style="background:${memberColor(m)}"></span>
     <span class="grow"><span class="title">${esc(sessionTitle(x))}</span> <span class="small muted">· ${fmtDate(x.date + 'T12:00:00')}${x.time ? ' · ' + esc(x.time) : ''}</span>
       <span class="sub" style="display:block">${esc(x.exercises.map((e) => e.name).join(' · ') || 'Sin ejercicios')}</span></span>
-    <span class="small muted num">${plural(x.workSets, 'serie', 'series')}</span></button>`;
+    ${threadBadge(m.user_id, x.time ? x.date + 'T' + x.time : '')}<span class="small muted num">${plural(x.workSets, 'serie', 'series')}</span></button>`;
 }
 /** Bloque estilo GitHub de 12 semanas para una persona, en su color. */
 function weeksBlock(m, days) {
@@ -5010,9 +5012,10 @@ function groupCalendarCard(rows) {
       if (i >= 35 && d.getMonth() !== first.getMonth()) break;
       const k = S.dayKey(d), out = d.getMonth() !== first.getMonth();
       const who = members.filter((m) => cal[m.user_id] && cal[m.user_id][k]);
-      const label = `${DF.long.format(d)}${who.length ? ': ' + who.map((m) => memberName(m)).join(', ') : ''}`;
+      const th = dayThreads(k);
+      const label = `${DF.long.format(d)}${who.length ? ': ' + who.map((m) => memberName(m)).join(', ') : ''}${th.comments ? ` · ${plural(th.comments, 'comentario', 'comentarios')}${th.unread ? ' nuevos' : ''}` : ''}`;
       cells += who.length
-        ? `<button class="day trained gday ${out ? 'out' : ''} ${k === todayK ? 'today' : ''}" data-action="fr-day" data-day="${k}" aria-label="${esc(label)}"><span>${d.getDate()}</span><span class="dots">${who.slice(0, 6).map((m) => `<i style="background:${memberColor(m)}"></i>`).join('')}</span></button>`
+        ? `<button class="day trained gday ${out ? 'out' : ''} ${k === todayK ? 'today' : ''}" data-action="fr-day" data-day="${k}" aria-label="${esc(label)}">${th.comments || th.unread ? `<span class="day-bubble ${th.unread ? 'new' : ''}" aria-hidden="true">💬</span>` : ''}<span>${d.getDate()}</span><span class="dots">${who.slice(0, 6).map((m) => `<i style="background:${memberColor(m)}"></i>`).join('')}</span></button>`
         : `<div class="day gday ${out ? 'out' : ''} ${k === todayK ? 'today' : ''}" aria-label="${esc(label)}">${d.getDate()}</div>`;
     }
     body = `<div class="row spread" style="margin-bottom:8px">
@@ -5034,7 +5037,7 @@ function openGroupDay(day) {
     body: items.length ? `<div class="list">${items.map(({ m, x, i }) => `<button class="list-item" data-fs-u="${esc(m.user_id)}" data-fs-i="${i}">
         ${avatar(m)}<span class="grow"><span class="title">${esc(memberName(m))}${m.is_me ? ' (tú)' : ''}</span>
         <span class="sub" style="display:block">${esc(sessionTitle(x))} · ${esc(C.TYPE_SHORT[x.type])}${x.time ? ' · ' + esc(x.time) : ''} · ${x.minutes ? fmtDur(x.minutes) + ' · ' : ''}${plural(x.workSets, 'serie', 'series')}</span></span>
-        <span class="small muted">Ver</span></button>`).join('')}</div>` : '<p class="muted">Nadie entrenó este día.</p>',
+        ${threadBadge(m.user_id, x.time ? x.date + 'T' + x.time : '')}<span class="small muted">Ver</span></button>`).join('')}</div>` : '<p class="muted">Nadie entrenó este día.</p>',
     onOpen: (root, close) => {
       $('.modal', root).addEventListener('click', (ev) => {
         const b = ev.target.closest('[data-fs-u]');
@@ -5058,8 +5061,11 @@ function openFriendSession(uid, index) {
         return `<div class="fs-ex"><div class="row spread"><b>${esc(e.name)}</b>${mine && !m.is_me ? `<button class="btn btn-ghost btn-sm" data-fs-ex="${esc(mine.id)}">Mi historial</button>` : ''}</div>
           <div class="fs-sets">${e.sets.map((t) => `<span class="fs-set ${t[2] === 'w' ? 'warm' : t[2] === 'd' ? 'drop' : ''}">${esc(setTxt(t))}</span>`).join('')}</div></div>`;
       }).join('')}</div>
-      <p class="small faint">C = calentamiento · D = descarga. Pesos en ${unit()}.</p>`,
+      <p class="small faint">C = calentamiento · D = descarga. Pesos en ${unit()}.</p>
+      ${x.time ? threadBox(m.user_id, x.date + 'T' + x.time) : ''}`,
+    onClose: afterThreadModal,
     onOpen: (root, close) => {
+      if (x.time) { markThreadSeen(social.activeGroup, S.threadKey(m.user_id, x.date + 'T' + x.time)); renderNav(); }
       $('.modal', root).addEventListener('click', (ev) => {
         const b = ev.target.closest('[data-fs-ex]');
         if (b) { close(); go('ejercicios', { exerciseId: b.dataset.fsEx, back: 'amigos' }); }
@@ -5068,6 +5074,8 @@ function openFriendSession(uid, index) {
   });
 }
 Object.assign(SocialActions, {
+  'fr-tab': (el) => { state.ui.frTab = el.dataset.t; render(); },
+  'fr-thread': (el) => openThread(el.dataset.u, el.dataset.k),
   'fr-cal': (el) => { state.ui.frCal = el.dataset.t; render(); },
   'fr-cal-nav': (el) => {
     const cur = state.ui.frCalMonth ? new Date(state.ui.frCalMonth) : S.startOfMonth(new Date());
@@ -5076,6 +5084,199 @@ Object.assign(SocialActions, {
   'fr-day': (el) => openGroupDay(el.dataset.day),
   'fr-session': (el) => openFriendSession(el.dataset.u, Number(el.dataset.i)),
 });
+
+// ---------------------------------------------------------------- hilos: reacciones y comentarios en cada sesión
+function memberById(id) {
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  return ((g && boardRows(g.id)) || []).find((r) => r.user_id === id) || null;
+}
+function whoName(id, fallback) { const m = memberById(id); return m ? memberName(m) : fallback || 'Alguien'; }
+/** La sesión compartida que corresponde a una clave (día y hora), si sigue en el resumen. */
+function sharedSession(owner, key) {
+  const m = memberById(owner);
+  const list = (m && m.summary && m.summary.sessions) || [];
+  const i = list.findIndex((x) => x.time && x.date + 'T' + x.time === key);
+  return i < 0 ? null : { m, x: list[i], i };
+}
+function threadTitle(owner, key) {
+  const f = sharedSession(owner, key);
+  const day = cap(DF.longNoY.format(new Date(key.slice(0, 10) + 'T12:00:00')));
+  const what = f ? sessionTitle(f.x) : 'Sesión';
+  return { what, day, time: key.slice(11) };
+}
+/** Indicador 💬 para listas: número de comentarios (o las reacciones si no hay comentarios). */
+function threadBadge(owner, key) {
+  if (!key || !owner || !social.activeGroup) return '';
+  const t = threadFor(social.activeGroup, owner, key);
+  if (!t) return '';
+  const unread = threadIsUnread(social.activeGroup, t);
+  const txt = t.comments.length ? `💬 ${t.comments.length}` : Array.from(new Set(t.reactions.map((k) => k.emoji))).slice(0, 3).join('');
+  return `<span class="th-badge ${unread ? 'new' : ''}" title="${esc(plural(t.comments.length, 'comentario', 'comentarios') + ' · ' + plural(t.reactions.length, 'reacción', 'reacciones') + (unread ? ' · hay novedades' : ''))}">${esc(txt)}</span>`;
+}
+/** Comentarios y novedades de un día en el calendario del grupo. */
+function dayThreads(day) {
+  const r = { comments: 0, unread: false };
+  if (!social.activeGroup) return r;
+  threadsOf(social.activeGroup).forEach((t) => {
+    if (t.sessionKey.slice(0, 10) !== day) return;
+    r.comments += t.comments.length;
+    if (threadIsUnread(social.activeGroup, t)) r.unread = true;
+  });
+  return r;
+}
+
+function threadBox(owner, key) {
+  return `<div class="thread" data-owner="${esc(owner)}" data-key="${esc(key)}">${threadInner(owner, key)}</div>`;
+}
+function threadInner(owner, key) {
+  const gid = social.activeGroup;
+  const p = social.threads[gid];
+  if (p && p.missing) return `<p class="notice">Para comentar falta instalar <b>gymtracker-hilos.sql</b> en Supabase (SQL Editor → Run).</p>`;
+  const me = myId();
+  const t = threadFor(gid, owner, key);
+  const reactions = t ? t.reactions : [], comments = t ? t.comments : [];
+  const mine = reactions.find((k) => k.from_user === me);
+  const counts = {};
+  reactions.forEach((k) => { (counts[k.emoji] = counts[k.emoji] || []).push(whoName(k.from_user, k.from_name)); });
+  const summary = Object.keys(counts).length ? `<p class="small th-reacts">${Object.keys(counts).map((e) => `<span class="react-pill">${esc(e)} ${esc(counts[e].join(', '))}</span>`).join(' ')}</p>` : '';
+  const reactRow = owner === me ? '' : `<div class="react-row">${C.REACTIONS.map((e) => `<button type="button" class="react-btn" data-th="react" data-e="${esc(e)}" aria-pressed="${!!(mine && mine.emoji === e)}" aria-label="${esc(C.REACTION_LABELS[e])}">${esc(e)}</button>`).join('')}</div>`;
+  const list = comments.length ? `<ul class="th-list">${comments.map((k) => {
+    const m = memberById(k.from_user) || { user_id: k.from_user, display_name: k.from_name };
+    return `<li>${avatar(m)}<div class="th-c"><p class="th-meta"><b>${esc(memberName(m))}</b>${k.from_user === owner ? ' <span class="tag">autor</span>' : ''} <span class="faint">· ${esc(ago(k.created_at))}</span></p>
+      <p class="th-body">${esc(k.body)}</p></div>
+      ${k.from_user === me ? `<button type="button" class="th-del" data-th="del" data-id="${esc(k.id)}" aria-label="Borrar tu comentario">Borrar</button>` : ''}</li>`;
+  }).join('')}</ul>` : `<p class="small muted">${owner === me ? 'Nadie ha comentado todavía tu sesión.' : 'Sin comentarios todavía. Estrena el hilo.'}</p>`;
+  const chip = (txt, i, own) => `<span class="jab-chip-wrap"><button type="button" class="chip jab-chip" data-th="chip" data-t="${esc(txt)}">${esc(txt)}</button>${own ? `<button type="button" class="jab-del" data-th="chip-del" data-i="${i}" aria-label="Quitar «${esc(txt)}» de tus pullas">×</button>` : ''}</span>`;
+  const compose = `<div class="th-compose">
+    <textarea class="input th-text" data-nofocus maxlength="${S.COMMENT_MAX}" rows="2" placeholder="${owner === me ? 'Responde a tu grupo…' : 'Comenta esta sesión…'}" aria-label="Escribe un comentario"></textarea>
+    <details class="th-quick"><summary class="small">Pullas rápidas</summary>
+      ${social.customJabs.length ? `<p class="eyebrow">Tus pullas</p><div class="chips">${social.customJabs.map((x, i) => chip(x, i, true)).join('')}</div>` : ''}
+      <p class="eyebrow">Predefinidas</p><div class="chips jab-chips">${C.JABS.map((x, i) => chip(x, i, false)).join('')}</div></details>
+    <div class="row spread"><label class="row small" style="cursor:pointer"><input type="checkbox" class="th-save" style="width:20px;height:20px;accent-color:var(--accent)"> Guardar en mis pullas</label>
+      <span class="row"><span class="small faint num th-count">0/${S.COMMENT_MAX}</span><button type="button" class="btn btn-primary btn-sm" data-th="send">Enviar</button></span></div>
+    <p class="set-err th-err" role="alert" style="padding:0" hidden></p></div>`;
+  return `<p class="eyebrow">Hilo de la sesión · lo ve todo el grupo</p>${reactRow}${summary}${list}${compose}`;
+}
+/** Repinta los hilos visibles sin perder lo que se está escribiendo. */
+function refreshThreadBoxes() {
+  $$('.thread').forEach((box) => {
+    const ta = $('.th-text', box), det = $('.th-quick', box), save = $('.th-save', box);
+    const st = { v: ta ? ta.value : '', focus: ta && document.activeElement === ta, open: det && det.open, save: save && save.checked };
+    box.innerHTML = threadInner(box.dataset.owner, box.dataset.key);
+    const ta2 = $('.th-text', box);
+    if (ta2) { ta2.value = st.v; updThreadCount(box); if (st.focus) ta2.focus(); }
+    if (det && st.open) $('.th-quick', box).open = true;
+    if (st.save) $('.th-save', box).checked = true;
+  });
+  renderNav();
+}
+function updThreadCount(box) { const ta = $('.th-text', box), c = $('.th-count', box); if (ta && c) c.textContent = ta.value.length + '/' + S.COMMENT_MAX; }
+let threadBusy = false;
+async function onThreadClick(el) {
+  const box = el.closest('.thread');
+  if (!box || threadBusy) return;
+  const gid = social.activeGroup, owner = box.dataset.owner, key = box.dataset.key;
+  const err = $('.th-err', box);
+  const fail = (e) => { if (err) { err.textContent = e.message || String(e); err.hidden = false; } else toast(e.message, 'err', 4000); };
+  const act = el.dataset.th;
+  if (act === 'chip') { const ta = $('.th-text', box); ta.value = el.dataset.t; updThreadCount(box); $('.th-quick', box).open = false; ta.focus(); return; }
+  if (act === 'chip-del') { social.customJabs.splice(Number(el.dataset.i), 1); await socialSave(); refreshThreadBoxes(); return; }
+  if (act === 'del' && el.dataset.sure !== '1') { el.dataset.sure = '1'; el.textContent = '¿Seguro?'; el.classList.add('sure'); setTimeout(() => { if (el.isConnected) { el.dataset.sure = ''; el.textContent = 'Borrar'; el.classList.remove('sure'); } }, 3000); return; }
+  threadBusy = true;
+  box.classList.add('busy');
+  try {
+    if (act === 'react') {
+      const t = threadFor(gid, owner, key);
+      const cur = t && t.reactions.find((k) => k.from_user === myId());
+      const value = cur && cur.emoji === el.dataset.e ? '' : el.dataset.e;   // tocar la misma la quita
+      await socialThreadPost(gid, owner, key, 'reaction', { emoji: value });
+      toast(value ? `${value} para ${whoName(owner)}` : 'Reacción quitada', '', 1500);
+    } else if (act === 'del') {
+      await socialThreadDelete(gid, el.dataset.id);
+      toast('Comentario borrado.', '', 1500);
+    } else if (act === 'send') {
+      const ta = $('.th-text', box);
+      const body = S.cleanComment(ta.value);
+      if (!body) { fail(new Error('Escribe algo o elige una pulla rápida.')); return; }
+      await socialThreadPost(gid, owner, key, 'comment', { body });
+      if ($('.th-save', box).checked && !social.customJabs.includes(body) && !C.JABS.includes(body)) {
+        social.customJabs = [body].concat(social.customJabs).slice(0, 30); await socialSave();
+      }
+      ta.value = '';
+      $('.th-save', box).checked = false;
+      if (err) err.hidden = true;
+      toast(owner === myId() ? 'Respondido.' : `Comentado en la sesión de ${whoName(owner)}.`, 'good', 1800);
+    }
+    refreshThreadBoxes();
+  } catch (e) { fail(e); }
+  finally { threadBusy = false; box.classList.remove('busy'); }
+}
+document.addEventListener('click', (ev) => {
+  const el = ev.target.closest('[data-th]');
+  if (!el || !el.closest('.thread')) return;
+  ev.preventDefault();
+  onThreadClick(el).catch((e) => toast(e.message, 'err'));
+});
+document.addEventListener('input', (ev) => {
+  if (ev.target.matches && ev.target.matches('.th-text')) { updThreadCount(ev.target.closest('.thread')); const err = $('.th-err', ev.target.closest('.thread')); if (err) err.hidden = true; }
+});
+
+/** Abre una sesión con su hilo; si ya no está en el resumen compartido, solo el hilo. */
+function openThread(owner, key) {
+  const f = sharedSession(owner, key);
+  if (f) { openFriendSession(owner, f.i); return; }
+  const tt = threadTitle(owner, key);
+  openModal({
+    title: `${whoName(owner)} · ${tt.what}`,
+    body: `<p class="small muted">${esc(tt.day)} · ${esc(tt.time)} · esta sesión ya no está entre las compartidas.</p>${threadBox(owner, key)}`,
+    onOpen: () => markThreadSeen(social.activeGroup, S.threadKey(owner, key)),
+    onClose: afterThreadModal,
+  });
+}
+function afterThreadModal() { if (state.route.view === 'amigos' || state.route.view === 'historial') setTimeout(() => { if (!$('#modal-root').children.length) render(); }, 0); }
+
+/** Pestaña Actividad: todas las sesiones del grupo con comentarios o reacciones, lo último arriba. */
+function activityCard(g) {
+  const p = social.threads[g.id];
+  if (p && p.missing) return `<p class="notice">Para comentar sesiones falta instalar <b>gymtracker-hilos.sql</b> en Supabase (SQL Editor → Run).</p>`;
+  if (!p) return `<div class="loading" style="min-height:120px">Cargando la actividad…</div>`;
+  const me = myId();
+  const list = threadsOf(g.id).filter((t) => memberById(t.owner));
+  if (!list.length) {
+    return `<div class="empty"><div class="plate">💬</div><h3>Silencio en el vestuario</h3><p>Abre una sesión en el calendario del grupo y deja el primer comentario o una reacción. Aquí verás todas las sesiones comentadas, de cualquiera del grupo.</p></div>`;
+  }
+  const unread = list.filter((t) => threadIsUnread(g.id, t)).length;
+  const item = (t) => {
+    const owner = memberById(t.owner);
+    const tt = threadTitle(t.owner, t.sessionKey);
+    const isNew = threadIsUnread(g.id, t);
+    const last = t.comments[t.comments.length - 1];
+    const lastTxt = last ? `<b>${esc(last.from_user === me ? 'Tú' : whoName(last.from_user, last.from_name))}:</b> ${esc(last.body.length > 90 ? last.body.slice(0, 88) + '…' : last.body)}` : '<span class="faint">Solo reacciones</span>';
+    const emojis = Array.from(new Set(t.reactions.map((k) => k.emoji))).join('');
+    return `<button class="list-item act-item ${isNew ? 'new' : ''}" data-action="fr-thread" data-u="${esc(t.owner)}" data-k="${esc(t.sessionKey)}">
+      ${avatar(owner)}<span class="grow"><span class="title">${t.owner === me ? 'Tu sesión' : esc(memberName(owner))} · ${esc(tt.what)}</span> ${isNew ? '<span class="tag tag-accent">Nuevo</span>' : ''}
+        <span class="sub" style="display:block">${esc(tt.day)}</span>
+        <span class="act-last">${lastTxt}</span>
+        <span class="small faint" style="display:block">${t.comments.length ? '💬 ' + t.comments.length : ''}${t.comments.length && emojis ? ' · ' : ''}${esc(emojis)}${t.reactions.length > 1 ? ' ' + t.reactions.length : ''} · ${esc(ago(t.last))}</span></span></button>`;
+  };
+  return `<section class="card"><div class="card-head"><h2>Sesiones comentadas</h2>
+      ${unread ? `<button class="btn btn-sm btn-ghost" data-action="fr-seen-all">Marcar todo como leído</button>` : `<span class="small muted">${plural(list.length, 'hilo', 'hilos')}</span>`}</div>
+    <div class="list">${list.map(item).join('')}</div>
+    <p class="small faint" style="margin-top:10px">Los comentarios y reacciones los ve todo el grupo. Cada uno puede borrar los suyos. Se guardan 120 días.</p></section>`;
+}
+Object.assign(SocialActions, {
+  'fr-seen-all': () => { threadsOf(social.activeGroup).forEach((t) => markThreadSeen(social.activeGroup, t.key)); render(); },
+});
+
+/** Hilo de una sesión tuya (detalle del historial). */
+function myThreadCard(s) {
+  if (!socialReady() || !loggedIn() || !social.activeGroup || !social.share.enabled || s.status !== 'done') return '';
+  if (new Date(s.startedAt) < S.addDays(S.startOfWeek(new Date()), -77)) return '';
+  const g = social.groups.find((x) => x.id === social.activeGroup);
+  const key = S.sessionKey(s.startedAt);
+  setTimeout(() => { markThreadSeen(social.activeGroup, S.threadKey(myId(), key)); renderNav(); }, 400);
+  return `<section class="card"><div class="card-head"><h2>Comentarios</h2><span class="small muted">${g ? esc(g.name) : ''}</span></div>${threadBox(myId(), key)}</section>`;
+}
 
 /* GymTracker — ajustes, copia de seguridad, navegación, eventos e inicio. */
 
@@ -5092,7 +5293,7 @@ function viewSettings() {
   ${newsCard()}
   <section class="card stack"><h2>Personalidad</h2>
     <label class="row" for="set-fun" style="cursor:pointer"><input type="checkbox" id="set-fun" data-setting="fun" ${st.fun ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--accent)">
-      <span>Mensajes con humor, logros y niveles</span></label>
+      <span>Mensajes con humor</span></label>
     <p class="small muted">Si lo desactivas, la app solo muestra datos y los avisos de récord en tono neutro.</p></section>
   <section class="card stack"><h2>Rutina y plantillas</h2>
     <p class="small muted">${templates().length ? `Tienes ${plural(templates().length, 'plantilla', 'plantillas')}: ${esc(templates().map((t) => t.name).join(' → '))}. El orden es tu rotación.` : 'Aún no tienes plantillas. Cada plantilla es un día de tu rutina con sus ejercicios en orden.'}</p>
@@ -5221,7 +5422,7 @@ function resetModal() {
         await seedCatalog();
         await loadAll();
         state.ui.greeting = null;
-        go('inicio');
+        go('entrenar');
         toast('Datos borrados. Empiezas de cero.');
       } },
     ],
@@ -5230,7 +5431,7 @@ function resetModal() {
 
 // ---------------------------------------------------------------- navegación
 const VIEWS = [
-  ['inicio', 'Inicio', 'home'], ['entrenar', 'Entrenar', 'dumbbell'], ['historial', 'Historial', 'history'],
+  ['entrenar', 'Entrenar', 'dumbbell'], ['historial', 'Historial', 'history'],
   ['progreso', 'Progreso', 'chart'], ['amigos', 'Amigos', 'users'], ['ejercicios', 'Ejercicios', 'list'], ['ajustes', 'Ajustes', 'settings'],
 ];
 function go(view, sub = null) {
@@ -5247,7 +5448,7 @@ function go(view, sub = null) {
 function renderNav() {
   const act = activeSession();
   $('#nav').innerHTML = `<div class="nav-brand"><span class="brand">Gym<b>Tracker</b></span></div>` + VIEWS.map(([k, l, ic]) =>
-    `<button data-action="nav" data-view="${k}" ${state.route.view === k ? 'aria-current="page"' : ''}>${ICON[ic]}<span>${l}</span>${k === 'entrenar' && act ? '<span class="live-dot" aria-label="sesión en curso"></span>' : ''}</button>`).join('');
+    `<button data-action="nav" data-view="${k}" ${state.route.view === k ? 'aria-current="page"' : ''}>${ICON[ic]}<span>${l}</span>${k === 'entrenar' && act ? '<span class="live-dot" aria-label="sesión en curso"></span>' : ''}${k === 'amigos' && typeof unreadThreadCount === 'function' && unreadThreadCount() ? '<span class="live-dot poke-dot" aria-label="comentarios nuevos"></span>' : ''}</button>`).join('');
 }
 function render() {
   if (!state.ready) return;
@@ -5265,10 +5466,10 @@ function render() {
     else if (r.view === 'ejercicios') html = viewExercises();
     else if (r.view === 'ajustes') html = viewSettings();
     else if (r.view === 'amigos') html = viewFriends();
-    else html = viewHome();
+    else html = viewTrainStart();
   } catch (e) {
     console.error(e);
-    html = `<div class="empty"><h3>Algo ha fallado al mostrar esta pantalla</h3><p>Tus datos siguen guardados. Prueba a volver al inicio o recargar la página. Detalle: ${esc(e.message)}</p><button class="btn" data-action="nav" data-view="inicio">Ir al inicio</button></div>`;
+    html = `<div class="empty"><h3>Algo ha fallado al mostrar esta pantalla</h3><p>Tus datos siguen guardados. Prueba a ir a otra pestaña o recargar la página. Detalle: ${esc(e.message)}</p><button class="btn" data-action="nav" data-view="entrenar">Ir a Entrenar</button></div>`;
   }
   const view = $('#view');
   view.innerHTML = html;
@@ -5494,12 +5695,12 @@ async function init() {
   if (invited) await socialSave();
   state.ready = true;
   const h = location.hash.slice(1);
-  state.route = { view: invited ? 'amigos' : VIEWS.some(([k]) => k === h) ? h : (activeSession() ? 'entrenar' : 'inicio'), sub: null };
+  state.route = { view: invited ? 'amigos' : VIEWS.some(([k]) => k === h) ? h : 'entrenar', sub: null };
   render();
   if (socialReady() && loggedIn()) {
     if (invited) socialAfterLogin().then(render).catch((e) => toast(e.message, 'err', 4500));
     else {
-      socialRefreshGroups().then(() => socialPublish(false)).then(socialLoadActive).catch(() => {});
+      socialRefreshGroups().then(() => socialPublish(false)).catch(() => {}).then(socialLoadActive).catch(() => {});
     }
     if (state.route.view === 'amigos') socialLoadActive();
   }
